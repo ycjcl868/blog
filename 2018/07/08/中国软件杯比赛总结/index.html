@@ -1,0 +1,48 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 中国软件杯比赛总结 · 信鑫-King's Blog</title><meta name="description" content="中国软件杯比赛总结 - Kylin King"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://www.ycjcl.cc/atom.xml" title="信鑫-King's Blog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/ycjcl868" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/ycjcl868" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">中国软件杯比赛总结</h1><div class="post-info">Jul 8, 2018</div><div class="post-content"><blockquote>
+<p>2016年8月22号-26号，在南京航空航天大学举办<strong>第五届中国软件杯大学生软件设计大赛</strong>。很幸运，进入决赛，赛题为：A4-基于web的3D模型浏览与交互系统。</p>
+</blockquote>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-28/6209250.jpg" alt=""></p>
+<p>2017年寒假学了下<code>Sketch</code>，更新下有点逼格的设计图：</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/17-2-20/87912624-file_1487566622503_31fa.png" alt=""></p>
+<p>####简述</p>
+<hr>
+<p>比赛分为两轮: 第一轮是指导老师 + 校企（占比多），通过在线演示选出进入答辩的队伍（争夺特、一等奖）。第二轮是答辨环节，通过PPT讲解作品。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-28/37273929.jpg" alt=""></p>
+<p>Unluckily,没有进入答辩环节。但我认为作品做的不比南/北航(晋级答辩环节的两支队伍)逊色。好吧，只拿了三等奖。😭</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-28/15352511.jpg" alt=""></p>
+<blockquote>
+<p>下面介绍下作品吧</p>
+</blockquote>
+<p>####首页</p>
+<hr>
+<p>首先进入的是开场部分，然后点击上传模型。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-23/7611547.jpg" alt=""></p>
+<p>####上传页</p>
+<hr>
+<p> 支持十种以上常用的3D模型格式，首先下载一个step格式的模型文件。点击上传。<br> 因为使用的是OSS对象存储，上传的时候先创建一个容器，然后开始上传模型文件，上传成功后，对模型文件进行解析，解析成功后直接跳转到展示页。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-23/1296023.jpg" alt=""></p>
+<p>####展示页</p>
+<hr>
+<p>这个就是刚刚上传解析出来的模型，对模型进行浏览，进行基本的浏览操作（旋转、缩放、剖切、拆分）</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-23/1190578.jpg" alt=""></p>
+<p>然后对图元的拾取（框取、点选、测量）</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-23/43686836.jpg" alt=""></p>
+<p>外观编辑（着色）</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-23/1969687.jpg" alt=""></p>
+<p>其中有一个特色功能，就是多人实时在线浏览 ，采用了Socket.IO进行实时在线，并采用Nginx的负载均衡 + NodeJS异步I/O操作来支撑高并发。<br><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-23/89525498.jpg" alt=""></p>
+<p>####总结</p>
+<hr>
+<ul>
+<li>看到了广东学校做的VR很棒，于是回校的第一天晚上就加了这个功能。</li>
+</ul>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-28/51482139.jpg" alt=""></p>
+<ul>
+<li>学长告诉我，这个比赛扣赛题的得分点扣得很严，所以我就在演示时，特意做了一个脑图，一步步按得分点演示。</li>
+</ul>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-28/69404193.jpg" alt=""></p>
+<ul>
+<li>总得来说，中软杯办得相当好。颁奖典礼真的是我目前见过只高端的典礼，还有新装起来的餐厅。点个赞。👍</li>
+</ul>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-28/5698657.jpg" alt=""></p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-28/59955591.jpg" alt=""></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/07/08/2016中国·西安“华山杯”WriteUp- SeeSea/" class="prev">PREV</a><a href="/2018/07/08/四六级查询demo总结/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://www.ycjcl.cc">Kylin King</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

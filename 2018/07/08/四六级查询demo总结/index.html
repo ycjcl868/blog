@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 四六级查询demo总结 · 信鑫-King's Blog</title><meta name="description" content="四六级查询demo总结 - Kylin King"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://www.ycjcl.cc/atom.xml" title="信鑫-King's Blog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/ycjcl868" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/ycjcl868" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">四六级查询demo总结</h1><div class="post-info">Jul 8, 2018</div><div class="post-content"><blockquote>
+<p>7月份时，闲着无聊，做了一个全国四六级的查询，体会了独立从设计、前端、后台、开发、部署、推广、服务器运维的过程，现做个总结。<a href="http://cet.ycjcl.cc" target="_blank" rel="noopener">demo演示</a></p>
+</blockquote>
+<p>当天的PV量和IP量：</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-21/83481037.jpg" alt=""></p>
+<hr>
+<p>####前端<br>因为是在手机上访问的，所以前端UI层其实没多大量。我个人比较喜欢像<strong>Google</strong>、<strong>苹果</strong>、<strong>微信</strong>的设计，所以前端的UI层采用了<a href="http://weui.io" target="_blank" rel="noopener"><code>WeUI</code></a>，交互层的JS框架采用了<a href="http://cn.vuejs.org" target="_blank" rel="noopener"><code>VueJS</code></a> + <a href="http://zeptojs.com/" target="_blank" rel="noopener"><code>Zepto</code></a>。写CSS时就使用的<code>Less</code>预处理(Less直接一保存，自动转成CSS)。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-22/11294235.jpg" alt=""></p>
+<p>####后端<br>后端为了支持短时间内的高并发，使用了<code>NodeJS</code>。非阻塞的异步I/O操作果然很强势。数据库连接开启了<code>pool</code>连接池和索引，查询起来压力不大。</p>
+<p>####服务器<br>其实最大的考验在于服务器的支撑上，买了两台学生机（阿里云9.9元 + 腾讯云1元）😂做的负载均衡</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-22/16013969.jpg" alt=""></p>
+<p>为了不给服务器大的压力，前端将该压缩的都压缩了。从<strong>html</strong>、<strong>CSS</strong>、<strong>js</strong>、<strong>图片</strong>全都压缩。</p>
+<p>然后用<code>tingyun</code>看了一下监测：</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-22/1087078.jpg" alt=""></p>
+<p>最后的访问量用百度统计看了一下，感觉一般，毕竟不是官方推荐的入口，只是自己心血来潮做个玩玩，同时免准考证查询接口临时改加密算法也是无奈。<a href="http://mp.weixin.qq.com/s?__biz=MzA5NTIxOTg4Ng==&amp;mid=2459553686&amp;idx=1&amp;sn=865e36dbb33e8f1a91e1886d1b350550&amp;scene=1&amp;srcid=0820cy3wk1L8aHTmqGTLfk8G#rd" target="_blank" rel="noopener">推文</a>写的也不是很好。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-22/76553376.jpg" alt=""></p>
+<p>####不足之处</p>
+<ul>
+<li>当时测试调用<code>学信网</code>接口时，没有加<code>XFF</code>头，导致了查询当天，查询了大概10几个分数后，就无法使用了。没办法，马上写了一个<code>RandomIp()</code>的方法。</li>
+</ul>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-22/350532.jpg" alt=""></p>
+<ul>
+<li>抓取完后，解析<strong>学信网</strong>宿舍信息时，用的是正则表达式，写了很长，没有用<code>cheerio</code>模块。</li>
+</ul>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-22/20309480.jpg" alt=""></p>
+<ul>
+<li>原先测试时，<code>99宿舍</code>免准考证查询是可以用的，结果出分的前一天晚上，换了加密算法。导致除<code>99宿舍</code>的所有第三方都无法查到准考证号。然后临时将<strong>免准考证查询</strong>的选项卡去除。</li>
+</ul>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-22/39685576.jpg" alt=""></p>
+<ul>
+<li>第一次处理那种大量用户查询服务，像这种服务有这样的特点：<strong>不确定性</strong>、<strong>即时性</strong>、<strong>高并发性</strong>，查询前一天晚上发现免准接口用不了了，心里是崩溃的。同时也就隐隐感受到了淘宝双十一时的那种心情，真的是一个传奇。</li>
+</ul>
+<p>####附目录结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">项目目录结构</span><br><span class="line">├── api.js</span><br><span class="line">├── app.js</span><br><span class="line">├── bin</span><br><span class="line">│   └── www</span><br><span class="line">├── conf</span><br><span class="line">│   └── db.js</span><br><span class="line">├── demo.html</span><br><span class="line">├── gulpfile.js</span><br><span class="line">├── node_modules</span><br><span class="line">├── package.json</span><br><span class="line">├── public</span><br><span class="line">│   ├── bower.json</span><br><span class="line">│   ├── bower_components</span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── favicon.ico</span><br><span class="line">│   ├── images</span><br><span class="line">│   ├── js</span><br><span class="line">│   └── min</span><br><span class="line">├── routes</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   └── users.js</span><br><span class="line">└── views</span><br><span class="line">    ├── error.ejs</span><br><span class="line">    └── index.ejs</span><br></pre></td></tr></table></figure></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/07/08/中国软件杯比赛总结/" class="prev">PREV</a><a href="/2018/07/08/全国高校网安联赛Web专场~WriteUp/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://www.ycjcl.cc">Kylin King</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

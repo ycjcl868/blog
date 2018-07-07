@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 全国高校网安联赛Web专场~WriteUp · 信鑫-King's Blog</title><meta name="description" content="全国高校网安联赛Web专场~WriteUp - Kylin King"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://www.ycjcl.cc/atom.xml" title="信鑫-King's Blog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/ycjcl868" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/ycjcl868" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">全国高校网安联赛Web专场~WriteUp</h1><div class="post-info">Jul 8, 2018</div><div class="post-content"><p>###1、Sign</p>
+<blockquote>
+<p>题目：Good Luck！flag{X-nuca@GoodLuck!}</p>
+</blockquote>
+<p>Flag直接写在题目上了，<code>flag{X-nuca@GoodLuck!}</code></p>
+<p>###2、BaseCoding</p>
+<blockquote>
+<p>提示：这是编码不是加密哦!一般什么编码里常见等号？<br>题目：这一串字符好奇怪的样子，里面会不会隐藏什么信息？<a href="http://question1.erangelab.com/" target="_blank" rel="noopener">http://question1.erangelab.com/</a><br>Base64……</p>
+</blockquote>
+<p>访问后得到一串含有等号的字符，然后base64解码得到flag</p>
+<p>###3、BaseInjection</p>
+<blockquote>
+<p>提示：试试万能密码<br>题目：不知道密码也能登录。<a href="http://question2.erangelab.com/" target="_blank" rel="noopener">http://question2.erangelab.com/</a></p>
+</blockquote>
+<p>万能密码  1‘or’1’=’1’<br>轻松拿到flag</p>
+<p>###4、BaseReconstruction</p>
+<blockquote>
+<p>提示：对数据包进行重构是基本技能<br>题目：此题看似和上题一样，其实不然。<a href="http://question3.erangelab.com/" target="_blank" rel="noopener">http://question3.erangelab.com/</a></p>
+</blockquote>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/50886843.jpg" alt=""></p>
+<p><code>flag{Cr05sthEjava5cr1pt}</code></p>
+<p>###5、CountingStars</p>
+<blockquote>
+<p>提示：一不小心Mac也侧漏<br>题目：No more $s counting stars. <a href="http://question4.erangelab.com/" target="_blank" rel="noopener">http://question4.erangelab.com/</a><br>查看源码可以看到有个提示是说mac系统的，所以直接下载DS_Store，里面可以看到有一个zip</p>
+</blockquote>
+<p>在<code>http://question4.erangelab.com/.DS_Store</code>查看源码，发现这么一个名字的压缩包 把压缩包下载来后。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/670690.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$S=&quot;song&quot;;</span><br><span class="line">$song=&quot;says&quot;;</span><br><span class="line">$says=&quot;no&quot;;</span><br><span class="line">$no=&quot;more&quot;;</span><br><span class="line">$more=&quot;d0llars&quot;;</span><br><span class="line">$d0llars=&quot;counting&quot;;</span><br><span class="line">$counting=&quot;star&quot;;</span><br><span class="line">$star=&quot;S&quot;;</span><br><span class="line">echo &apos;&lt;div style=&quot;text-align:center&quot;&gt;What is $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$S&lt;/div&gt;&apos;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>应该是变量覆盖，直接<code>echo $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$S</code>解出来是<code>d0llars</code></p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/20812182.jpg" alt=""></p>
+<p>###6、Invisible</p>
+<blockquote>
+<p>题目：隐藏IP来保护自己。<a href="http://121.195.186.234" target="_blank" rel="noopener">http://121.195.186.234</a></p>
+</blockquote>
+<p>发包时直接改<code>X-Forwarded-For:127.0.0.1</code></p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/93672064.jpg" alt=""></p>
+<p>###7、Normal_normal</p>
+<blockquote>
+<p>提示：phpwind 后台getxxxxx<br>题目：又是一个bbs。<a href="http://question6.erangelab.com/" target="_blank" rel="noopener">http://question6.erangelab.com/</a></p>
+</blockquote>
+<p>126邮箱社工拿到后台用户名和密码:<code>zhangrendao  zhang2010</code></p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/41934336.jpg" alt=""></p>
+<p>登录后台 翻了下XML  最后拿到Flag</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/30764935.jpg" alt=""></p>
+<p><code>flag{n0rmal_meth0d_n0rmal_l1fe}</code></p>
+<p>###8、DBexplorer</p>
+<blockquote>
+<p>提示：a.SELECT @@datadir 。。。mysql/user.MYD b.user.MYD<br>题目：Where is my data。<a href="http://question7.erangelab.com/（请不要修改密码！）" target="_blank" rel="noopener">http://question7.erangelab.com/（请不要修改密码！）</a></p>
+</blockquote>
+<p>提示vim，看<code>db.php.swp</code>文件，找到了用户名和密码<code>ctfdb  ctfmysql123</code>，还有phpmyadmin的地址。但权限不够。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/66830417.jpg" alt=""></p>
+<p>无意中，看到大牛们导出时出现了这个：</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/79136926.jpg" alt=""></p>
+<p>然后用<code>topsec  topsec123456</code>登陆进去拿到flag</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/56027448.jpg" alt=""></p>
+<p>###9、RotatePicture</p>
+<blockquote>
+<p>提示：urlopen file schema<br>题目：转转转。<a href="http://question8.erangelab.com/picrotate" target="_blank" rel="noopener">http://question8.erangelab.com/picrotate</a></p>
+</blockquote>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/5643835.jpg" alt=""></p>
+<p>首先可以看源码，得到<br><a href="http://question8.erangelab.com/getredisvalue" target="_blank" rel="noopener">http://question8.erangelab.com/getredisvalue</a><br>然后找了个paper<code>http://www.tuicool.com/articles/fE7nMv3</code>，是Python urllib HTTP Header Injection。<br>方法就是先设置uuid，然后再get uuid。<br>这样get uuid 就等于get flag<br><code>flag{url0pen_1s_1nterest1ng}</code></p>
+<p>###10、AdminLogin</p>
+<blockquote>
+<p>题目：On the way in。<a href="http://121.195.186.238/index.php" target="_blank" rel="noopener">http://121.195.186.238/index.php</a></p>
+</blockquote>
+<p>点击进去好像有个链接 然后是我队友注入跑出来了账号密码</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/18238161.jpg" alt=""></p>
+<p>解出来是<br><code>Ctfadmin    admininistrat0r</code><br>然后尝试去登陆 发现死活登陆不了  看看返回信息。经师傅提示，找到了svn目录，找到了路径。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/18264019.jpg" alt=""></p>
+<p>好吧 要伪造IP  那简单啦 X-Forwarded-For 轻松解决一切</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/32635280.jpg" alt=""></p>
+<p>返回了一个图片的包 这个图片base64 那么用base64解出来图片应该就能看到flag了<br>拿到火狐解一下</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/91009013.jpg" alt=""></p>
+<p>###11、WeirdCamel(白师傅做的)</p>
+<blockquote>
+<p>提示：a.小骆驼的%和@真是蛋疼 b.嗯……URL转义有时候会失效 c.也许变量能够覆盖哦<br>题目：欢迎报名夏令营，请您仔细阅读公告，之后我们将会审核您的报名信息。<a href="http://question10.erangelab.com/" target="_blank" rel="noopener">http://question10.erangelab.com/</a></p>
+</blockquote>
+<p>这个一开始完全没思路，500太坑，最后又来了个提示，变量覆盖（post:name=a&amp;name=STATEMENT&amp;name=register.pl），直接拿到了源码</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/13727897.jpg" alt=""></p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/82014747.jpg" alt=""></p>
+<p>可以直接命令执行（post: name=1&amp;name=STATEMENT&amp;name=|ls|）<br>然后翻了下目录，没找到flag，不过有个xnuca_looktheregisternews.pl</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/76746107.jpg" alt=""></p>
+<p>源码:</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/21303771.jpg" alt=""></p>
+<p>然后就是弹shell了，上py脚本，直接反弹shell出来<br>登mysql提示：<br>Access denied for user ‘xnuca_user‘@’localhost’ to database ‘xnuca_news_db’ when using LOCK TABLES<br>我服，写了个py脚本去读所有字段，提示：<br>ImportError: No module named MySQLdb<br>我服，还打算写个php的，后来发现内核版本有点老啊，ubuntu的，上exp<br><a href="https://www.exploit-db.com/exploits/37292/" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/37292/</a></p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/7953510.jpg" alt=""></p>
+<p>我服，又穿了，中午穿过一次了……<br>最后看师傅们都在使劲传脚本，弹shell，无奈了，太菜害怕被超，最后十几分钟干了点缺德事，抱歉抱歉……</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-8-1/45618409.jpg" alt=""></p>
+<p>不过最后发现，删了以后有点亏，因为拿到了root密码xgsqggxwalspassw0rd，不知道是否通用啊，如果通用的话，那500也就可以拿下了……Orz</p>
+<p>###12、OneWayIn</p>
+<blockquote>
+<p>题目：How can I get in。<a href="http://question11.erangelab.com/" target="_blank" rel="noopener">http://question11.erangelab.com/</a></p>
+</blockquote>
+<p>查看源码，发现<code>crc32($_POST[&#39;0kee_username&#39;]) === crc32($_POST[&#39;0kee_password&#39;])</code>，弱类型数组绕过。<br><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/48845989.jpg" alt="">，url有一个任意文件读取，file参数值需要base64编码一下，num参数是读取第几行数，尝试着读取<code>index.php</code>源码，得到：</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/62064630.jpg" alt=""></p>
+<p>做一下代码审计，发现，当<code>cookie</code>设置<code>role_cookie=flagadmin</code>时，才可以读取<code>flag.php</code>文件。读了一下发现<code>flag.php</code>被<code>phpjiami</code>加密了</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/99272920.jpg" alt=""></p>
+<p>于是解密得：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">	$iipp=$_SERVER[&quot;HTTP_HOST&quot;];</span><br><span class="line">	if ($iipp === &apos;127.0.0.1&apos;) &#123;</span><br><span class="line">		echo &apos;ADwAcwBjAHIAaQBwAHQAPgBmAGwAYQBnAHsATAB6AFUAVgB6AEQATwBvAHgAeQBlAG4AYwA4AHAAagBUADkAdwBlAG8AUgB1AE4ATgBJAE8ATQA0AGIAUQAyAH0APAAvAHMAYwByAGkAcAB0AD4&apos;;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		echo &apos;We need local...&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>直接base64解密一下，得到flag</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/16-7-31/17441357.jpg" alt=""></p>
+<hr>
+<p>Team: JSSec<br>School: 西安科技大学</p>
+<hr>
+<p>最后打进决赛了：</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/public/16-12-4/10241653.jpg" alt=""></p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/public/16-12-4/44623095.jpg" alt=""></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/07/08/四六级查询demo总结/" class="prev">PREV</a><a href="/2018/07/08/腾讯云极速配置NodeJS+LNMP运行环境/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://www.ycjcl.cc">Kylin King</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
