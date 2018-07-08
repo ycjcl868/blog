@@ -1,0 +1,52 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Docker学习笔记 · 信鑫-King's Blog</title><meta name="description" content="Docker学习笔记 - Kylin King"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://www.ycjcl.cc/atom.xml" title="信鑫-King's Blog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/ycjcl868" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/ycjcl868" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Docker学习笔记</h1><div class="post-info">Jul 8, 2018</div><div class="post-content"><blockquote>
+<p>在美团∙点评前端基础技术团队里，需要装<code>Docker</code>，平台运行测试在<code>Docker</code>里，于是有了下文的<code>Docker</code>入坑记。</p>
+</blockquote>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="noopener">Docker官网地址</a></p>
+<p><a href="https://docs.docker.com/engine/installation/#platform-support-matrix" target="_blank" rel="noopener">各种系统版本(Windows/MacOS/Linux)</a></p>
+<p>装好后，就是个小鲸鱼的图标，</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/17-3-13/46642938-file_1489389332728_d5e7.png" alt=""></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>一般使用是在<code>终端</code>里，所以打开终端，先运行三条命令，测试下<code>docker</code>安装情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ docker --version</span><br><span class="line">Docker version 17.03.0-ce, build 60ccb22</span><br><span class="line"></span><br><span class="line">$ docker-compose --version</span><br><span class="line">docker-compose version 1.11.2, build dfed245</span><br><span class="line"></span><br><span class="line">$ docker-machine --version</span><br><span class="line">docker-machine version 0.10.0, build 76ed2a6</span><br></pre></td></tr></table></figure>
+<h4 id="开启容器"><a href="#开启容器" class="headerlink" title="开启容器"></a>开启容器</h4><p>这里，运行<code>nginx</code>，将本机的80端口映射到<code>docker</code>里的80端口，容器名为<code>webserver</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 80:80 --name webserver nginx</span><br></pre></td></tr></table></figure>
+<p>然后访问<code>http://localhost</code>，就看到配好的<code>nginx</code>。</p>
+<p><img src="http://7xi72v.com1.z0.glb.clouddn.com/17-3-13/71278965-file_1489389325557_1792b.png" alt=""></p>
+<h4 id="关闭容器"><a href="#关闭容器" class="headerlink" title="关闭容器"></a>关闭容器</h4><p>关闭容器，先得知道<code>容器的id</code>，所以这里先查看一下<code>容器的id</code>,使用<code>docker ps -a</code>或者<code>docker images</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES</span><br><span class="line">96d00fcc948b        nginx               <span class="string">"nginx -g 'daemon ..."</span>   19 minutes ago      Exited (0) 5 minutes ago                       webserver</span><br></pre></td></tr></table></figure>
+<p>然后有一个id号<code>96d00fcc948b</code>，关闭时，只需要输入前几名就可以了，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker stop 96d0</span><br></pre></td></tr></table></figure>
+<h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><p>输入<code>docker</code>镜像的<code>name</code>名(查看方法用<code>docker ps -a</code>)，删除就用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm -f webserver1</span><br></pre></td></tr></table></figure>
+<h3 id="在Docker里安装Kali"><a href="#在Docker里安装Kali" class="headerlink" title="在Docker里安装Kali"></a>在Docker里安装Kali</h3><ul>
+<li>首先在终端输入(使用了国内的镜像，官方的超级慢)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull hub.c.163.com/vamvam/kalilinux:latest</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装完成后，查看下镜像</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br></pre></td></tr></table></figure>
+<ul>
+<li>直接运行</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name Kali -t -i hub.c.163.com/vamvam/kalilinux /bin/bash</span><br></pre></td></tr></table></figure>
+<ul>
+<li>更新各种软件</li>
+</ul>
+<p>因为使用了国内镜像，所以 <code>apt-get</code> 的源也是国内的，非常之快</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get update &amp;&amp; apt-get upgrade &amp;&amp; apt-get dist-upgrade -y</span><br></pre></td></tr></table></figure>
+<p>安装渗透工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get install metasploit-framework nmap git sqlmap websploit kali-linux-wireless aircrack-ng pciutils</span><br><span class="line"> -y</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装完后，需要保存容器状态， Ctrl-p + Ctrl-q.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker commit -m <span class="string">"add hydra"</span> 容器id REPOSITORY</span><br></pre></td></tr></table></figure>
+<p><img src="http://i1.piimg.com/567571/a62ce4d543bd125d.png" alt=""></p>
+<p>为了与本机Mac实现共享数据，在 Mac 中新建了一个共享空目录 <code>/Users/jcl/Desktop/Kali_File</code> ，在 <code>Kali</code> 中新建了一个目录 <code>/jcl</code>  ，然后使用在 <code>docker run</code> 命令之后添加 <code>-v /Users/jcl/Desktop/Kali_File:/jcl</code> 来挂载本机目录。</p>
+<p>退出时，直接输入 <code>exit</code> 。<br>使用时，输入自定义的命令开启(我在 <code>.zshrc</code> 中的自定义)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.zshrc 或者 ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">alias</span>=<span class="string">"alias run-kali="</span>docker run -it -v /Users/jcl/Desktop/Kali_File:/jcl kali /bin/bash<span class="string">"</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://i4.buimg.com/567571/cc1ab98331f6fb91.png" alt=""></p>
+<p>$ docker build -t {hash} .<br>$ docker ps<br>$ docker kill {containerName}<br>$ docker run -d -P {hash}</p>
+<blockquote>
+<p>参考: <a href="https://miteshshah.github.io/mac/kali-linux-and-metasploit-with-docker/" target="_blank" rel="noopener">Kali Linux and Metasploit With Docker</a>、<a href="http://dockone.io/article/783" target="_blank" rel="noopener">10张图带你深入理解Docker容器和镜像</a>、<a href="http://wobushi.cn/?p=123123308" target="_blank" rel="noopener">在docker容器中运行kali linux </a>、<a href="https://xudafeng.github.io/slide/archives/docker-in-practice/" target="_blank" rel="noopener">Docker从入门到实践</a></p>
+</blockquote>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/07/08/Nisp之道/" class="prev">PREV</a><a href="/2018/07/08/深入学习下AJAX/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="https://www.ycjcl.cc">Kylin King</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
