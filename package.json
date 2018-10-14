@@ -23,8 +23,12 @@
     "snyk": "^1.88.2"
   },
   "scripts": {
+    "prepublish": "hexo d",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"
   },
-  "snyk": true
+  "snyk": true,
+  "devDependencies": {
+    "hexo": "^3.7.1"
+  }
 }
