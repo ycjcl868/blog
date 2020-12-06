@@ -6,7 +6,7 @@
     "version": "3.7.1"
   },
   "dependencies": {
-    "hexo": "^3.2.0",
+    "hexo": "^5.0.0",
     "hexo-browsersync": "^0.3.0",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.5",
@@ -17,7 +17,7 @@
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.3.0",
     "hexo-renderer-jade": "^0.4.1",
-    "hexo-renderer-marked": "^0.3.0",
+    "hexo-renderer-marked": "^3.0.0",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0",
     "snyk": "^1.88.2"
@@ -29,6 +29,6 @@
   },
   "snyk": true,
   "devDependencies": {
-    "hexo": "^3.7.1"
+    "hexo": "^5.0.0"
   }
 }
