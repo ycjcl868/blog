@@ -1,0 +1,21 @@
+name: 15-minute-cron
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: build
+        run: |
+          yarn install
+          yarn build
+      - name: deploy
+        env:
+          BUILD_ID: ${{ github.sha }}
+          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+        run: |
+          vercel --token=$ZEIT_TOKEN --confirm --prod --force
