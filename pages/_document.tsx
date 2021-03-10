@@ -54,14 +54,9 @@ export default class MyDocument extends Document {
             />
           )}
           {ga?.id && (
-            <>
-              <script
-                async
-                src={`https://www.googletagmanager.com/gtag/js?id=${ga.id}`}
-              />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `(function(){
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `(function(){
                     if (!location.port) {
                       (function (i, s, o, g, r, a, m) {
                         i['GoogleAnalyticsObject'] = r;
@@ -78,9 +73,8 @@ export default class MyDocument extends Document {
                       ga('send', 'pageview');
                     }
                   })();`
-                }}
-              />
-            </>
+              }}
+            />
           )}
         </Html>
       </IconContext.Provider>
