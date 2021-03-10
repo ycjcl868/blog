@@ -13,6 +13,9 @@ module.exports = {
 
   // open graph metadata (optional)
   description: "Personal blog by Kylin King. I'm a web developer.",
+  cnzz: {
+    id: '1279745642'
+  },
   socialImageTitle: 'Kylin King',
   socialImageSubtitle: 'Hello World! 👋',
 

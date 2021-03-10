@@ -1,5 +1,6 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { cnzz } from 'lib/config'
 import { IconContext } from 'react-icons'
 
 export default class MyDocument extends Document {
@@ -44,6 +45,14 @@ export default class MyDocument extends Document {
 
             <NextScript />
           </body>
+          {cnzz?.id && (
+            <script
+              type='text/javascript'
+              dangerouslySetInnerHTML={{
+                __html: `document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_${cnzz.id}'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D${cnzz.id}' type='text/javascript'%3E%3C/script%3E"));`
+              }}
+            />
+          )}
         </Html>
       </IconContext.Provider>
     )
