@@ -135,7 +135,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
     ) || config.api.renderSocialImage(pageId)
 
   const socialDescription =
-    htmlEscape(getPageDescription(block, recordMap)) ?? config.description
+    htmlEscape(getPageDescription(block, recordMap) || '') ?? config.description
 
   let comments: React.ReactNode = null
   let pageAside: React.ReactChild = null
