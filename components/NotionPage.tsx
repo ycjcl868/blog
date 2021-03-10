@@ -8,6 +8,7 @@ import { useSearchParam } from 'react-use'
 import BodyClassName from 'react-body-classname'
 import useDarkMode from 'use-dark-mode'
 import { PageBlock } from 'notion-types'
+import { htmlEscape } from 'escape-goat'
 
 import { Tweet, Twitter } from 'react-static-tweets'
 
@@ -134,7 +135,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
     ) || config.api.renderSocialImage(pageId)
 
   const socialDescription =
-    getPageDescription(block, recordMap) ?? config.description
+    htmlEscape(getPageDescription(block, recordMap)) ?? config.description
 
   let comments: React.ReactNode = null
   let pageAside: React.ReactChild = null
