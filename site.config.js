@@ -16,6 +16,9 @@ module.exports = {
   cnzz: {
     id: '1279745642'
   },
+  ga: {
+    id: 'G-QNHPPR60EZ'
+  },
   socialImageTitle: 'Kylin King',
   socialImageSubtitle: 'Hello World! 👋',
 
