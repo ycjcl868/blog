@@ -12,8 +12,8 @@ module.exports = {
   author: 'ycjcl868',
 
   // open graph metadata (optional)
-  description: 'Example site description',
-  socialImageTitle: 'Transitive Bullshit',
+  description: "Personal blog by Kylin King. I'm a web developer.",
+  socialImageTitle: 'Kylin King',
   socialImageSubtitle: 'Hello World! 👋',
 
   // social usernames (optional)
