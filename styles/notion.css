@@ -43,57 +43,8 @@
   margin: 0 auto;
 }
 
-.notion-gallery-grid {
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  grid-gap: 6vmin;
-  gap: 6vmin;
-}
-
-.notion-gallery-grid .notion-page-icon {
-  display: none;
-}
-
-.notion-gallery-grid .notion-page-title-text {
-  font-size: 2em;
-  white-space: unset;
-}
-
-.notion-gallery-grid .notion-collection-card-property {
-  white-space: unset;
-  text-overflow: unset;
-}
-
-.notion-gallery-grid .notion-property-text {
-  font-size: 14px;
-}
-
-.notion-collection-card {
-  border-radius: 16px;
-  box-shadow: none;
-}
-
-.notion-collection-card-cover img {
-  border-radius: 16px;
-}
-
-.notion-collection-card {
-  overflow: visible;
-}
-
-.notion-collection-card-cover {
-  border-radius: 16px;
-  overflow: visible;
-  box-shadow: 2px 2px 8px 4px rgba(15, 15, 15, 0.1);
-}
-
-.notion-collection-card-cover {
-  border-bottom: 0 none;
-  transition: filter 150ms linear;
-  filter: none;
-}
-
-.notion-collection-card:hover .notion-collection-card-cover {
-  filter: brightness(120%);
+.notion-collection-card .notion-property-multi_select-item {
+  margin-bottom: 2px;
 }
 
 /* only target safari */
@@ -145,14 +96,6 @@
   }
 }
 
-@media only screen and (max-width: 400px) {
-  .notion-gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 10vmin;
-    gap: 10vmin;
-  }
-}
-
 .notion .notion-page-icon-cover {
   margin-left: auto;
   margin-right: auto;
@@ -161,19 +104,6 @@
 .notion-title {
   display: block;
   text-align: center;
-}
-
-.notion-collection-column-title {
-  display: none !important;
-}
-
-.notion-collection-row-property .notion-property {
-  display: flex;
-  justify-content: center;
-}
-
-.notion-collection-row-value {
-  padding: 0;
 }
 
 .notion-page-cover {
@@ -186,11 +116,6 @@
   .notion-page-cover {
     border-radius: 0;
   }
-}
-
-.notion-block-ab9a258d6cf444f3bb40dc2600feae91 .notion-page-link {
-  justify-content: center;
-  padding: 2em;
 }
 
 .notion-code {
@@ -310,10 +235,6 @@
   margin: 0;
   border-radius: 0;
   background: none !important;
-}
-
-.notion-block-f382a57807bc40779860eb079d0144f2 .lazy-image-wrapper {
-  border-radius: 16px;
 }
 
 /* if you don't want rounded page images, remove this */
