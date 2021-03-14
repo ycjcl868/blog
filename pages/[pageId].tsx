@@ -37,7 +37,6 @@ export async function getStaticPaths() {
   }
 
   const siteMaps = await getSiteMaps()
-
   const ret = {
     paths: siteMaps.flatMap((siteMap) =>
       Object.keys(siteMap.canonicalPageMap).map((pageId) => ({
@@ -50,7 +49,6 @@ export async function getStaticPaths() {
     fallback: true
   }
 
-  console.log(ret.paths)
   return ret
 }
 

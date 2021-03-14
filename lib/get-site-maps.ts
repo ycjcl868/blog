@@ -11,13 +11,6 @@ export async function getSiteMaps(): Promise<types.SiteMap[]> {
     sites,
     async (site, index) => {
       try {
-        console.log(
-          'getSiteMap',
-          `${index + 1}/${sites.length}`,
-          `(${(((index + 1) / sites.length) * 100) | 0}%)`,
-          site
-        )
-
         return {
           site,
           ...(await getAllPages(site.rootNotionPageId, site.rootNotionSpaceId))

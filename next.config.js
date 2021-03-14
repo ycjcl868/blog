@@ -6,6 +6,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
   images: {
-    domains: ['nodego.top']
+    domains: ['www.notion.so']
   }
 })
