@@ -74,6 +74,7 @@
 
 .notion-hr {
   margin: 2em 0;
+  border-color: var(--bg-color-0);
 }
 
 @media only screen and (max-width: 920px) {
