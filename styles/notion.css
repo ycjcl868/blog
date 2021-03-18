@@ -72,6 +72,10 @@
   border-top: 1px solid var(--bg-color-0);
 }
 
+.notion-collection-row {
+  border-bottom: 1px solid var(--bg-color-0);
+}
+
 .notion-callout {
   margin: 0.75em 0;
 }
