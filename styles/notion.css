@@ -68,6 +68,10 @@
   margin-bottom: 0.25em;
 }
 
+.notion-gallery-grid {
+  border-top: 1px solid var(--bg-color-0);
+}
+
 .notion-callout {
   margin: 0.75em 0;
 }
