@@ -35,24 +35,9 @@ import { PageActions } from './PageActions'
 import { Footer } from './Footer'
 import { PageSocial } from './PageSocial'
 import { GitHubShareButton } from './GitHubShareButton'
-import { ReactUtterances } from './ReactUtterances'
+import { Comments } from './Comments'
 
 import styles from './styles.module.css'
-
-// const Code = dynamic(() =>
-//   import('react-notion-x').then((notion) => notion.Code)
-// )
-//
-// const Collection = dynamic(() =>
-//   import('react-notion-x').then((notion) => notion.Collection)
-// )
-//
-// const CollectionRow = dynamic(
-//   () => import('react-notion-x').then((notion) => notion.CollectionRow),
-//   {
-//     ssr: false
-//   }
-// )
 
 const Pdf = dynamic(() => import('react-notion-x').then((notion) => notion.Pdf))
 
@@ -134,13 +119,12 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   // only display comments and page actions on blog post pages
   if (isBlogPost) {
-    if (config.utterancesGitHubRepo) {
+    if (config.disqus) {
       comments = (
-        <ReactUtterances
-          repo={config.utterancesGitHubRepo}
-          issueMap='issue-term'
-          issueTerm='title'
-          theme={darkMode.value ? 'photon-dark' : 'github-light'}
+        <Comments
+          identifier={pageId}
+          shortname={config.disqus}
+          theme={darkMode.value ? 'dark' : 'light'}
         />
       )
     }
