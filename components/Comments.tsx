@@ -18,6 +18,7 @@ export const Comments: React.FC<CommentsProps> = ({
   return (
     <div className={styles.comments}>
       <DiscussionEmbed
+        // @ts-ignore
         theme={theme}
         shortname={shortname}
         config={{ identifier }}
