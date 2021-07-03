@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-iframe[src*='ads-iframe'] {
+iframe[src*='ads-iframe'], iframe[id*="dsq"] {
   display: none;
 }
 
