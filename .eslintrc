@@ -18,10 +18,8 @@
       "parser": "babel-eslint",
       "extends": [
         "standard",
-        "standard-react",
-        "plugin:prettier/recommended",
-        "prettier/standard",
-        "prettier/react"
+        "next",
+        "prettier"
       ],
       "env": { "node": true },
       "rules": {
@@ -29,6 +27,8 @@
         "react/prop-types": 0,
         "react/jsx-handler-names": 0,
         "react/jsx-fragments": 0,
+        "react/no-unescaped-entities": 0,
+        "@next/next/no-page-custom-font": 0,
         "react/no-unused-prop-types": 0,
         "import/export": 0,
         "standard/no-callback-literal": 0
@@ -41,14 +41,15 @@
       "extends": [
         "plugin:@typescript-eslint/recommended",
         "standard",
-        "standard-react",
-        "plugin:prettier/recommended",
-        "prettier/standard",
-        "prettier/react"
+        "next",
+        "prettier"
       ],
       "env": { "browser": true, "node": true },
       "rules": {
         "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/ban-ts-comment": 0,
+        "react/no-unescaped-entities": 0,
+        "@next/next/no-page-custom-font": 0,
         "@typescript-eslint/explicit-module-boundary-types": 0,
         "no-use-before-define": 0,
         "@typescript-eslint/no-use-before-define": 0,

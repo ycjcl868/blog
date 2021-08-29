@@ -1,8 +1,8 @@
-import React from 'react'
-import { isDev, domain } from 'lib/config'
+import { NotionPage } from 'components'
+import { domain, isDev } from 'lib/config'
 import { getSiteMaps } from 'lib/get-site-maps'
 import { resolveNotionPage } from 'lib/resolve-notion-page'
-import { NotionPage } from 'components'
+import React from 'react'
 
 export const getStaticProps = async (context) => {
   const rawPageId = context.params.pageId as string
@@ -45,8 +45,7 @@ export async function getStaticPaths() {
         }
       }))
     ),
-    // paths: [],
-    fallback: true
+    fallback: false
   }
 
   return ret

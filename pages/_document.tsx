@@ -1,6 +1,6 @@
-import React from 'react'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { cnzz, ga } from 'lib/config'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
+import React from 'react'
 import { IconContext } from 'react-icons'
 
 export default class MyDocument extends Document {
