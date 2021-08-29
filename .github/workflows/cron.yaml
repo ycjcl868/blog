@@ -1,7 +1,5 @@
 name: autoRefresh
 on:
-  push:
-    branches: [ master, main ]
   schedule:
     # Every 60 minutes, every hour, every day
     - cron: '*/60 * * * *'
@@ -23,9 +21,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --ignore-engines
       - name: build
-        run: |
-          yarn build
-          yarn export
+        run: yarn build
       - name: deploy
         env:
           BUILD_ID: ${{ github.sha }}
