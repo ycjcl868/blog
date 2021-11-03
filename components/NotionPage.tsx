@@ -33,7 +33,9 @@ import { PageActions } from './PageActions'
 import { PageHead } from './PageHead'
 import { PageSocial } from './PageSocial'
 import styles from './styles.module.css'
-const Pdf = dynamic(() => import('react-notion-x').then((notion) => notion.Pdf))
+const Pdf = dynamic(() =>
+  import('react-notion-x').then((notion: any) => notion.Pdf)
+)
 
 const Equation = dynamic(() =>
   import('react-notion-x').then((notion) => notion.Equation)
