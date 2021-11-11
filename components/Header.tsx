@@ -13,7 +13,7 @@ const NavBar = () => {
   ]
   return (
     <div className='flex-shrink-0'>
-      <ul className='flex flex-row'>
+      <ul className='flex flex-row items-center'>
         {links.map(
           (link) =>
             link.show && (
@@ -60,7 +60,7 @@ const Header = ({ navBarTitle, fullWidth }) => {
     <>
       <div className='observer-element h-4 md:h-12' ref={sentinalRef}></div>
       <div
-        className={`sticky-nav m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${
+        className={`sticky-nav m-auto w-full h-6 flex flex-row justify-between items-center mb-4 md:mb-12 py-8 bg-opacity-60 ${
           !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
         }`}
         id='sticky-nav'
@@ -68,12 +68,11 @@ const Header = ({ navBarTitle, fullWidth }) => {
       >
         <div className='flex items-center'>
           <Link href='/'>
-            <a aria-label={BLOG.title}>
-              <div className='h-6'>
-                <span className='text-lg text-black dark:text-white'>
-                  ✨ {BLOG.title}
-                </span>
-              </div>
+            <a
+              className='h-6 text-lg text-black dark:text-white'
+              aria-label={BLOG.title}
+            >
+              ✨ {BLOG.title}
             </a>
           </Link>
           {navBarTitle ? (
