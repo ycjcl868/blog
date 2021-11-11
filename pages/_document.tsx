@@ -18,14 +18,14 @@ class MyDocument extends Document {
             <>
               <link
                 rel='preload'
-                href='/fonts/SourceSerif.var.woff2'
+                href='//cdn.jsdelivr.net/gh/ycjcl868/cdn@1.0.0/fonts/SourceSerif.var.woff2'
                 as='font'
                 type='font/woff2'
                 crossOrigin='anonymous'
               />
               <link
                 rel='preload'
-                href='/fonts/SourceSerif-Italic.var.woff2'
+                href='//cdn.jsdelivr.net/gh/ycjcl868/cdn@1.0.0/fonts/SourceSerif-Italic.var.woff2'
                 as='font'
                 type='font/woff2'
                 crossOrigin='anonymous'
@@ -35,14 +35,14 @@ class MyDocument extends Document {
             <>
               <link
                 rel='preload'
-                href='/fonts/IBMPlexSansVar-Roman.woff2'
+                href='//cdn.jsdelivr.net/gh/ycjcl868/cdn@1.0.0/fonts/IBMPlexSansVar-Roman.woff2'
                 as='font'
                 type='font/woff2'
                 crossOrigin='anonymous'
               />
               <link
                 rel='preload'
-                href='/fonts/IBMPlexSansVar-Italic.woff2'
+                href='//cdn.jsdelivr.net/gh/ycjcl868/cdn@1.0.0/fonts/IBMPlexSansVar-Italic.woff2'
                 as='font'
                 type='font/woff2'
                 crossOrigin='anonymous'
@@ -62,20 +62,20 @@ class MyDocument extends Document {
               <link
                 rel='preload'
                 as='style'
-                href={`https://fonts.googleapis.com/css2?family=Noto+${
+                href={`https://fonts.loli.net/css2?family=Noto+${
                   BLOG.font === 'serif' ? 'Serif' : 'Sans'
                 }+${CJK()}:wght@400;500;700&display=swap`}
               />
               <link
                 rel='stylesheet'
-                href={`https://fonts.googleapis.com/css2?family=Noto+${
+                href={`https://fonts.loli.net/css2?family=Noto+${
                   BLOG.font === 'serif' ? 'Serif' : 'Sans'
                 }+${CJK()}:wght@400;500;700&display=swap`}
               />
               <noscript>
                 <link
                   rel='stylesheet'
-                  href={`https://fonts.googleapis.com/css2?family=Noto+${
+                  href={`https://fonts.loli.net/css2?family=Noto+${
                     BLOG.font === 'serif' ? 'Serif' : 'Sans'
                   }+${CJK()}:wght@400;500;700&display=swap`}
                 />
