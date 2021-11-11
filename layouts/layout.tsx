@@ -43,7 +43,12 @@ const Layout = ({
         {frontMatter.type[0] !== 'Page' && (
           <nav className='flex mt-7 items-start text-gray-500 dark:text-gray-400'>
             <div className='flex mb-4'>
-              <a href={BLOG.socialLink || '#'} className='flex'>
+              <a
+                href={BLOG.socialLink || '#'}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='flex'
+              >
                 <Image
                   alt={BLOG.author}
                   width={24}
