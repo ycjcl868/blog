@@ -1,11 +1,14 @@
-module.exports = {
-  webpack5: true,
+/**
+ * @type {import('next').NextConfig}
+ **/
+const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['gravatar.com']
   },
   eslint: {
-    dirs: ['components', 'layouts', 'lib', 'pages']
+    dirs: ['components', 'layouts', 'lib', 'pages'],
+    ignoreDuringBuilds: true
   },
   async headers() {
     return [
@@ -30,5 +33,10 @@ module.exports = {
       })
     }
     return config
+  },
+  typescript: {
+    ignoreBuildErrors: true
   }
 }
+
+module.exports = nextConfig

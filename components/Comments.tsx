@@ -17,7 +17,7 @@ const UtterancesComponent = dynamic(
   { ssr: false }
 )
 const CusdisComponent = dynamic(
-  () => {
+  (): any => {
     return import('react-cusdis').then((m) => m.ReactCusdis)
   },
   { ssr: false }

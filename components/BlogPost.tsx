@@ -3,7 +3,6 @@ import BLOG from '@/blog.config'
 import formatDate from '@/lib/formatDate'
 
 const BlogPost = ({ post }) => {
-  console.log('post', post)
   return (
     <Link href={`${BLOG.path}/${post.slug}`}>
       <a>

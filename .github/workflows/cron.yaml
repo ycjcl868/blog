@@ -16,12 +16,13 @@ jobs:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: install pnpm
+        run: npm install pnpm -g
       - name: install
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --ignore-engines
+        run: pnpm install
       - name: build
-        run: yarn build
+        run: pnpm run build
       - name: deploy
         env:
           BUILD_ID: ${{ github.sha }}
