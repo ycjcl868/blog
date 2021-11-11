@@ -70,7 +70,9 @@ const Header = ({ navBarTitle, fullWidth }) => {
           <Link href='/'>
             <a aria-label={BLOG.title}>
               <div className='h-6'>
-                <span className='text-lg'>✨ {BLOG.title}</span>
+                <span className='text-lg text-black dark:text-white'>
+                  ✨ {BLOG.title}
+                </span>
               </div>
             </a>
           </Link>
