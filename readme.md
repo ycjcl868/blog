@@ -1,3 +1,3 @@
-# Notion Starter Kit
+# Blog
 
-Kylin King Blog
+Fork from [nobelium](https://github.com/craigary/nobelium).
