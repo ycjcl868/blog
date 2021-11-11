@@ -9,17 +9,17 @@ const NavBar = () => {
     { id: 0, name: locale.NAV.INDEX, to: BLOG.path || '/', show: true },
     { id: 1, name: locale.NAV.ABOUT, to: '/about', show: BLOG.showAbout },
     { id: 2, name: locale.NAV.SEARCH, to: '/search', show: true },
-    { id: 3, name: locale.NAV.RSS, to: '/feed', show: true },
+    { id: 3, name: locale.NAV.RSS, to: '/feed', show: true }
   ]
   return (
-    <div className="flex-shrink-0">
-      <ul className="flex flex-row">
+    <div className='flex-shrink-0'>
+      <ul className='flex flex-row'>
         {links.map(
-          link =>
+          (link) =>
             link.show && (
               <li
                 key={link.id}
-                className="block ml-4 text-black dark:text-gray-50 nav"
+                className='block ml-4 text-black dark:text-gray-50 nav'
               >
                 <Link href={link.to}>
                   <a>{link.name}</a>
@@ -58,34 +58,32 @@ const Header = ({ navBarTitle, fullWidth }) => {
   }, [sentinalRef])
   return (
     <>
-      <div className="observer-element h-4 md:h-12" ref={sentinalRef}></div>
+      <div className='observer-element h-4 md:h-12' ref={sentinalRef}></div>
       <div
         className={`sticky-nav m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${
           !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
         }`}
-        id="sticky-nav"
+        id='sticky-nav'
         ref={navRef}
       >
-        <div className="flex items-center">
-          <Link href="/">
+        <div className='flex items-center'>
+          <Link href='/'>
             <a aria-label={BLOG.title}>
-              <div className="h-6">
-                <span className="text-lg">✨ {BLOG.title}</span>
+              <div className='h-6'>
+                <span className='text-lg'>✨ {BLOG.title}</span>
               </div>
             </a>
           </Link>
-          {navBarTitle
-            ? (
-            <p className="ml-2 font-medium text-day dark:text-night header-name">
+          {navBarTitle ? (
+            <p className='ml-2 font-medium text-day dark:text-night header-name'>
               {navBarTitle}
             </p>
-              )
-            : (
-            <p className="ml-2 font-medium text-day dark:text-night header-name">
+          ) : (
+            <p className='ml-2 font-medium text-day dark:text-night header-name'>
               {BLOG.title},{' '}
-              <span className="font-normal">{BLOG.description}</span>
+              <span className='font-normal'>{BLOG.description}</span>
             </p>
-              )}
+          )}
         </div>
         <NavBar />
       </div>

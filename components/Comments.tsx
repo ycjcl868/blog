@@ -18,7 +18,7 @@ const UtterancesComponent = dynamic(
 )
 const CusdisComponent = dynamic(
   () => {
-    return import('react-cusdis').then(m => m.ReactCusdis)
+    return import('react-cusdis').then((m) => m.ReactCusdis)
   },
   { ssr: false }
 )
@@ -46,7 +46,7 @@ const Comments = ({ frontMatter }) => {
       )}
       {BLOG.comment && BLOG.comment.provider === 'cusdis' && (
         <CusdisComponent
-        lang={fetchCusdisLang()}
+          lang={fetchCusdisLang()}
           attrs={{
             host: BLOG.comment.cusdisConfig.host,
             appId: BLOG.comment.cusdisConfig.appId,

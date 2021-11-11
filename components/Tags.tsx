@@ -3,9 +3,9 @@ import Link from 'next/link'
 const Tags = ({ tags, currentTag }) => {
   if (!tags) return null
   return (
-    <div className="tag-container">
-      <ul className="flex max-w-full mt-4 overflow-x-auto">
-        {Object.keys(tags).map(key => {
+    <div className='tag-container'>
+      <ul className='flex max-w-full mt-4 overflow-x-auto'>
+        {Object.keys(tags).map((key) => {
           const selected = key === currentTag
           return (
             <li
@@ -20,9 +20,7 @@ const Tags = ({ tags, currentTag }) => {
                 key={key}
                 href={selected ? '/search' : `/tag/${encodeURIComponent(key)}`}
               >
-                <a className="px-4 py-2 block">
-                  {`${key} (${tags[key]})`}
-                </a>
+                <a className='px-4 py-2 block'>{`${key} (${tags[key]})`}</a>
               </Link>
             </li>
           )

@@ -32,7 +32,7 @@ const Scripts = () => (
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${BLOG.analytics.gaConfig.measurementId}`}
         />
-        <Script strategy="lazyOnload" id="ga">
+        <Script strategy='lazyOnload' id='ga'>
           {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());

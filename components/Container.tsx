@@ -17,37 +17,37 @@ const Container = ({ children, layout, fullWidth, ...customMeta }) => {
       <Head>
         <title>{meta.title}</title>
         {/* <meta content={BLOG.darkBackground} name="theme-color" /> */}
-        <meta name="robots" content="follow, index" />
-        <meta charSet="UTF-8" />
+        <meta name='robots' content='follow, index' />
+        <meta charSet='UTF-8' />
         {BLOG.seo.googleSiteVerification && (
           <meta
-            name="google-site-verification"
+            name='google-site-verification'
             content={BLOG.seo.googleSiteVerification}
           />
         )}
         {BLOG.seo.keywords && (
-          <meta name="keywords" content={BLOG.seo.keywords.join(', ')} />
+          <meta name='keywords' content={BLOG.seo.keywords.join(', ')} />
         )}
-        <meta name="description" content={meta.description} />
-        <meta property="og:locale" content={BLOG.lang} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
+        <meta name='description' content={meta.description} />
+        <meta property='og:locale' content={BLOG.lang} />
+        <meta property='og:title' content={meta.title} />
+        <meta property='og:description' content={meta.description} />
         <meta
-          property="og:url"
+          property='og:url'
           content={meta.slug ? `${url}/${meta.slug}` : url}
         />
         <meta
-          property="og:image"
+          property='og:image'
           content={`${BLOG.ogImageGenerateURL}/${encodeURIComponent(
             meta.title
           )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`}
         />
-        <meta property="og:type" content={meta.type} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:title" content={meta.title} />
+        <meta property='og:type' content={meta.type} />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:description' content={meta.description} />
+        <meta name='twitter:title' content={meta.title} />
         <meta
-          name="twitter:image"
+          name='twitter:image'
           content={`${BLOG.ogImageGenerateURL}/${encodeURIComponent(
             meta.title
           )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`}
@@ -55,10 +55,10 @@ const Container = ({ children, layout, fullWidth, ...customMeta }) => {
         {meta.type === 'article' && (
           <>
             <meta
-              property="article:published_time"
+              property='article:published_time'
               content={meta.date || meta.createdTime}
             />
-            <meta property="article:author" content={BLOG.author} />
+            <meta property='article:author' content={BLOG.author} />
           </>
         )}
       </Head>

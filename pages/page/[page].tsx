@@ -8,13 +8,13 @@ const Page = ({ postsToShow, page, showNext }) => {
   return (
     <Container>
       {postsToShow &&
-        postsToShow.map(post => <BlogPost key={post.id} post={post} />)}
+        postsToShow.map((post) => <BlogPost key={post.id} post={post} />)}
       <Pagination page={page} showNext={showNext} />
     </Container>
   )
 }
 
-export async function getStaticProps (context) {
+export async function getStaticProps(context) {
   const { page } = context.params // Get Current Page No.
   const posts = await getAllPosts({ includePages: false })
   const postsToShow = posts.slice(
@@ -33,7 +33,7 @@ export async function getStaticProps (context) {
   }
 }
 
-export async function getStaticPaths () {
+export async function getStaticPaths() {
   const posts = await getAllPosts({ includePages: false })
   const totalPosts = posts.length
   const totalPages = Math.ceil(totalPosts / BLOG.postsPerPage)

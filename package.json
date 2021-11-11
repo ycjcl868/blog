@@ -20,7 +20,7 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
-    "axios": ">=0.24.0",
+    "axios": "^0.24.0",
     "dayjs": "^1.10.7",
     "feed": "^4.2.2",
     "gitalk": "^1.7.2",
@@ -35,6 +35,7 @@
     "use-ackee": "^3.0.0"
   },
   "devDependencies": {
+    "@types/react": "^17.0.34",
     "autoprefixer": "^10.4.0",
     "eslint": "<8.0.0",
     "eslint-config-next": "^12.0.3",
@@ -43,9 +44,12 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "eslint-plugin-react": "^7.26.1",
+    "prettier": "^2.4.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
     "next-sitemap": "^1.6.203",
     "postcss": "^8.3.11",
-    "tailwindcss": "^2.2.19"
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.4.4"
   },
   "resolutions": {
     "axios": ">=0.21.1"
