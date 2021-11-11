@@ -14,7 +14,6 @@ export const Comments: React.FC<CommentsProps> = ({
   theme,
   shortname
 }) => {
-  console.log('theme', theme)
   return (
     <div className={styles.comments}>
       <DiscussionEmbed
