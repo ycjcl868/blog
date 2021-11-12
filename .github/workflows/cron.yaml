@@ -12,7 +12,7 @@ jobs:
           fetch-depth: '1'
       - name: deploy
         env:
-          BUILD_ID: ${{ github.sha }}
+          BUILD_BRANCH: master
           ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
         run: |
           vercel --token=$ZEIT_TOKEN --confirm --prod --force
