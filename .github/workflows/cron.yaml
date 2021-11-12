@@ -1,8 +1,8 @@
 name: autoRefresh
 on:
   schedule:
-    # Every 60 minutes, every hour, every day
-    - cron: '*/60 * * * *'
+    # Every day
+    - cron: '30 2 * * *'
 jobs:
   cron:
     runs-on: ubuntu-latest
