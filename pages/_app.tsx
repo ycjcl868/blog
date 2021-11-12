@@ -1,3 +1,13 @@
+// syntax highlighting via Notion's Code block
+import 'prismjs'
+import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-diff'
+import 'prismjs/components/prism-go'
+import 'prismjs/components/prism-yaml'
+import 'prismjs/components/prism-rust'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-typescript'
 import 'prismjs/themes/prism.css'
 import 'react-notion-x/src/styles.css'
 import 'katex/dist/katex.min.css'

@@ -10,10 +10,16 @@
 .notion-h-title {
   @apply leading-8;
   @apply p-0;
-  @apply my-3;
 }
 .notion-page-link {
   color: inherit;
+}
+.notion-list li {
+  padding: 0;
+}
+
+.notion-blank {
+  margin: 0;
 }
 
 svg.notion-page-icon {
