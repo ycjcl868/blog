@@ -77,7 +77,7 @@ const Layout = ({
         )}
         {children}
         {blockMap && (
-          <div className='-mt-4'>
+          <div className={frontMatter.type[0] !== 'Page' ? '-mt-4' : ''}>
             <NotionRenderer
               recordMap={blockMap}
               components={{
