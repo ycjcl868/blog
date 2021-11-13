@@ -1,9 +1,15 @@
+import dayjs from 'dayjs'
 import { getAllPosts } from '@/lib/notion'
 import { generateRss } from '@/lib/rss'
+
 export async function getServerSideProps({ res }) {
   res.setHeader('Content-Type', 'text/xml')
   const posts = await getAllPosts({ includePages: false })
-  const latestPosts = posts.slice(0, 10)
+  const latestPosts = posts
+    .slice(0, 10)
+    .sort((a, b) =>
+      dayjs(b.date.start_date).isAfter(dayjs(a.date.start_date)) ? 1 : -1
+    )
   const xmlFeed = generateRss(latestPosts)
   res.write(xmlFeed)
   res.end()
