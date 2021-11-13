@@ -80,7 +80,7 @@ const Header = ({ navBarTitle, fullWidth }) => {
         <div className='flex items-center'>
           <Link href='/'>
             <a
-              className='text-lg text-black dark:text-white'
+              className='md:text-lg text-base text-black dark:text-white'
               aria-label={BLOG.title}
             >
               ✨ {BLOG.title}
