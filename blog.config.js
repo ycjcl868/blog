@@ -3,7 +3,7 @@ const BLOG = {
   author: 'ycjcl868',
   authorAvatar: '/avatar.jpeg',
   email: 'chaolinjin@gmail.com',
-  link: 'https://nodego.top',
+  link: 'https://www.rustc.cloud',
   description: '写写文章的地方',
   lang: 'en-US', // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   appearance: 'auto', // ['light', 'dark', 'auto'],
