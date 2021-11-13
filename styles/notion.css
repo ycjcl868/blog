@@ -4,6 +4,9 @@
   @apply text-gray-600 dark:text-gray-300;
   overflow-wrap: break-word;
 }
+.notion-list-numbered {
+  max-width: 100%;
+}
 .notion,
 .notion-text,
 .notion-quote,
