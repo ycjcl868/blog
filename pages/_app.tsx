@@ -15,6 +15,7 @@ import '@/styles/globals.css'
 import '@/styles/notion.css'
 import BLOG from '@/blog.config'
 import dynamic from 'next/dynamic'
+import { ThemeProvider } from 'next-themes'
 import { LocaleProvider } from '@/lib/locale'
 import Scripts from '@/components/Scripts'
 
@@ -34,7 +35,9 @@ function MyApp({ Component, pageProps }) {
             />
           )}
           {BLOG.isProd && BLOG?.analytics?.provider === 'ga' && <Gtag />}
-          <Component {...pageProps} />
+          <ThemeProvider attribute='class'>
+            <Component {...pageProps} />
+          </ThemeProvider>
         </>
       </LocaleProvider>
     </>

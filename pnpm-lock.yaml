@@ -19,6 +19,7 @@ specifiers:
   gitalk: ^1.7.2
   next: ^12.0.3
   next-sitemap: ^1.6.203
+  next-themes: ^0.0.15
   notion-client: ^4.10.0
   notion-utils: ^4.10.0
   postcss: ^8.3.11
@@ -28,10 +29,12 @@ specifiers:
   react: ^17.0.2
   react-cusdis: ^2.0.1
   react-dom: ^17.0.2
+  react-icons: ^4.3.1
   react-notion-x: ^4.11.0
   tailwindcss: ^2.2.19
   typescript: ^4.4.4
   use-ackee: ^3.0.0
+  use-dark-mode: ^2.3.1
 
 dependencies:
   axios: 0.24.0
@@ -39,14 +42,17 @@ dependencies:
   feed: 4.2.2
   gitalk: 1.7.2_react-dom@17.0.2+react@17.0.2
   next: 12.0.3_react-dom@17.0.2+react@17.0.2
+  next-themes: 0.0.15_72b2f1fb664d51f286fb64a58e104b48
   notion-client: 4.11.1
   notion-utils: 4.10.0
   preact: 10.5.15
   react: 17.0.2
   react-cusdis: 2.1.3_react-dom@17.0.2+react@17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-icons: 4.3.1_react@17.0.2
   react-notion-x: 4.11.0_react-dom@17.0.2+react@17.0.2
   use-ackee: 3.0.0_react@17.0.2
+  use-dark-mode: 2.3.1_react@17.0.2
 
 devDependencies:
   '@types/react': 17.0.34
@@ -511,6 +517,14 @@ packages:
       '@typescript-eslint/types': 4.33.0
       eslint-visitor-keys: 2.1.0
     dev: true
+
+  /@use-it/event-listener/0.1.6_react@17.0.2:
+    resolution: {integrity: sha512-e6V7vbU8xpuqy4GZkTLExHffOFgxmGHo3kNWnlhzM/zcX2v+idbD/HaJ9sKdQMgTh+L7MIhdRDXGX3SdAViZzA==}
+    peerDependencies:
+      react: ^16.8.0
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /@xobotyi/scrollbar-width/1.9.5:
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}
@@ -2770,6 +2784,18 @@ packages:
       next: 12.0.3_react-dom@17.0.2+react@17.0.2
     dev: true
 
+  /next-themes/0.0.15_72b2f1fb664d51f286fb64a58e104b48:
+    resolution: {integrity: sha512-LTmtqYi03c4gMTJmWwVK9XkHL7h0/+XrtR970Ujvtu3s0kZNeJN24aJsi4rkZOI8i19+qq6f8j+8Duwy5jqcrQ==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 12.0.3_react-dom@17.0.2+react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
   /next/12.0.3_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-GGdhTBcerdMZbitrO67IVetmB+AHa2X69xrkXKClUT8SRu8pEVto/2QMSnfI+uYc5czCUWPsVtVY3aMoMRMaCA==}
     engines: {node: '>=12.22.0'}
@@ -3584,6 +3610,14 @@ packages:
       hotkeys-js: 3.8.7
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /react-icons/4.3.1_react@17.0.2:
+    resolution: {integrity: sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 17.0.2
     dev: false
 
   /react-image/4.0.3_react-dom@17.0.2+react@17.0.2:
@@ -4415,6 +4449,25 @@ packages:
       react: ^17.0.0
     dependencies:
       ackee-tracker: 5.1.0
+      react: 17.0.2
+    dev: false
+
+  /use-dark-mode/2.3.1_react@17.0.2:
+    resolution: {integrity: sha512-hmcdJR96tTustRQdaQwe6jMrZHnmPqXBxgy4jaQ4gsfhwajsCpjECuq9prgDe9XxMx/f9r96o2/md6O4Lwhwjg==}
+    peerDependencies:
+      react: ^16.8.0
+    dependencies:
+      '@use-it/event-listener': 0.1.6_react@17.0.2
+      react: 17.0.2
+      use-persisted-state: 0.3.3_react@17.0.2
+    dev: false
+
+  /use-persisted-state/0.3.3_react@17.0.2:
+    resolution: {integrity: sha512-pCNlvYC8+XjRxwnIut4teGC9f2p9aD88R8OGseQGZa2dvqG/h1vEGk1vRE1IZG0Vf161UDpn+NlW4+UGubQflQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@use-it/event-listener': 0.1.6_react@17.0.2
       react: 17.0.2
     dev: false
 

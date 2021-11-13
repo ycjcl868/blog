@@ -1,8 +1,10 @@
 import BLOG from '@/blog.config'
+
 const Footer = ({ fullWidth }) => {
   const d = new Date()
   const y = d.getFullYear()
   const from = +BLOG.since
+
   return (
     <div
       className={`mt-6 flex-shrink-0 m-auto w-full text-gray-500 dark:text-gray-400 transition-all ${
@@ -13,7 +15,15 @@ const Footer = ({ fullWidth }) => {
       <div className='my-4 text-sm leading-6'>
         <div className='flex align-baseline justify-between flex-wrap'>
           <p>
-            © {BLOG.author} {from === y || !from ? y : `${from} - ${y}`}
+            ©{' '}
+            <a
+              target='_blank'
+              rel='noopener noreferrer'
+              href={`https://github.com/${BLOG.author}`}
+            >
+              {BLOG.author}
+            </a>{' '}
+            {from === y || !from ? y : `${from} - ${y}`}
           </p>
         </div>
       </div>

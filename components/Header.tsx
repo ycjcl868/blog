@@ -1,10 +1,13 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { IoSunnyOutline, IoMoonSharp } from 'react-icons/io5'
+import { useTheme } from 'next-themes'
 import BLOG from '@/blog.config'
 import { useLocale } from '@/lib/locale'
 
 const NavBar = () => {
   const locale = useLocale()
+
   const links = [
     { id: 0, name: locale.NAV.INDEX, to: BLOG.path || '/', show: true },
     { id: 1, name: locale.NAV.ABOUT, to: '/about', show: BLOG.showAbout },
@@ -19,7 +22,7 @@ const NavBar = () => {
             link.show && (
               <li
                 key={link.id}
-                className='block ml-4 text-black dark:text-gray-50 nav'
+                className='block mx-2 text-black dark:text-gray-50 nav'
               >
                 <Link href={link.to}>
                   <a>{link.name}</a>
@@ -36,6 +39,13 @@ const Header = ({ navBarTitle, fullWidth }) => {
   const useSticky = !BLOG.autoCollapsedNavBar
   const navRef = useRef(null)
   const sentinalRef = useRef([])
+  const { theme, setTheme } = useTheme()
+  const [hasMounted, setHasMounted] = useState(false)
+
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
   const handler = ([entry]) => {
     if (navRef && navRef.current && useSticky) {
       if (!entry.isIntersecting && entry !== undefined) {
@@ -56,6 +66,7 @@ const Header = ({ navBarTitle, fullWidth }) => {
     // }
     /* eslint-disable-line */
   }, [sentinalRef])
+
   return (
     <>
       <div className='observer-element h-4 md:h-12' ref={sentinalRef}></div>
@@ -69,7 +80,7 @@ const Header = ({ navBarTitle, fullWidth }) => {
         <div className='flex items-center'>
           <Link href='/'>
             <a
-              className='h-6 text-lg text-black dark:text-white'
+              className='text-lg text-black dark:text-white'
               aria-label={BLOG.title}
             >
               ✨ {BLOG.title}
@@ -87,6 +98,19 @@ const Header = ({ navBarTitle, fullWidth }) => {
           )}
         </div>
         <NavBar />
+        <div>
+          <a
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            title={`Toggle dark mode - current ${theme}`}
+            className='hover:text-blue-400 cursor-pointer text-xl'
+          >
+            {hasMounted && theme === 'dark' ? (
+              <IoMoonSharp />
+            ) : (
+              <IoSunnyOutline />
+            )}
+          </a>
+        </div>
       </div>
     </>
   )
