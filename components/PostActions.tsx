@@ -18,7 +18,7 @@ const PostActions: React.FC<{ title: string }> = (props) => {
   const socialLinks: SocialLink[] = [
     {
       name: 'twitter',
-      href: `https://twitter.com/share?url=${BLOG.link}${router.asPath}&text=${title}`,
+      href: `https://twitter.com/intent/tweet?url=${BLOG.link}${router.asPath}&text=${title}`,
       title: 'Twitter',
       icon: (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
