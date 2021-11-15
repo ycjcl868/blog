@@ -1,17 +1,12 @@
 import Container from '@/components/Container'
 import BlogPost from '@/components/BlogPost'
-import dayjs from 'dayjs'
 import Pagination from '@/components/Pagination'
 import { getAllPosts } from '@/lib/notion'
 import BLOG from '@/blog.config'
 
 export async function getStaticProps() {
   const posts = await getAllPosts({ includePages: false })
-  const postsToShow = posts
-    .slice(0, BLOG.postsPerPage)
-    .sort((a, b) =>
-      dayjs(b.date.start_date).isAfter(dayjs(a.date.start_date)) ? 1 : -1
-    )
+  const postsToShow = posts.slice(0, BLOG.postsPerPage)
   const totalPosts = posts.length
   const showNext = totalPosts > BLOG.postsPerPage
   return {

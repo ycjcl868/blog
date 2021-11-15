@@ -8,7 +8,6 @@ specifiers:
   autoprefixer: ^10.4.0
   axios: '>=0.21.1'
   classnames: ^2.3.1
-  dayjs: ^1.10.7
   eslint: <8.0.0
   eslint-config-next: ^12.0.3
   eslint-config-standard: ^16.0.2
@@ -39,7 +38,6 @@ specifiers:
 dependencies:
   axios: 0.24.0
   classnames: 2.3.1
-  dayjs: 1.10.7
   feed: 4.2.2
   gitalk: 1.7.2_react-dom@17.0.2+react@17.0.2
   next: 12.0.3_react-dom@17.0.2+react@17.0.2
@@ -1215,10 +1213,6 @@ packages:
   /date-fns/2.25.0:
     resolution: {integrity: sha512-ovYRFnTrbGPD4nqaEqescPEv1mNwvt+UTqI3Ay9SzNtey9NZnYu6E2qCcBBgJ6/2VF1zGGygpyTDITqpQQ5e+w==}
     engines: {node: '>=0.11'}
-    dev: false
-
-  /dayjs/1.10.7:
-    resolution: {integrity: sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==}
     dev: false
 
   /debug/2.6.9:
