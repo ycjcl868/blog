@@ -35,7 +35,7 @@ const Layout = ({ children, blockMap, frontMatter, fullWidth = false }) => {
       fullWidth={fullWidth}
     >
       <div className='flex flex-row'>
-        <article>
+        <article className='md:overflow-x-visible overflow-x-scroll'>
           <h1 className='font-bold text-3xl text-black dark:text-white'>
             {frontMatter.title}
           </h1>

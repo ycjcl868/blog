@@ -1,9 +1,5 @@
-.pageSocial {
-  color: var(--fg-color);
-}
 
 .action {
-  border: 2px solid var(--fg-color-6);
   transition: all 300ms ease-out;
   width: 3.5em;
   height: 3.5em;
@@ -29,9 +25,9 @@
 }
 
 .actionBg svg {
+  @apply text-current;
   width: 50%;
   height: 50%;
-  fill: var(--fg-color-6);
 }
 
 .actionBgPane {
