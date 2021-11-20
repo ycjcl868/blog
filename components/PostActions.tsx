@@ -1,4 +1,4 @@
-import React from 'react'
+import type { ReactNode } from 'react'
 import BLOG from '@/blog.config'
 import { useRouter } from 'next/router'
 import cs from 'classnames'
@@ -8,7 +8,7 @@ import styles from './PostActions.module.css'
 interface SocialLink {
   name: string
   title: string
-  icon: React.ReactNode
+  icon: ReactNode
   href?: string
 }
 

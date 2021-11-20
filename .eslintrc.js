@@ -19,7 +19,10 @@ module.exports = {
     }
   },
   rules: {
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'space-before-function-paren': 'off',
+    'multiline-ternary': 'off',
+    indent: 'off'
   },
   globals: {
     React: true
