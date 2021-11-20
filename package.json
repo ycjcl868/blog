@@ -19,12 +19,6 @@
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "*.@(ts|tsx)": [
-      "yarn lint",
-      "yarn format"
-    ]
-  },
   "dependencies": {
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
