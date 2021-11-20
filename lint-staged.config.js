@@ -1,4 +1,7 @@
 module.exports = {
   // Run ESLint on changes to JavaScript/TypeScript files
-  '*.@(ts|tsx)': ['npm run lint', 'npm run format']
+  '*.@(ts|tsx)': (filenames) => [
+    `yarn lint . ${filenames.join(' ')} --fix`,
+    'yarn format'
+  ]
 }
