@@ -59,21 +59,21 @@ class MyDocument extends Document {
                   crossOrigin='anonymous'
                 />
                 <link
-                  rel='preload'
+                  rel='preload preconnect'
                   as='style'
                   href={`https://fonts.loli.net/css2?family=Noto+${
                     BLOG.font === 'serif' ? 'Serif' : 'Sans'
                   }+${CJK()}:wght@400;500;700&display=swap`}
                 />
                 <link
-                  rel='stylesheet'
+                  rel='stylesheet preconnect prefetch'
                   href={`https://fonts.loli.net/css2?family=Noto+${
                     BLOG.font === 'serif' ? 'Serif' : 'Sans'
                   }+${CJK()}:wght@400;500;700&display=swap`}
                 />
                 <noscript>
                   <link
-                    rel='stylesheet'
+                    rel='stylesheet preconnect prefetch'
                     href={`https://fonts.loli.net/css2?family=Noto+${
                       BLOG.font === 'serif' ? 'Serif' : 'Sans'
                     }+${CJK()}:wght@400;500;700&display=swap`}
