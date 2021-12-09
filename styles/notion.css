@@ -52,6 +52,10 @@ svg + .notion-page-title-text {
   @apply text-gray-900;
 }
 
+.notion-code .token.operator {
+  background: transparent;
+}
+
 pre[class*='language-'] {
   line-height: inherit;
 }

@@ -24,16 +24,16 @@
     "classnames": "^2.3.1",
     "feed": "^4.2.2",
     "gitalk": "^1.7.2",
-    "next": "^12.0.4",
+    "next": "^12.0.5",
     "next-themes": "^0.0.15",
-    "notion-client": "^4.10.0",
+    "notion-client": "^4.11.1",
     "notion-utils": "^4.10.0",
-    "preact": "^10.5.15",
+    "preact": "^10.6.3",
     "react": "^17.0.2",
-    "react-cusdis": "^2.0.1",
+    "react-cusdis": "^2.1.3",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-notion-x": "^4.11.0",
+    "react-notion-x": "^4.11.3",
     "use-ackee": "^3.0.0"
   },
   "devDependencies": {
@@ -49,8 +49,8 @@
     "husky": "^7.0.0",
     "lint-staged": "^12.0.3",
     "next-sitemap": "^1.6.203",
-    "postcss": "^8.3.11",
-    "prettier": "^2.4.1",
+    "postcss": "^8.4.4",
+    "prettier": "^2.5.1",
     "prettier-plugin-organize-imports": "^2.3.4",
     "tailwindcss": "^2.2.19",
     "typescript": "^4.5.2"
@@ -59,7 +59,7 @@
     "axios": ">=0.21.1"
   },
   "bugs": {
-    "url": "https://github.com/craigary/nobelium/issues",
-    "email": "i@craigary.net"
+    "url": "https://github.com/ycjcl868/blog/issues",
+    "email": "chaolinjin@gmail.com"
   }
 }
