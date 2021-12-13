@@ -1,7 +1,7 @@
-@import "prism-theme-vars/base.css";
+@import 'prism-theme-vars/base.css';
 
 :root {
-  --prism-font-family: "Fira Code", monospace
+  --prism-font-family: 'Fira Code', monospace;
 }
 
 html:not(.dark) {
