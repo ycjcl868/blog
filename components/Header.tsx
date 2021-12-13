@@ -15,7 +15,7 @@ const NavBar = () => {
     { id: 3, name: locale.NAV.RSS, to: '/feed', show: true }
   ]
   return (
-    <div className='flex-shrink-0'>
+    <div className='shrink-0'>
       <ul className='flex flex-row items-center'>
         {links.map(
           (link) =>

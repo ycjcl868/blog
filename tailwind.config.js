@@ -9,8 +9,7 @@ const fontSerifCJK = !CJK()
   : [`"Noto Serif CJK ${CJK()}"`, `"Noto Serif ${CJK()}"`]
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.tsx', './components/**/*.tsx', './layouts/**/*.tsx'],
+  content: ['./pages/**/*.tsx', './components/**/*.tsx', './layouts/**/*.tsx'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
@@ -35,9 +34,6 @@ module.exports = {
         ]
       }
     }
-  },
-  variants: {
-    extend: {}
   },
   plugins: []
 }
