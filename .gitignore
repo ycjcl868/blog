@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
+.cache
+.vercel
+.output
 /node_modules
 /.pnp
 .pnp.js
@@ -32,6 +34,8 @@ yarn-error.log*
 .env.production.local
 
 # vercel
-.vercel
 public/robots.txt
 public/sitemap.xml
+
+public/build
+api/build
