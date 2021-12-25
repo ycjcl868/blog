@@ -30,6 +30,7 @@ const Scripts = () => (
     {BLOG.analytics && BLOG.analytics.provider === 'ga' && (
       <>
         <Script
+          strategy='lazyOnload'
           src={`https://www.googletagmanager.com/gtag/js?id=${BLOG.analytics.gaConfig.measurementId}`}
         />
         <Script strategy='lazyOnload' id='ga'>
