@@ -17,14 +17,14 @@ class MyDocument extends Document {
               <>
                 <link
                   rel='preload'
-                  href='//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif.var.woff2'
+                  href='https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif.var.woff2'
                   as='font'
                   type='font/woff2'
                   crossOrigin='anonymous'
                 />
                 <link
                   rel='preload'
-                  href='//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif-Italic.var.woff2'
+                  href='https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif-Italic.var.woff2'
                   as='font'
                   type='font/woff2'
                   crossOrigin='anonymous'
@@ -34,14 +34,14 @@ class MyDocument extends Document {
               <>
                 <link
                   rel='preload'
-                  href='//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Roman.woff2'
+                  href='https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Roman.woff2'
                   as='font'
                   type='font/woff2'
                   crossOrigin='anonymous'
                 />
                 <link
                   rel='preload'
-                  href='//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Italic.woff2'
+                  href='https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Italic.woff2'
                   as='font'
                   type='font/woff2'
                   crossOrigin='anonymous'
