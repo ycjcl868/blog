@@ -9,7 +9,8 @@
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Regular';
-  src: url('//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Roman.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Roman.woff2')
+    format('woff2');
 }
 
 @font-face {
@@ -18,7 +19,8 @@
   font-display: swap;
   font-style: italic;
   font-named-instance: 'Italic';
-  src: url('//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Italic.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/IBMPlexSansVar-Italic.woff2')
+    format('woff2');
 }
 
 @font-face {
@@ -27,7 +29,8 @@
   font-display: swap;
   font-style: normal;
   font-named-instance: 'Regular';
-  src: url('//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif.var.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif.var.woff2')
+    format('woff2');
 }
 
 @font-face {
@@ -36,7 +39,8 @@
   font-display: swap;
   font-style: italic;
   font-named-instance: 'Italic';
-  src: url('//cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif-Italic.var.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/ycjcl868/blog@1.0.0/public/fonts/SourceSerif-Italic.var.woff2')
+    format('woff2');
 }
 
 :root {
