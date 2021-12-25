@@ -30,17 +30,23 @@ const Scripts = () => (
     {BLOG.analytics && BLOG.analytics.provider === 'ga' && (
       <>
         <Script
-          strategy='lazyOnload'
+          strategy='afterInteractive'
           src={`https://www.googletagmanager.com/gtag/js?id=${BLOG.analytics.gaConfig.measurementId}`}
         />
-        <Script strategy='lazyOnload' id='ga'>
-          {`window.dataLayer = window.dataLayer || [];
+        <Script
+          id='gtag-init'
+          strategy='afterInteractive'
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${BLOG.analytics.gaConfig.measurementId}', {
               page_path: window.location.pathname,
-            });`}
-        </Script>
+            });
+          `
+          }}
+        />
       </>
     )}
   </>
