@@ -1,4 +1,4 @@
-import BLOG from '@/blog.config'
+import BLOG from '~/blog.config'
 
 const Footer = ({ fullWidth }) => {
   const d = new Date()

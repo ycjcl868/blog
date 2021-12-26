@@ -1,5 +1,5 @@
 import { useContext, createContext } from 'react'
-import { fetchLocaleLang } from '@/lib/lang'
+import { fetchLocaleLang } from '~/lib/lang'
 
 const locale = fetchLocaleLang()
 const LocaleContext = createContext()

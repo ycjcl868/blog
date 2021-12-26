@@ -1,6 +1,6 @@
-const BLOG = require('../blog.config')
+import BLOG from '~/blog.config'
 
-module.exports = function () {
+export default function () {
   switch (BLOG.lang.toLowerCase()) {
     case 'zh-cn':
     case 'zh-sg':

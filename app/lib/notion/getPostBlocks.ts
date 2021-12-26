@@ -1,4 +1,4 @@
-import BLOG from '@/blog.config'
+import BLOG from '~/blog.config'
 import { NotionAPI } from 'notion-client'
 
 export async function getPostBlocks(id) {
