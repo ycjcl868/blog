@@ -3,31 +3,14 @@ import BLOG from '@/blog.config'
 
 const Scripts = () => (
   <>
-    {BLOG.analytics && BLOG.analytics.provider === 'ackee' && (
+    {BLOG.analytics && BLOG.analytics.providers.includes('ackee') && (
       <Script
         src={BLOG.analytics.ackeeConfig.tracker}
         data-ackee-server={BLOG.analytics.ackeeConfig.dataAckeeServer}
         data-ackee-domain-id={BLOG.analytics.ackeeConfig.domainId}
       />
     )}
-    {/* {BLOG.autoCollapsedNavBar === true && (
-      <Script strategy="lazyOnload">
-        {`var windowTop=0;
-          function scrollTrigger(){
-              let scrollS = window.scrollY;
-              let nav = document.querySelector('.sticky-nav');
-              if(scrollS >= windowTop){
-                  nav.style.opacity = 0;
-                  windowTop = scrollS;
-              }else{
-                  nav.style.opacity = 1;
-                  windowTop = scrollS;
-              }
-          };
-          window.addEventListener('scroll',scrollTrigger);`}
-      </Script>
-    )} */}
-    {BLOG.analytics && BLOG.analytics.provider === 'ga' && (
+    {BLOG.analytics && BLOG.analytics.providers.includes('ga') && (
       <>
         <Script
           strategy='afterInteractive'
@@ -48,6 +31,12 @@ const Scripts = () => (
           }}
         />
       </>
+    )}
+    {BLOG.analytics && BLOG.analytics.providers.includes('cnzz') && (
+      <Script
+        strategy='afterInteractive'
+        src={`https://v1.cnzz.com/z_stat.php?id=${BLOG.analytics.cnzzConfig.id}&web_id=${BLOG.analytics.cnzzConfig.id}`}
+      />
     )}
   </>
 )

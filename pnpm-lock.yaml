@@ -1,15 +1,12 @@
 lockfileVersion: 5.3
 
-overrides:
-  axios: '>=0.21.1'
-
 specifiers:
   '@next/bundle-analyzer': ^12.0.7
   '@types/react': ^17.0.38
   autoprefixer: ^10.4.0
-  axios: '>=0.21.1'
   classnames: ^2.3.1
   cross-env: ^7.0.3
+  dayjs: ^1.10.7
   eslint: <8.0.0
   eslint-config-next: ^12.0.4
   eslint-config-standard: ^16.0.2
@@ -42,8 +39,8 @@ specifiers:
   use-ackee: ^3.0.0
 
 dependencies:
-  axios: 0.24.0
   classnames: 2.3.1
+  dayjs: 1.10.7
   feed: 4.2.2
   gitalk: 1.7.2_react-dom@17.0.2+react@17.0.2
   next: 12.0.7_react-dom@17.0.2+react@17.0.2
@@ -778,12 +775,11 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /axios/0.24.0:
-    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+  /axios/0.19.2:
+    resolution: {integrity: sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==}
+    deprecated: Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410
     dependencies:
-      follow-redirects: 1.14.5
-    transitivePeerDependencies:
-      - debug
+      follow-redirects: 1.5.10
     dev: false
 
   /axobject-query/2.2.0:
@@ -1277,10 +1273,20 @@ packages:
     engines: {node: '>=0.11'}
     dev: false
 
+  /dayjs/1.10.7:
+    resolution: {integrity: sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==}
+    dev: false
+
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     dependencies:
       ms: 2.0.0
+
+  /debug/3.1.0:
+    resolution: {integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==}
+    dependencies:
+      ms: 2.0.0
+    dev: false
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -1972,14 +1978,11 @@ packages:
     resolution: {integrity: sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==}
     dev: true
 
-  /follow-redirects/1.14.5:
-    resolution: {integrity: sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==}
+  /follow-redirects/1.5.10:
+    resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==}
     engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
+    dependencies:
+      debug: 3.1.0
     dev: false
 
   /for-each/0.3.3:
@@ -2054,7 +2057,7 @@ packages:
     resolution: {integrity: sha512-7jrUlGDtwdmvaHNVKTzG1qLLqgUdFsMPQLbPVMLVNiECmyg20TvBiRlU7t6xqUBYC/j6YwlOnqwgJuKiDmC8fA==}
     dependencies:
       autosize: 3.0.21
-      axios: 0.24.0
+      axios: 0.19.2
       date-fns: 2.16.1
       es6-promise: 4.1.1
       github-markdown-css: 2.8.0
@@ -2063,7 +2066,6 @@ packages:
       preact-compat: 3.16.0_preact@8.1.0
       react-flip-move: 2.9.14_react-dom@17.0.2+react@17.0.2
     transitivePeerDependencies:
-      - debug
       - react
       - react-dom
     dev: false

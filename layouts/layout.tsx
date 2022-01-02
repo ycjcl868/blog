@@ -10,7 +10,7 @@ import {
   CollectionRow
 } from 'react-notion-x'
 import BLOG from '@/blog.config'
-import formatDate from '@/lib/formatDate'
+import dayjs from 'dayjs'
 import { useLocale } from '@/lib/locale'
 import { useRouter } from 'next/router'
 import Comments from '@/components/Comments'
@@ -60,10 +60,9 @@ const Layout = ({ children, blockMap, frontMatter, fullWidth = false }) => {
                 <span className='block'>&nbsp;/&nbsp;</span>
               </div>
               <div className='mr-2 mb-4 md:ml-0'>
-                {formatDate(
-                  frontMatter?.date?.start_date || frontMatter.createdTime,
-                  BLOG.lang
-                )}
+                {dayjs(
+                  frontMatter?.date?.start_date || frontMatter.createdTime
+                ).format(BLOG.dateFormat)}
               </div>
               {frontMatter.tags && (
                 <div className='flex flex-nowrap max-w-full overflow-x-auto article-tags'>

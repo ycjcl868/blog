@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import BLOG from '@/blog.config'
-import formatDate from '@/lib/formatDate'
+import dayjs from 'dayjs'
 
 const BlogPost = ({ post }) => {
   return (
@@ -12,9 +12,8 @@ const BlogPost = ({ post }) => {
               {post.title}
             </h2>
             <time className='shrink-0 text-gray-600 dark:text-gray-400'>
-              {formatDate(
-                post?.date?.start_date || post.createdTime,
-                BLOG.lang
+              {dayjs(post?.date?.start_date || post.createdTime).format(
+                BLOG.dateFormat
               )}
             </time>
           </header>

@@ -1,7 +1,3 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import * as gtag from '../lib/gtag'
-// syntax highlighting via Notion's Code block
 import 'prismjs'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-diff'
@@ -23,31 +19,25 @@ import Scripts from '@/components/Scripts'
 
 const Ackee = dynamic(() => import('@/components/Ackee'), { ssr: false })
 const Gtag = dynamic(() => import('@/components/Gtag'), { ssr: false })
+const Cnzz = dynamic(() => import('@/components/Cnzz'), { ssr: false })
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter()
-  useEffect(() => {
-    const handleRouteChange = (url) => {
-      gtag.pageview(url)
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
-
   return (
     <>
       <Scripts />
       <LocaleProvider>
         <>
-          {BLOG.isProd && BLOG?.analytics?.provider === 'ackee' && (
+          {BLOG.isProd && BLOG?.analytics?.providers.includes('ackee') && (
             <Ackee
               ackeeServerUrl={BLOG.analytics.ackeeConfig.dataAckeeServer}
               ackeeDomainId={BLOG.analytics.ackeeConfig.domainId}
             />
           )}
-          {BLOG.isProd && BLOG?.analytics?.provider === 'ga' && <Gtag />}
+          {BLOG.isProd && BLOG?.analytics?.providers.includes('ga') && <Gtag />}
+          {BLOG.isProd && BLOG?.analytics?.providers.includes('cnzz') && (
+            <Cnzz />
+          )}
+
           <ThemeProvider attribute='class'>
             <Component {...pageProps} />
           </ThemeProvider>
