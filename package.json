@@ -21,6 +21,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@notionhq/client": "^0.4.12",
     "classnames": "^2.3.1",
     "dayjs": "^1.10.7",
     "feed": "^4.2.2",
