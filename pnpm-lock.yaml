@@ -23,8 +23,8 @@ specifiers:
   next-compose-plugins: ^2.2.1
   next-sitemap: ^1.6.203
   next-themes: ^0.0.15
-  notion-client: ^4.12.0
-  notion-utils: ^4.12.0
+  notion-client: ^4.14.1
+  notion-utils: ^4.14.1
   postcss: ^8.4.5
   prettier: ^2.5.1
   prettier-plugin-organize-imports: ^2.3.4
@@ -34,7 +34,7 @@ specifiers:
   react-cusdis: ^2.1.3
   react-dom: ^17.0.2
   react-icons: ^4.3.1
-  react-notion-x: ^4.12.0
+  react-notion-x: ^4.14.2
   tailwindcss: ^3.0.7
   typescript: ^4.5.4
   use-ackee: ^3.0.0
@@ -47,15 +47,15 @@ dependencies:
   gitalk: 1.7.2_react-dom@17.0.2+react@17.0.2
   next: 12.0.7_react-dom@17.0.2+react@17.0.2
   next-themes: 0.0.15_d837ce8f3acb2f60f8b7454672a9bcea
-  notion-client: 4.12.0
-  notion-utils: 4.12.0
+  notion-client: 4.14.1
+  notion-utils: 4.14.1
   prism-theme-vars: 0.2.2
   prismjs: 1.25.0
   react: 17.0.2
   react-cusdis: 2.1.3_react-dom@17.0.2+react@17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-icons: 4.3.1_react@17.0.2
-  react-notion-x: 4.12.0_react-dom@17.0.2+react@17.0.2
+  react-notion-x: 4.14.2_react-dom@17.0.2+react@17.0.2
   use-ackee: 3.0.0_react@17.0.2
 
 devDependencies:
@@ -3098,26 +3098,26 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /notion-client/4.12.0:
-    resolution: {integrity: sha512-lfc7g9eGSJKyNW1ibGEAxPLhTP46umhDwZd5+dno65wqWO/t+S1l32JV+oiKnk1mCHuMEtY6VCIbC7WxdnFhxw==}
+  /notion-client/4.14.1:
+    resolution: {integrity: sha512-h1h95ZFwXyx+mbr21s54Uc9SfQjev6zU9AmPBLGGRRj/AZsqytYsn681PUv17x7/T2DNzTSSBg/Ifnyr5b/GfA==}
     engines: {node: '>=12'}
     dependencies:
       got: 11.8.2
-      notion-types: 4.10.0
-      notion-utils: 4.12.0
+      notion-types: 4.14.1
+      notion-utils: 4.14.1
       p-map: 4.0.0
     dev: false
 
-  /notion-types/4.10.0:
-    resolution: {integrity: sha512-+vGbzPCdPzunn6W8U/ugKCv6dP52FXSBHlS4ZeOtm4YeHxeXtglBeUDjTSsUix8+/j+aennL/YxzeeFEB0m5pQ==}
+  /notion-types/4.14.1:
+    resolution: {integrity: sha512-jtWQ353gFIPNAbdTpPkrQKT0M6LEFNYPvg9aPGl21otxh2sSeZI4LQVOSbCMfwPdON0bw/0hhaHEJYp56zQUZA==}
     engines: {node: '>=12'}
     dev: false
 
-  /notion-utils/4.12.0:
-    resolution: {integrity: sha512-Z6xokiNMmTIQcDHgUOv62PIZv7wqVN7b4aa3uTkKgnaBPXtGB1ljaESoQ+DVlWiUnO2uUoKmPQe1aMjYG1yfmw==}
+  /notion-utils/4.14.1:
+    resolution: {integrity: sha512-iuCALwFk2qg5dgbAoq0Wrfmfl8yn0B69fbcTSNN6DiKeJGEbIvMeCOmtX1MAWqyiWUjY1XDFM2DmJBCZU05uHw==}
     engines: {node: '>=12'}
     dependencies:
-      notion-types: 4.10.0
+      notion-types: 4.14.1
       p-queue: 6.6.2
     dev: false
 
@@ -3850,8 +3850,8 @@ packages:
       warning: 4.0.3
     dev: false
 
-  /react-notion-x/4.12.0_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-S5uUVY4DEqtfP2KWXY2Hk0cz6GtvaJTSGd/WuXeRe6l/qNQqsvWofElF/ELAsreLH3NeGUALlcDlz+cGdn6btQ==}
+  /react-notion-x/4.14.2_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-CgkJW4rPxITW4xJCwgQPrFebWgYn+ODhxV00aImUvDokHQQfR3mEP0U22AJYq4NzmGTDpmXROoAmuETCtf9Wqg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'
@@ -3864,8 +3864,8 @@ packages:
       katex: 0.13.24
       lodash.throttle: 4.1.1
       medium-zoom: 1.0.6
-      notion-types: 4.10.0
-      notion-utils: 4.12.0
+      notion-types: 4.14.1
+      notion-utils: 4.14.1
       prismjs: 1.25.0
       rc-dropdown: 3.2.0_react-dom@17.0.2+react@17.0.2
       rc-menu: 9.0.14_react-dom@17.0.2+react@17.0.2

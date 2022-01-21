@@ -1,5 +1,5 @@
 import Layout from '@/layouts/layout'
-import { getAllPosts, getPostBlocks } from '@/lib/notion'
+import { getPostBlocks, getAllPostsList } from '@/lib/notion'
 import BLOG from '@/blog.config'
 
 const BlogPost = ({ post, blockMap }) => {
@@ -10,7 +10,7 @@ const BlogPost = ({ post, blockMap }) => {
 }
 
 export async function getStaticPaths() {
-  const posts = await getAllPosts({ includePages: true })
+  const posts = await getAllPostsList({ includePages: true })
   return {
     paths: posts.map((row) => `${BLOG.path}/${row.slug}`),
     fallback: true
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const posts = await getAllPosts({ includePages: true })
+  const posts = await getAllPostsList({ includePages: true })
   const post = posts.find((t) => t.slug === slug)
   const blockMap = await getPostBlocks(post.id)
 
