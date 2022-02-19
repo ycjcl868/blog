@@ -2,6 +2,7 @@
 
 :root {
   --prism-font-family: 'Fira Code', monospace;
+  --prism-line-height: 1.5em;
 }
 
 html:not(.dark) {

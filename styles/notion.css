@@ -52,12 +52,17 @@ svg + .notion-page-title-text {
   @apply text-gray-900;
 }
 
+.notion .notion-code {
+  font-size: var(--prism-font-size);
+  line-height: var(--prism-line-height);
+}
+
 .notion-code .token.operator {
   background: transparent;
 }
 
 pre[class*='language-'] {
-  line-height: inherit;
+  line-height: var(--prism-line-height);
 }
 
 .notion-bookmark:hover {
