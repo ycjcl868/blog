@@ -8,6 +8,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  **/
 const nextConfig = {
   swcMinify: true,
+  reactStrictMode: true,
+  experimental: {
+    outputStandalone: true
+  },
   images: {
     domains: ['gravatar.com']
   },
