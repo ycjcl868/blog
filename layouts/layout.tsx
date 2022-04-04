@@ -2,13 +2,10 @@ import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import Container from '@/components/Container'
 import TagItem from '@/components/TagItem'
-import {
-  NotionRenderer,
-  Equation,
-  Code,
-  Collection,
-  CollectionRow
-} from 'react-notion-x'
+import { NotionRenderer } from 'react-notion-x'
+import { ExtendedRecordMap } from 'notion-types'
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import BLOG from '@/blog.config'
 import dayjs from 'dayjs'
 import { useLocale } from '@/lib/locale'
@@ -16,11 +13,34 @@ import { useRouter } from 'next/router'
 import Comments from '@/components/Comments'
 import PostActions from '@/components/PostActions'
 
+const Code = dynamic(() =>
+  import('react-notion-x/build/third-party/code').then((m) => m.Code)
+)
+const Collection = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then(
+    (m) => m.Collection
+  )
+)
+const Equation = dynamic(() =>
+  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
+)
+
 const mapPageUrl = (id) => {
   return 'https://www.notion.so/' + id.replace(/-/g, '')
 }
 
-const Layout = ({ children, blockMap, frontMatter, fullWidth = false }) => {
+interface LayoutProps {
+  blockMap: ExtendedRecordMap
+  frontMatter: any
+  fullWidth?: boolean
+}
+
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  blockMap,
+  frontMatter,
+  fullWidth = false
+}) => {
   const locale = useLocale()
   const router = useRouter()
   const { theme } = useTheme()
@@ -79,10 +99,11 @@ const Layout = ({ children, blockMap, frontMatter, fullWidth = false }) => {
               <NotionRenderer
                 recordMap={blockMap}
                 components={{
-                  equation: Equation,
-                  code: Code,
-                  collection: Collection,
-                  collectionRow: CollectionRow
+                  Equation,
+                  Code,
+                  Collection,
+                  nextImage: Image,
+                  nextLink: Link
                 }}
                 mapPageUrl={mapPageUrl}
                 darkMode={theme === 'dark'}
