@@ -44,6 +44,7 @@ const Layout: React.FC<LayoutProps> = ({
   const locale = useLocale()
   const router = useRouter()
   const { theme } = useTheme()
+  const date = frontMatter?.date?.start_date || frontMatter.createdTime
 
   return (
     <Container
@@ -75,15 +76,19 @@ const Layout: React.FC<LayoutProps> = ({
                     src={BLOG.authorAvatar}
                     className='rounded-full'
                   />
-                  <p className='ml-2 md:block'>{BLOG.author}</p>
+                  {dayjs(date).isValid() ? (
+                    <p className='ml-2 md:block'>{BLOG.author}</p>
+                  ) : null}
                 </a>
                 <span className='block'>&nbsp;/&nbsp;</span>
               </div>
-              <div className='mr-2 mb-4 md:ml-0'>
-                {dayjs(
-                  frontMatter?.date?.start_date || frontMatter.createdTime
-                ).format(BLOG.dateFormat)}
-              </div>
+              {dayjs(date).isValid() ? (
+                <div className='mr-2 mb-4 md:ml-0'>
+                  {dayjs(
+                    frontMatter?.date?.start_date || frontMatter.createdTime
+                  ).format(BLOG.dateFormat)}
+                </div>
+              ) : null}
               {frontMatter.tags && (
                 <div className='flex flex-nowrap max-w-full overflow-x-auto article-tags'>
                   {frontMatter.tags.map((tag) => (
