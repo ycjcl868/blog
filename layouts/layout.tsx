@@ -76,9 +76,7 @@ const Layout: React.FC<LayoutProps> = ({
                     src={BLOG.authorAvatar}
                     className='rounded-full'
                   />
-                  {dayjs(date).isValid() ? (
-                    <p className='ml-2 md:block'>{BLOG.author}</p>
-                  ) : null}
+                  <p className='ml-2 md:block'>{BLOG.author}</p>
                 </a>
                 <span className='block'>&nbsp;/&nbsp;</span>
               </div>
