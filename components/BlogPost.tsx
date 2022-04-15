@@ -3,6 +3,7 @@ import BLOG from '@/blog.config'
 import dayjs from 'dayjs'
 
 const BlogPost = ({ post }) => {
+  const date = post?.date?.start_date || post.createdTime
   return (
     <Link href={`${BLOG.path}/${post.slug}`} prefetch={false}>
       <a>
@@ -11,11 +12,11 @@ const BlogPost = ({ post }) => {
             <h2 className='text-lg md:text-xl font-medium mb-2 cursor-pointer text-black dark:text-gray-100'>
               {post.title}
             </h2>
-            <time className='shrink-0 text-gray-600 dark:text-gray-400'>
-              {dayjs(post?.date?.start_date || post.createdTime).format(
-                BLOG.dateFormat
-              )}
-            </time>
+            {dayjs(date).isValid() ? (
+              <time className='shrink-0 text-gray-600 dark:text-gray-400'>
+                {dayjs(date).format(BLOG.dateFormat)}
+              </time>
+            ) : null}
           </header>
           <main>
             <p className='hidden md:block leading-8 text-gray-700 dark:text-gray-300'>
