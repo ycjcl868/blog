@@ -9,8 +9,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
+  optimizeFonts: true,
   experimental: {
-    outputStandalone: true
+    outputStandalone: true,
+    optimizeCss: true,
+    reactRoot: true
   },
   images: {
     domains: ['gravatar.com']
