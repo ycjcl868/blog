@@ -11,9 +11,7 @@ const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: true,
   experimental: {
-    outputStandalone: true,
-    optimizeCss: true,
-    reactRoot: true
+    optimizeCss: true
   },
   images: {
     domains: ['gravatar.com']
