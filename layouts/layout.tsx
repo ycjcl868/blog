@@ -4,6 +4,7 @@ import Container from '@/components/Container'
 import TagItem from '@/components/TagItem'
 import { NotionRenderer } from 'react-notion-x'
 import { ExtendedRecordMap } from 'notion-types'
+import TweetEmbed from 'react-tweet-embed'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import BLOG from '@/blog.config'
@@ -27,6 +28,10 @@ const Equation = dynamic(() =>
 
 const mapPageUrl = (id) => {
   return 'https://www.notion.so/' + id.replace(/-/g, '')
+}
+
+const Tweet = ({ id }: { id: string }) => {
+  return <TweetEmbed tweetId={id} />
 }
 
 interface LayoutProps {
@@ -106,7 +111,8 @@ const Layout: React.FC<LayoutProps> = ({
                   Code,
                   Collection,
                   nextImage: Image,
-                  nextLink: Link
+                  nextLink: Link,
+                  Tweet
                 }}
                 mapPageUrl={mapPageUrl}
                 darkMode={theme === 'dark'}
