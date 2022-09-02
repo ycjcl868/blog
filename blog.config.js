@@ -47,8 +47,8 @@ const BLOG = {
       repo: 'blog', // The repository of store comments
       owner: 'ycjcl868',
       admin: ['ycjcl868'],
-      clientID: process.env.GITALK_CLIENT_ID,
-      clientSecret: process.env.GITALK_CLIENT_SECRET,
+      clientID: '373847594a3cbd535d72',
+      clientSecret: 'f0b8276f6d9be40b1d6dd1b4c0efe1d238e405b1',
       distractionFreeMode: false
     },
     utterancesConfig: {
