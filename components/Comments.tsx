@@ -48,7 +48,8 @@ const Comments = ({ frontMatter }) => {
             repo: BLOG.comment.gitalkConfig.repo,
             owner: BLOG.comment.gitalkConfig.owner,
             admin: BLOG.comment.gitalkConfig.admin,
-            distractionFreeMode: BLOG.comment.gitalkConfig.distractionFreeMode
+            distractionFreeMode: BLOG.comment.gitalkConfig.distractionFreeMode,
+            proxy: BLOG.comment.gitalkConfig.proxy
           }}
         />
       )}

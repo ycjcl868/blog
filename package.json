@@ -28,6 +28,7 @@
     "gitalk": "^1.8.0",
     "next": "^12.2.5",
     "next-themes": "^0.2.0",
+    "node-fetch": "^3.2.10",
     "notion-client": "^6.12.9",
     "notion-utils": "^6.12.9",
     "prism-theme-vars": "^0.2.2",

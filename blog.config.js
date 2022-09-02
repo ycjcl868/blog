@@ -47,9 +47,10 @@ const BLOG = {
       repo: 'blog', // The repository of store comments
       owner: 'ycjcl868',
       admin: ['ycjcl868'],
-      clientID: '373847594a3cbd535d72',
-      clientSecret: 'f0b8276f6d9be40b1d6dd1b4c0efe1d238e405b1',
-      distractionFreeMode: false
+      clientID: '26baba385d964968e855',
+      clientSecret: '56f5bf32b9785258727c624d7fbd2984361315e3',
+      distractionFreeMode: false,
+      proxy: 'https://www.rustc.cloud/api/get_access_token'
     },
     utterancesConfig: {
       repo: ''
