@@ -44,7 +44,7 @@ const BLOG = {
     // support provider: gitalk, utterances, cusdis
     provider: 'gitalk', // leave it empty if you don't need any comment plugin
     gitalkConfig: {
-      repo: 'localhost:3000', // The repository of store comments
+      repo: 'blog', // The repository of store comments
       owner: 'ycjcl868',
       admin: ['ycjcl868'],
       clientID: process.env.GITALK_CLIENT_ID,
