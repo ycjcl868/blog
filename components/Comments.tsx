@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import 'gitalk/dist/gitalk.css'
 
 const GitalkComponent = dynamic(
   () => {
