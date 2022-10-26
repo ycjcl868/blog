@@ -20,20 +20,16 @@ const Pagination = ({ page, showNext }) => {
               : `/page/${currentPage - 1}`
           }
         >
-          <a>
-            <button rel='prev' className='block cursor-pointer'>
-              ← {locale.PAGINATION.PREV}
-            </button>
-          </a>
+          <button rel='prev' className='block cursor-pointer'>
+            ← {locale.PAGINATION.PREV}
+          </button>
         </Link>
       )}
       {showNext && (
         <Link href={`/page/${currentPage + 1}`}>
-          <a>
-            <button rel='next' className='block cursor-pointer'>
-              {locale.PAGINATION.NEXT} →
-            </button>
-          </a>
+          <button rel='next' className='block cursor-pointer'>
+            {locale.PAGINATION.NEXT} →
+          </button>
         </Link>
       )}
     </div>

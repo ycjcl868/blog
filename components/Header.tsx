@@ -26,7 +26,7 @@ const NavBar = () => {
                 className='block mx-2 text-black dark:text-gray-50 nav'
               >
                 <Link prefetch={false} href={link.to}>
-                  <a>{link.name}</a>
+                  {link.name}
                 </Link>
               </li>
             )
@@ -79,13 +79,12 @@ const Header = ({ navBarTitle, fullWidth }) => {
         ref={navRef}
       >
         <div className='flex items-center'>
-          <Link href='/'>
-            <a
-              className='md:text-lg text-base text-black dark:text-white'
-              aria-label={BLOG.title}
-            >
-              ✨ {BLOG.title}
-            </a>
+          <Link
+            className='md:text-lg text-base text-black dark:text-white'
+            aria-label={BLOG.title}
+            href='/'
+          >
+            ✨ {BLOG.title}
           </Link>
           {navBarTitle ? (
             <p className='ml-2 font-medium text-day dark:text-night header-name'>
