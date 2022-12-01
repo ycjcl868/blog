@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import type { TableOfContentsEntry } from 'notion-utils'
 import Container from '@/components/Container'
 import TagItem from '@/components/TagItem'
 import { NotionRenderer } from 'react-notion-x'
@@ -13,6 +14,7 @@ import { useLocale } from '@/lib/locale'
 import { useRouter } from 'next/router'
 import Comments from '@/components/Comments'
 import PostActions from '@/components/PostActions'
+import TableOfContent from '@/components/TableOfContent'
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
@@ -38,11 +40,13 @@ interface LayoutProps {
   blockMap: ExtendedRecordMap
   frontMatter: any
   fullWidth?: boolean
+  tableOfContent?: TableOfContentsEntry[]
 }
 
 const Layout: React.FC<LayoutProps> = ({
   children,
   blockMap,
+  tableOfContent,
   frontMatter,
   fullWidth = false
 }) => {
@@ -65,7 +69,7 @@ const Layout: React.FC<LayoutProps> = ({
           <h1 className='font-bold text-3xl text-black dark:text-white'>
             {frontMatter.title}
           </h1>
-          {frontMatter.type[0] !== 'Page' && (
+          {frontMatter.type !== 'Page' && (
             <nav className='flex my-7 items-start text-gray-500 dark:text-gray-400'>
               <div className='flex mb-4'>
                 <a
@@ -103,7 +107,7 @@ const Layout: React.FC<LayoutProps> = ({
           )}
           {children}
           {blockMap && (
-            <div className={frontMatter.type[0] !== 'Page' ? '-mt-4' : ''}>
+            <div className={frontMatter.type !== 'Page' ? '-mt-4' : ''}>
               <NotionRenderer
                 recordMap={blockMap}
                 components={{
@@ -121,8 +125,15 @@ const Layout: React.FC<LayoutProps> = ({
             </div>
           )}
         </article>
-        {frontMatter.type[0] !== 'Page' && (
-          <aside className='md:flex md:ml-8 sticky md:flex-col md:items-center md:top-36 md:self-start md:flex-auto hidden'>
+        {frontMatter.type !== 'Page' && (
+          <aside className='md:flex md:ml-4 sticky md:flex-col md:items-center md:top-36 md:self-start md:flex-auto hidden'>
+            {tableOfContent.length > 0 && (
+              <TableOfContent
+                className='mb-6'
+                tableOfContent={tableOfContent}
+                mobile
+              />
+            )}
             <PostActions title={frontMatter.title} />
           </aside>
         )}

@@ -4,6 +4,9 @@
   @apply text-gray-600 dark:text-gray-300;
   overflow-wrap: break-word;
 }
+main .notion-table-of-contents-item {
+  white-space: break-spaces;
+}
 .notion-list-numbered {
   max-width: 100%;
 }
@@ -104,4 +107,21 @@ pre[class*='language-'] {
 }
 .notion-collection-row {
   @apply hidden;
+}
+
+@media (min-width: 1300px) and (min-height: 300px) {
+  .notion-page-content-has-aside {
+    display: flex;
+    flex-direction: row;
+    width: calc((100vw + var(--notion-max-width)) / 2.2);
+  }
+
+  .notion-page-content-has-aside .notion-aside {
+    display: flex;
+  }
+
+  .notion-page-content-has-aside .notion-page-content-inner {
+    width: var(--notion-max-width);
+    max-width: var(--notion-max-width);
+  }
 }
