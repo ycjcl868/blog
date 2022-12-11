@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "regions": ["hkg1"],
   "headers": [
     {
       "source": "/fonts/IBMPlexSansVar-Roman.woff2",

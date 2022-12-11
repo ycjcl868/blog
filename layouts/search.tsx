@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import BlogPost from '@/components/BlogPost'
 import Container from '@/components/Container'
 import Tags from '@/components/Tags'
-import PropTypes from 'prop-types'
 
-const SearchLayout = ({ tags, posts, currentTag }) => {
+interface SearchLayoutProps {
+  posts: any[]
+  tags: object
+  currentTag: string
+}
+
+const SearchLayout: FC<SearchLayoutProps> = ({ tags, posts, currentTag }) => {
   const [searchValue, setSearchValue] = useState('')
   let filteredBlogPosts = []
   if (posts) {
@@ -52,10 +57,5 @@ const SearchLayout = ({ tags, posts, currentTag }) => {
       </div>
     </Container>
   )
-}
-SearchLayout.propTypes = {
-  posts: PropTypes.array.isRequired,
-  tags: PropTypes.object.isRequired,
-  currentTag: PropTypes.string
 }
 export default SearchLayout

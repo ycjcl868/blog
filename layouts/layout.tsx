@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import BLOG from '@/blog.config'
 import dayjs from 'dayjs'
 import { useLocale } from '@/lib/locale'
+import { gitHub2jsDelivr } from '@/lib/utils'
 import { useRouter } from 'next/router'
 import Comments from '@/components/Comments'
 import PostActions from '@/components/PostActions'
@@ -29,7 +30,12 @@ const Equation = dynamic(() =>
 )
 
 const mapPageUrl = (id) => {
+  console.log('page', id)
   return 'https://www.notion.so/' + id.replace(/-/g, '')
+}
+
+const mapImageUrl = (url) => {
+  return gitHub2jsDelivr(url)
 }
 
 const Tweet = ({ id }: { id: string }) => {
@@ -119,6 +125,7 @@ const Layout: React.FC<LayoutProps> = ({
                   Tweet
                 }}
                 mapPageUrl={mapPageUrl}
+                mapImageUrl={mapImageUrl}
                 darkMode={theme === 'dark'}
                 pageAside={false}
               />
