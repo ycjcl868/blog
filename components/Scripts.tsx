@@ -6,6 +6,7 @@ const Scripts = () => (
     {BLOG.analytics && BLOG.analytics.providers.includes('ackee') && (
       <Script
         src={BLOG.analytics.ackeeConfig.tracker}
+        strategy='afterInteractive'
         data-ackee-server={BLOG.analytics.ackeeConfig.dataAckeeServer}
         data-ackee-domain-id={BLOG.analytics.ackeeConfig.domainId}
       />
