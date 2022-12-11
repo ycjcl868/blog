@@ -17,6 +17,9 @@ main .notion-table-of-contents-item {
   @apply leading-8;
   @apply p-0;
 }
+.notion .notion-hr {
+  border-top: 1px solid var(--fg-color-0);
+}
 .notion-page-link {
   color: inherit;
 }

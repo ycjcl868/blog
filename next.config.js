@@ -9,7 +9,17 @@ const nextConfig = {
     optimizeCss: true
   },
   images: {
-    domains: ['gravatar.com']
+    domains: [
+      'cdn.jsdelivr.net',
+      'raw.githubusercontent.com',
+      'gravatar.com',
+      'www.notion.so',
+      'notion.so',
+      'images.unsplash.com',
+      'pbs.twimg.com',
+      's3.us-west-2.amazonaws.com'
+    ],
+    formats: ['image/avif', 'image/webp']
   },
   eslint: {
     dirs: ['components', 'layouts', 'lib', 'pages'],

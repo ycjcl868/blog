@@ -5,7 +5,6 @@ import Container from '@/components/Container'
 import TagItem from '@/components/TagItem'
 import { NotionRenderer } from 'react-notion-x'
 import { ExtendedRecordMap } from 'notion-types'
-import TweetEmbed from 'react-tweet-embed'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import BLOG from '@/blog.config'
@@ -29,8 +28,9 @@ const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
 
+const TweetEmbed = dynamic(() => import('react-tweet-embed'), { ssr: false })
+
 const mapPageUrl = (id) => {
-  console.log('page', id)
   return 'https://www.notion.so/' + id.replace(/-/g, '')
 }
 
