@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import 'prismjs'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-diff'
@@ -47,6 +48,7 @@ function MyApp({ Component, pageProps }) {
           </ThemeProvider>
         </>
       </LocaleProvider>
+      <Analytics />
     </>
   )
 }

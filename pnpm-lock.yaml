@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@notionhq/client': ^2.2.2
   '@types/react': ^18.0.9
+  '@vercel/analytics': ^0.1.6
   autoprefixer: ^10.4.13
   classnames: ^2.3.1
   critters: ^0.0.16
@@ -44,6 +45,7 @@ specifiers:
 
 dependencies:
   '@notionhq/client': 2.2.2
+  '@vercel/analytics': 0.1.6_react@18.2.0
   classnames: 2.3.1
   dayjs: 1.10.7
   feed: 4.2.2
@@ -461,6 +463,14 @@ packages:
       '@typescript-eslint/types': 5.41.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@vercel/analytics/0.1.6_react@18.2.0:
+    resolution: {integrity: sha512-zNd5pj3iDvq8IMBQHa1YRcIteiw6ZiPB8AsONHd8ieFXlNpLqhXfIYnf4WvTfZ7S1NSJ++mIM14aJnNac/VMXQ==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@xobotyi/scrollbar-width/1.9.5:
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}
