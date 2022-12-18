@@ -1,3 +1,4 @@
+import { GetStaticProps, GetStaticPaths } from 'next'
 import Layout from '@/layouts/layout'
 import { getPostBlocks, getAllPostsList } from '@/lib/notion'
 import { getPageTableOfContents, uuidToId } from 'notion-utils'
@@ -16,7 +17,7 @@ const BlogPost = ({ post, blockMap, tableOfContent }) => {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getAllPostsList({ includePages: true })
   return {
     paths: posts.map((row) => `${BLOG.path}/${row.slug}`),
@@ -24,9 +25,16 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params: { slug } }) {
+export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   const posts = await getAllPostsList({ includePages: true })
   const post = posts.find((t) => t.slug === slug)
+
+  if (!post) {
+    return {
+      notFound: true
+    }
+  }
+
   const blockMap = await getPostBlocks(post.id)
 
   const keys = Object.keys(blockMap?.block || {})
