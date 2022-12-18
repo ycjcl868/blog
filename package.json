@@ -33,6 +33,7 @@
     "node-fetch": "^3.3.0",
     "notion-client": "^6.15.6",
     "notion-utils": "^6.15.6",
+    "nprogress": "^0.2.0",
     "prism-theme-vars": "^0.2.4",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",

@@ -28,6 +28,7 @@ specifiers:
   notion-client: ^6.15.6
   notion-types: ^6.15.6
   notion-utils: ^6.15.6
+  nprogress: ^0.2.0
   postcss: ^8.4.20
   prettier: ^2.8.1
   prettier-plugin-organize-imports: ^3.2.1
@@ -56,6 +57,7 @@ dependencies:
   node-fetch: 3.3.0
   notion-client: 6.15.6
   notion-utils: 6.15.6
+  nprogress: 0.2.0
   prism-theme-vars: 0.2.4
   prismjs: 1.29.0
   react: 18.2.0
@@ -2860,6 +2862,10 @@ packages:
     dependencies:
       path-key: 3.1.1
     dev: true
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /nth-check/2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}

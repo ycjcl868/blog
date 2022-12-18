@@ -1,4 +1,8 @@
+import { useEffect } from 'react'
+import Router from 'next/router'
 import { Analytics } from '@vercel/analytics/react'
+import 'nprogress/nprogress.css'
+import NProgress from 'nprogress'
 import 'prismjs'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-diff'
@@ -27,6 +31,22 @@ const Gtag = dynamic(() => import('@/components/Gtag'), { ssr: false })
 const Cnzz = dynamic(() => import('@/components/Cnzz'), { ssr: false })
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    const handleRouteStart = () => NProgress.start()
+    const handleRouteDone = () => NProgress.done()
+
+    Router.events.on('routeChangeStart', handleRouteStart)
+    Router.events.on('routeChangeComplete', handleRouteDone)
+    Router.events.on('routeChangeError', handleRouteDone)
+
+    return () => {
+      // Make sure to remove the event handler on unmount!
+      Router.events.off('routeChangeStart', handleRouteStart)
+      Router.events.off('routeChangeComplete', handleRouteDone)
+      Router.events.off('routeChangeError', handleRouteDone)
+    }
+  }, [])
+
   return (
     <>
       <Scripts />
