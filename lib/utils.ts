@@ -11,7 +11,7 @@ export const gitHub2jsDelivr = (gitHub: string) => {
     /^https?:\/\/(?:github|raw\.githubusercontent)\.com\/([^/]+)\/([^/]+)(?:\/blob)?\/([^/]+)\/(.*)$/i
   const match = pattern.exec(gitHub)
 
-  if (match && !gitHub?.includes('token=')) {
+  if (match) {
     const [, user, repo, version, file] = match
 
     return buildJsDelivrLink(user, repo, version, file)
