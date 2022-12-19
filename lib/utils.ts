@@ -6,12 +6,12 @@ const buildJsDelivrLink = (user, repo, version, path) => {
   return `https://cdn.jsdelivr.net/gh/${user}/${repo}@${version}/${path}`
 }
 
-export const gitHub2jsDelivr = (gitHub) => {
+export const gitHub2jsDelivr = (gitHub: string) => {
   const pattern =
     /^https?:\/\/(?:github|raw\.githubusercontent)\.com\/([^/]+)\/([^/]+)(?:\/blob)?\/([^/]+)\/(.*)$/i
   const match = pattern.exec(gitHub)
 
-  if (match) {
+  if (match && !gitHub?.includes('token=')) {
     const [, user, repo, version, file] = match
 
     return buildJsDelivrLink(user, repo, version, file)
