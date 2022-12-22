@@ -20,6 +20,7 @@ specifiers:
   gitalk: ^1.8.0
   husky: ^7.0.4
   lint-staged: ^12.3.4
+  lodash.pick: ^4.4.0
   lodash.throttle: ^4.1.1
   next: ^13.0.7
   next-sitemap: ^3.1.42
@@ -51,6 +52,7 @@ dependencies:
   dayjs: 1.11.7
   feed: 4.2.2
   gitalk: 1.8.0_biqbaboplfbrettd7655fr4n2y
+  lodash.pick: 4.4.0
   lodash.throttle: 4.1.1
   next: 13.0.7_biqbaboplfbrettd7655fr4n2y
   next-themes: 0.2.1_gvvct4imq5upoiloat43sswrza
@@ -2521,6 +2523,10 @@ packages:
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
+
+  /lodash.pick/4.4.0:
+    resolution: {integrity: sha512-hXt6Ul/5yWjfklSGvLQl8vM//l3FtyHZeuelpzK6mm99pNvN9yTDruNZPEJZD1oWrqo+izBmB7oUfWgcCX7s4Q==}
+    dev: false
 
   /lodash.throttle/4.1.1:
     resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}

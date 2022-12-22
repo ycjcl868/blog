@@ -1,11 +1,19 @@
+import { useMemo } from 'react'
 import Link from 'next/link'
 
 const Tags = ({ tags, currentTag }) => {
+  const sortedTagKeys = useMemo(() => {
+    return Object.keys(tags || {})?.sort((a) => {
+      return a === currentTag ? -1 : 0
+    })
+  }, [tags, currentTag])
+
   if (!tags) return null
+
   return (
     <div className='tag-container'>
       <ul className='flex max-w-full mt-4 overflow-x-auto'>
-        {Object.keys(tags).map((key) => {
+        {sortedTagKeys.map((key) => {
           const selected = key === currentTag
           return (
             <li
