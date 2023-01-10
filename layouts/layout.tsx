@@ -12,10 +12,10 @@ import dayjs from 'dayjs'
 import { useLocale } from '@/lib/locale'
 import { gitHub2jsDelivr } from '@/lib/utils'
 import { useRouter } from 'next/router'
-import Comments from '@/components/Comments'
 import PostActions from '@/components/PostActions'
 import TableOfContent from '@/components/TableOfContent'
 
+const Comments = dynamic(() => import('@/components/Comments'))
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
@@ -163,7 +163,7 @@ const Layout: React.FC<LayoutProps> = ({
           </button>
         </a>
       </div>
-      <Comments frontMatter={frontMatter} />
+      {frontMatter.type !== 'Page' && <Comments frontMatter={frontMatter} />}
     </Container>
   )
 }
