@@ -1,15 +1,21 @@
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Layout from '@/layouts/layout'
 import { getPostBlocks, getAllPostsList } from '@/lib/notion'
-import { getPageTableOfContents, uuidToId } from 'notion-utils'
-import { PageBlock } from 'notion-types'
+import {
+  getPageTableOfContents,
+  uuidToId,
+  getPageImageUrls
+} from 'notion-utils'
+import { PageBlock, Block } from 'notion-types'
+import { mapCoverUrl } from '@/lib/utils'
 import BLOG from '@/blog.config'
 
-const BlogPost = ({ post, blockMap, tableOfContent }) => {
+const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
   if (!post) return null
   return (
     <Layout
       blockMap={blockMap}
+      coverImage={coverImage}
       tableOfContent={tableOfContent}
       frontMatter={post}
       fullWidth={post.fullWidth}
@@ -36,6 +42,14 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   }
 
   const blockMap = await getPostBlocks(post.id)
+  const [coverImage = ''] =
+    getPageImageUrls(blockMap, {
+      mapImageUrl: (url: string, block: Block) => {
+        if (block.format?.page_cover) {
+          return !url?.startsWith('http') ? mapCoverUrl(url) : url
+        }
+      }
+    }) || []
 
   const keys = Object.keys(blockMap?.block || {})
   const block = blockMap?.block?.[keys[0]]?.value as PageBlock
@@ -50,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
     ) || []
 
   return {
-    props: { post, blockMap, tableOfContent },
+    props: { post, blockMap, coverImage, tableOfContent },
     revalidate: 1
   }
 }

@@ -19,3 +19,11 @@ export const gitHub2jsDelivr = (gitHub: string) => {
 
   return gitHub
 }
+
+export const mapPageUrl = (id) => {
+  return 'https://www.notion.so/' + id.replace(/-/g, '')
+}
+
+export const mapCoverUrl = (url: string) => {
+  return 'https://www.notion.so' + url.replace(/-/g, '')
+}

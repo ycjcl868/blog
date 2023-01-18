@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic'
 import BLOG from '@/blog.config'
 import dayjs from 'dayjs'
 import { useLocale } from '@/lib/locale'
-import { gitHub2jsDelivr } from '@/lib/utils'
+import { gitHub2jsDelivr, mapPageUrl } from '@/lib/utils'
 import { useRouter } from 'next/router'
 import PostActions from '@/components/PostActions'
 import TableOfContent from '@/components/TableOfContent'
@@ -30,10 +30,6 @@ const Equation = dynamic(() =>
 
 const TweetEmbed = dynamic(() => import('react-tweet-embed'), { ssr: false })
 
-const mapPageUrl = (id) => {
-  return 'https://www.notion.so/' + id.replace(/-/g, '')
-}
-
 const mapImageUrl = (url) => {
   return gitHub2jsDelivr(url)
 }
@@ -46,11 +42,13 @@ interface LayoutProps {
   blockMap: ExtendedRecordMap
   frontMatter: any
   fullWidth?: boolean
+  coverImage?: string
   tableOfContent?: TableOfContentsEntry[]
 }
 
 const Layout: React.FC<LayoutProps> = ({
   children,
+  coverImage,
   blockMap,
   tableOfContent,
   frontMatter,
@@ -66,6 +64,7 @@ const Layout: React.FC<LayoutProps> = ({
       layout='blog'
       title={frontMatter.title}
       description={frontMatter.summary}
+      coverImage={coverImage}
       // date={new Date(frontMatter.publishedAt).toISOString()}
       type='article'
       fullWidth={fullWidth}

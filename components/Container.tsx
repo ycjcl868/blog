@@ -2,15 +2,25 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import BLOG from '@/blog.config'
 import Head from 'next/head'
-import PropTypes from 'prop-types'
 
-const Container = ({ children, layout, fullWidth, ...customMeta }) => {
+const Container: React.FC<any> = ({
+  children,
+  layout,
+  fullWidth,
+  coverImage,
+  ...customMeta
+}) => {
   const url = BLOG.path.length ? `${BLOG.link}/${BLOG.path}` : BLOG.link
   const meta = {
     title: BLOG.title,
     type: 'website',
     ...customMeta
   }
+  const image =
+    coverImage ||
+    `${BLOG.ogImageGenerateURL}/${encodeURIComponent(
+      meta.title
+    )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`
 
   return (
     <div>
@@ -36,22 +46,12 @@ const Container = ({ children, layout, fullWidth, ...customMeta }) => {
           property='og:url'
           content={meta.slug ? `${url}/${meta.slug}` : url}
         />
-        <meta
-          property='og:image'
-          content={`${BLOG.ogImageGenerateURL}/${encodeURIComponent(
-            meta.title
-          )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`}
-        />
         <meta property='og:type' content={meta.type} />
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:description' content={meta.description} />
         <meta name='twitter:title' content={meta.title} />
-        <meta
-          name='twitter:image'
-          content={`${BLOG.ogImageGenerateURL}/${encodeURIComponent(
-            meta.title
-          )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`}
-        />
+        <meta name='twitter:image' content={image} />
+        <meta property='og:image' content={image} />
         {meta.type === 'article' && (
           <>
             <meta
@@ -82,10 +82,6 @@ const Container = ({ children, layout, fullWidth, ...customMeta }) => {
       </div>
     </div>
   )
-}
-
-Container.propTypes = {
-  children: PropTypes.node
 }
 
 export default Container
