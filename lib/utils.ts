@@ -25,5 +25,5 @@ export const mapPageUrl = (id) => {
 }
 
 export const mapCoverUrl = (url: string) => {
-  return 'https://www.notion.so' + url.replace(/-/g, '')
+  return 'https://www.notion.so' + url
 }
