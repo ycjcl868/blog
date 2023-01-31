@@ -1,4 +1,6 @@
-import fetch from 'node-fetch'
+export const config = {
+  runtime: 'edge'
+}
 
 export default async function handler(req, res) {
   const { body } = req

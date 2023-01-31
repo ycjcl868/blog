@@ -31,7 +31,6 @@
     "lodash.throttle": "^4.1.1",
     "next": "^13.1.5",
     "next-themes": "^0.2.1",
-    "node-fetch": "^3.3.0",
     "notion-client": "^6.15.6",
     "notion-utils": "^6.15.6",
     "nprogress": "^0.2.0",
