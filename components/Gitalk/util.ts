@@ -27,18 +27,15 @@ export const axiosJSON = axios.create({
 })
 
 export const axiosGithub = axios.create({
-  baseURL: '/api/proxy_github',
+  baseURL: 'https://cors-anywhere.azm.workers.dev/https://api.github.com',
   headers: {
     Accept: 'application/json'
   }
 })
 
 export const getMetaContent = (name, content) => {
-  /* istanbul ignore next */
   content || (content = 'content')
-  /* istanbul ignore next */
   const el = window.document.querySelector(`meta[name='${name}']`)
-  /* istanbul ignore next */
   return el && el.getAttribute(content)
 }
 

@@ -236,14 +236,14 @@ class GitalkComponent extends Component {
     const getUrl = `/repos/${owner}/${repo}/issues/${number}`
     return new Promise((resolve, reject) => {
       axiosGithub
-        .get(getUrl, {
+        .get(`${getUrl}${encodeURIComponent(`?t=${Date.now()}`)}`, {
           auth: {
             username: clientID,
             password: clientSecret
-          },
-          params: {
-            t: Date.now()
           }
+          // params: {
+          //   t: Date.now()
+          // }
         })
         .then((res) => {
           let issue = null
@@ -267,16 +267,21 @@ class GitalkComponent extends Component {
     const { owner, repo, id, labels, clientID, clientSecret } = this.options
 
     return axiosGithub
-      .get(`/repos/${owner}/${repo}/issues`, {
-        auth: {
-          username: clientID,
-          password: clientSecret
-        },
-        params: {
-          labels: labels.concat(id).join(','),
-          t: Date.now()
+      .get(
+        `/repos/${owner}/${repo}/issues${encodeURIComponent(
+          `?labels=${labels.concat(id).join(',')}&t=${Date.now()}`
+        )}`,
+        {
+          auth: {
+            username: clientID,
+            password: clientSecret
+          }
+          // params: {
+          //   labels: labels.concat(id).join(','),
+          //   t: Date.now()
+          // }
         }
-      })
+      )
       .then((res) => {
         const { createIssueManually } = this.options
         let isNoInit = false
@@ -300,15 +305,18 @@ class GitalkComponent extends Component {
     const { issue } = this.state
     if (issue) {
       this.setState({ isNoInit: false })
+      console.log('issue', issue)
       return Promise.resolve(issue)
     }
 
     if (typeof number === 'number' && number > 0) {
+      console.log('issue', issue)
       return this.getIssueById().then((resIssue) => {
         if (!resIssue) return this.getIssueByLabels()
         return resIssue
       })
     }
+    console.log('222222')
     return this.getIssueByLabels()
   }
 
@@ -348,25 +356,31 @@ class GitalkComponent extends Component {
     return this.getIssue().then((issue) => {
       if (!issue) return
 
+      console.log('issueissue', issue)
+      const path = issue.comments_url?.replace('https://api.github.com', '')
+
       return axiosGithub
-        .get(issue.comments_url?.replace('https://api.github.com', ''), {
-          headers: {
-            Accept: 'application/vnd.github.v3.full+json'
-          },
-          auth: {
-            username: clientID,
-            password: clientSecret
-          },
-          params: {
-            per_page: perPage,
-            page
+        .get(
+          `${path}${encodeURIComponent(`?per_page=${perPage}&page=${page}`)}`,
+          {
+            headers: {
+              Accept: 'application/vnd.github.v3.full+json'
+            },
+            auth: {
+              username: clientID,
+              password: clientSecret
+            }
+            // params: {
+            //   per_page: perPage,
+            //   page
+            // }
           }
-        })
+        )
         .then((res) => {
           const { comments, issue } = this.state
           let isLoadOver = false
           const cs = comments.concat(res.data)
-          if (cs.length >= issue.comments || res.data.length < perPage) {
+          if (cs.length >= issue?.comments || res.data.length < perPage) {
             isLoadOver = true
           }
           this.setState({
@@ -662,6 +676,7 @@ class GitalkComponent extends Component {
     const { issue, isLoadMore } = this.state
     if (isLoadMore) return
     this.setState({ isLoadMore: true })
+    console.log('issue', issue)
     this.getComments(issue).then(() => this.setState({ isLoadMore: false }))
   }
 
