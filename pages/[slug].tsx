@@ -7,7 +7,7 @@ import {
   getPageImageUrls
 } from 'notion-utils'
 import { PageBlock, Block } from 'notion-types'
-import { mapCoverUrl } from '@/lib/utils'
+import { mapImageUrl } from '@/lib/utils'
 import BLOG from '@/blog.config'
 
 const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
@@ -42,11 +42,26 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   }
 
   const blockMap = await getPostBlocks(post.id)
+
+  // ref: https://github.com/transitive-bullshit/nextjs-notion-starter-kit/issues/279#issuecomment-1245467818
+  if (blockMap && blockMap.signed_urls) {
+    const signedUrls = blockMap.signed_urls
+    const newSignedUrls = {}
+    for (const p in signedUrls) {
+      if (signedUrls[p] && signedUrls[p].includes('.amazonaws.com/')) {
+        console.log('skip : ' + signedUrls[p])
+        continue
+      }
+      newSignedUrls[p] = signedUrls[p]
+    }
+    blockMap.signed_urls = newSignedUrls
+  }
+
   const [coverImage = ''] =
     getPageImageUrls(blockMap, {
       mapImageUrl: (url: string, block: Block) => {
         if (block.format?.page_cover) {
-          return !url?.startsWith('http') ? mapCoverUrl(url) : url
+          return mapImageUrl(url, block)
         }
       }
     }) || []

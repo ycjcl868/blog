@@ -3,6 +3,7 @@ const BLOG = {
   author: 'ycjcl868',
   authorAvatar: '/avatar.jpeg',
   email: 'chaolinjin@gmail.com',
+  defaultImageHost: 'images.rustc.cloud',
   link: 'https://www.rustc.cloud',
   description: '写写文章的地方',
   lang: 'en-US', // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']

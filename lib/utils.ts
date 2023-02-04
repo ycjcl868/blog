@@ -1,3 +1,7 @@
+import { Block } from 'notion-types'
+import BLOG from '@/blog.config'
+import { defaultMapImageUrl } from 'react-notion-x'
+
 const buildJsDelivrLink = (user, repo, version, path) => {
   if (version === 'latest') {
     return `https://cdn.jsdelivr.net/gh/${user}/${repo}/${path}`
@@ -26,4 +30,11 @@ export const mapPageUrl = (id) => {
 
 export const mapCoverUrl = (url: string) => {
   return 'https://www.notion.so' + url
+}
+
+export const mapImageUrl = (url: string, block: Block) => {
+  if (new URL(url)?.host === BLOG.defaultImageHost) {
+    return url
+  }
+  return defaultMapImageUrl(url, block)
 }

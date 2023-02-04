@@ -1,23 +1,39 @@
+import { useMemo } from 'react'
 import Image from 'next/image'
+import { NotionRenderer } from 'react-notion-x'
 import { useTheme } from 'next-themes'
+import { ExtendedRecordMap } from 'notion-types'
 import type { TableOfContentsEntry } from 'notion-utils'
 import Container from '@/components/Container'
 import TagItem from '@/components/TagItem'
-import { NotionRenderer } from 'react-notion-x'
-import { ExtendedRecordMap } from 'notion-types'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import BLOG from '@/blog.config'
 import dayjs from 'dayjs'
 import { useLocale } from '@/lib/locale'
-import { gitHub2jsDelivr, mapPageUrl } from '@/lib/utils'
+import { mapPageUrl, mapImageUrl } from '@/lib/utils'
 import { useRouter } from 'next/router'
 import PostActions from '@/components/PostActions'
 import TableOfContent from '@/components/TableOfContent'
 
 const Comments = dynamic(() => import('@/components/Comments'))
 const Code = dynamic(() =>
-  import('react-notion-x/build/third-party/code').then((m) => m.Code)
+  import('react-notion-x/build/third-party/code').then(async (m) => {
+    await Promise.all([
+      import('prismjs/components/prism-bash'),
+      import('prismjs/components/prism-diff'),
+      import('prismjs/components/prism-go'),
+      import('prismjs/components/prism-yaml'),
+      import('prismjs/components/prism-rust'),
+      import('prismjs/components/prism-python'),
+      import('prismjs/components/prism-markup-templating'),
+      import('prismjs/components/prism-php'),
+      import('prismjs/components/prism-javascript'),
+      import('prismjs/components/prism-markup'),
+      import('prismjs/components/prism-typescript')
+    ])
+    return m.Code
+  })
 )
 const Collection = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then(
@@ -27,12 +43,14 @@ const Collection = dynamic(() =>
 const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
+const Pdf = dynamic(
+  () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
+  {
+    ssr: false
+  }
+)
 
 const TweetEmbed = dynamic(() => import('react-tweet-embed'), { ssr: false })
-
-const mapImageUrl = (url) => {
-  return gitHub2jsDelivr(url)
-}
 
 const Tweet = ({ id }: { id: string }) => {
   return <TweetEmbed tweetId={id} />
@@ -58,6 +76,19 @@ const Layout: React.FC<LayoutProps> = ({
   const router = useRouter()
   const { theme } = useTheme()
   const date = frontMatter?.date?.start_date || frontMatter.createdTime
+
+  const components = useMemo(
+    () => ({
+      Equation,
+      Code,
+      Collection,
+      Pdf,
+      nextImage: Image,
+      nextLink: Link,
+      Tweet
+    }),
+    []
+  )
 
   return (
     <Container
@@ -115,15 +146,10 @@ const Layout: React.FC<LayoutProps> = ({
             <div className={frontMatter.type !== 'Page' ? '-mt-4' : ''}>
               <NotionRenderer
                 recordMap={blockMap}
-                components={{
-                  Equation,
-                  Code,
-                  Collection,
-                  nextImage: Image,
-                  nextLink: Link,
-                  Tweet
-                }}
+                components={components}
                 mapPageUrl={mapPageUrl}
+                previewImages={!!blockMap.preview_images}
+                rootDomain={new URL(BLOG.link)?.host}
                 mapImageUrl={mapImageUrl}
                 darkMode={theme === 'dark'}
                 pageAside={false}

@@ -311,13 +311,11 @@ class GitalkComponent extends Component {
     }
 
     if (typeof number === 'number' && number > 0) {
-      console.log('issue', issue)
       return this.getIssueById().then((resIssue) => {
         if (!resIssue) return this.getIssueByLabels()
         return resIssue
       })
     }
-    console.log('222222')
     return this.getIssueByLabels()
   }
 
