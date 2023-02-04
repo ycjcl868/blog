@@ -3,7 +3,9 @@ lockfileVersion: 5.4
 specifiers:
   '@notionhq/client': ^2.2.3
   '@svgr/webpack': ^6.5.1
+  '@types/autosize': ^4.0.1
   '@types/react': ^18.0.27
+  '@types/react-flip-move': ^2.9.12
   '@vercel/analytics': ^0.1.8
   autoprefixer: ^10.4.13
   autosize: ^5.0.2
@@ -81,7 +83,9 @@ dependencies:
 
 devDependencies:
   '@svgr/webpack': 6.5.1
+  '@types/autosize': 4.0.1
   '@types/react': 18.0.27
+  '@types/react-flip-move': 2.9.12_biqbaboplfbrettd7655fr4n2y
   autoprefixer: 10.4.13_postcss@8.4.21
   critters: 0.0.16
   cross-env: 7.0.3
@@ -1800,6 +1804,10 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: true
 
+  /@types/autosize/4.0.1:
+    resolution: {integrity: sha512-iPJT/FCaSO79G6j+9n6gmFc5nhxZ1gDrA2UAvb5FslJ6FJQZnDfbBU0qp5vpp0Cbjj7+gOyjuWZ7RrXvRuETaA==}
+    dev: true
+
   /@types/cacheable-request/6.0.3:
     resolution: {integrity: sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==}
     dependencies:
@@ -1848,6 +1856,16 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+
+  /@types/react-flip-move/2.9.12_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-NoQXHUFwboxbTV1NWf55ztoESiX/ShHUySG8uRCiu8ExBH+K033mRHAnBHAK8izVsH/eSfA3/IA1o1CqHA8QGg==}
+    deprecated: This is a stub types definition for react-flip-move (https://github.com/joshwcomeau/react-flip-move). react-flip-move provides its own type definitions, so you don't need @types/react-flip-move installed!
+    dependencies:
+      react-flip-move: 3.0.5_biqbaboplfbrettd7655fr4n2y
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: true
 
   /@types/react/18.0.27:
     resolution: {integrity: sha512-3vtRKHgVxu3Jp9t718R9BuzoD4NcQ8YJ5XRzsSKxNDiDonD2MXIT1TmSkenxuCycZJoQT5d2vE8LwWJxBC1gmA==}
@@ -4845,7 +4863,6 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
 
   /react-hotkeys-hook/3.4.7_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-+bbPmhPAl6ns9VkXkNNyxlmCAIyDAcWbB76O4I0ntr3uWCRuIQf/aRLartUahe9chVMPj+OEzzfk3CQSjclUEQ==}

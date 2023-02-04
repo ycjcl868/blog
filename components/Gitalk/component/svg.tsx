@@ -4,7 +4,7 @@ import Github from '../assets/icon/github.svg'
 import Heart from '../assets/icon/heart.svg'
 import HeartOn from '../assets/icon/heart_on.svg'
 import Reply from '../assets/icon/reply.svg'
-import Tip from '../assets/icon/Tip.svg'
+import Tip from '../assets/icon/tip.svg'
 
 const map = {
   arrow_down: ArrowDown,

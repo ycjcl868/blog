@@ -51,7 +51,9 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
+    "@types/autosize": "^4.0.1",
     "@types/react": "^18.0.27",
+    "@types/react-flip-move": "^2.9.12",
     "autoprefixer": "^10.4.13",
     "critters": "^0.0.16",
     "cross-env": "^7.0.3",

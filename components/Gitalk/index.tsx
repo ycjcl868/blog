@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import Polyglot from 'node-polyglot/build/polyglot'
+import Polyglot from 'node-polyglot'
 import FlipMove from 'react-flip-move'
 import autosize from 'autosize'
 
