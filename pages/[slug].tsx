@@ -7,7 +7,7 @@ import {
   getPageImageUrls
 } from 'notion-utils'
 import { PageBlock, Block } from 'notion-types'
-import { mapImageUrl, isDev } from '@/lib/utils'
+import { mapImageUrl } from '@/lib/utils'
 import BLOG from '@/blog.config'
 
 const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
@@ -24,13 +24,6 @@ const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  if (isDev) {
-    return {
-      paths: [],
-      fallback: true
-    }
-  }
-
   const posts = await getAllPostsList({ includePages: true })
   return {
     paths: posts.map((row) => `${BLOG.path}/${row.slug}`),
