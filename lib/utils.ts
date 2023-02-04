@@ -38,3 +38,6 @@ export const mapImageUrl = (url: string, block: Block) => {
   }
   return defaultMapImageUrl(url, block)
 }
+
+export const environment = process.env.NODE_ENV || 'development'
+export const isDev = environment === 'development'

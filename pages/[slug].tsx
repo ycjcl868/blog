@@ -1,13 +1,13 @@
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Layout from '@/layouts/layout'
-import { getPostBlocks, getAllPostsList } from '@/lib/notion'
+import { getPostBlocks, getAllPostsList, getPost } from '@/lib/notion'
 import {
   getPageTableOfContents,
   uuidToId,
   getPageImageUrls
 } from 'notion-utils'
 import { PageBlock, Block } from 'notion-types'
-import { mapImageUrl } from '@/lib/utils'
+import { mapImageUrl, isDev } from '@/lib/utils'
 import BLOG from '@/blog.config'
 
 const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
@@ -24,6 +24,13 @@ const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  if (isDev) {
+    return {
+      paths: [],
+      fallback: true
+    }
+  }
+
   const posts = await getAllPostsList({ includePages: true })
   return {
     paths: posts.map((row) => `${BLOG.path}/${row.slug}`),
@@ -32,8 +39,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
-  const posts = await getAllPostsList({ includePages: true })
-  const post = posts.find((t) => t.slug === slug)
+  const [post] = await getPost({ slug })
 
   if (!post) {
     return {
@@ -42,20 +48,6 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   }
 
   const blockMap = await getPostBlocks(post.id)
-
-  // ref: https://github.com/transitive-bullshit/nextjs-notion-starter-kit/issues/279#issuecomment-1245467818
-  if (blockMap && blockMap.signed_urls) {
-    const signedUrls = blockMap.signed_urls
-    const newSignedUrls = {}
-    for (const p in signedUrls) {
-      if (signedUrls[p] && signedUrls[p].includes('.amazonaws.com/')) {
-        console.log('skip : ' + signedUrls[p])
-        continue
-      }
-      newSignedUrls[p] = signedUrls[p]
-    }
-    blockMap.signed_urls = newSignedUrls
-  }
 
   const [coverImage = ''] =
     getPageImageUrls(blockMap, {
@@ -80,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
 
   return {
     props: { post, blockMap, coverImage, tableOfContent },
-    revalidate: 1
+    revalidate: 10
   }
 }
 
