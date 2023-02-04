@@ -13,6 +13,8 @@ export default async function handler(
   const path = Array.isArray(queryUrl) ? queryUrl.join('/') : ''
   const url = `https://api.github.com/${path}?${queryString.stringify(query)}`
 
+  console.log('url', url)
+
   const response = await axios(url, {
     method,
     ...(method === 'POST' ? { data: JSON.stringify(body) } : {}),
