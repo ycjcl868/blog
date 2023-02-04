@@ -9,8 +9,17 @@ const nextConfig = {
     optimizeCss: true
   },
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.rustc.cloud',
+        port: '',
+        pathname: '/**'
+      }
+    ],
     domains: [
       'cdn.jsdelivr.net',
+      'images.rustc.cloud',
       'raw.githubusercontent.com',
       'gravatar.com',
       'www.notion.so',
