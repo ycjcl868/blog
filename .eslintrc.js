@@ -19,6 +19,7 @@ module.exports = {
     }
   },
   rules: {
+    'node/handle-callback-err': 'off',
     'react/prop-types': 'off',
     'space-before-function-paren': 'off',
     'multiline-ternary': 'off',

@@ -1,16 +1,13 @@
-export const config = {
-  runtime: 'edge'
-}
+import axios from 'axios'
 
 export default async function handler(req, res) {
   const { body } = req
 
-  const response = await fetch('https://github.com/login/oauth/access_token', {
+  const response = await axios('https://github.com/login/oauth/access_token', {
     method: 'post',
-    body: JSON.stringify(body),
+    data: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json', accept: 'application/json' }
   })
-  const data = await response.json()
 
-  res.status(200).json(data)
+  res.status(200).json(response.data)
 }

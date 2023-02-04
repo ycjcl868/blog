@@ -12,27 +12,22 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.rustc.cloud',
-        port: '',
-        pathname: '/**'
+        hostname: '**'
       }
-    ],
-    domains: [
-      'cdn.jsdelivr.net',
-      'images.rustc.cloud',
-      'raw.githubusercontent.com',
-      'gravatar.com',
-      'www.notion.so',
-      'notion.so',
-      'images.unsplash.com',
-      'pbs.twimg.com',
-      's3.us-west-2.amazonaws.com'
     ],
     formats: ['image/avif', 'image/webp']
   },
   eslint: {
     dirs: ['components', 'layouts', 'lib', 'pages'],
     ignoreDuringBuilds: true
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack']
+    })
+
+    return config
   },
   async headers() {
     return [

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 const GitalkComponent = dynamic(
   () => {
-    return import('gitalk/dist/gitalk-component')
+    return import('@/components/Gitalk')
   },
   { ssr: false }
 )

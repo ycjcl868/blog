@@ -25,9 +25,7 @@ const NavBar = () => {
                 key={link.id}
                 className='block mx-2 text-black dark:text-gray-50 nav'
               >
-                <Link prefetch={false} href={link.to}>
-                  {link.name}
-                </Link>
+                <Link href={link.to}>{link.name}</Link>
               </li>
             )
         )}
