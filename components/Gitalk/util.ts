@@ -27,7 +27,7 @@ export const axiosJSON = axios.create({
 })
 
 export const axiosGithub = axios.create({
-  baseURL: 'https://cors-anywhere.azm.workers.dev/https://api.github.com',
+  baseURL: 'https://proxy.rustc.cloud/?https://api.github.com',
   headers: {
     Accept: 'application/json'
   }

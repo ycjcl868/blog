@@ -69,7 +69,8 @@ class GitalkComponent extends Component {
         pagerDirection: 'last', // last or first
         createIssueManually: false,
         distractionFreeMode: false,
-        proxy: '/api/get_access_token',
+        proxy:
+          'https://proxy.rustc.cloud/?https://github.com/login/oauth/access_token',
         flipMoveOptions: {
           staggerDelayBy: 150,
           appearAnimation: 'accordionVertical',

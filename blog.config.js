@@ -50,7 +50,8 @@ const BLOG = {
       clientID: '26baba385d964968e855',
       clientSecret: '56f5bf32b9785258727c624d7fbd2984361315e3',
       distractionFreeMode: false,
-      proxy: 'https://www.rustc.cloud/api/get_access_token'
+      proxy:
+        'https://proxy.rustc.cloud/?https://github.com/login/oauth/access_token'
     },
     utterancesConfig: {
       repo: ''
