@@ -33,10 +33,14 @@ export const mapCoverUrl = (url: string) => {
 }
 
 export const mapImageUrl = (url: string, block: Block) => {
-  if (new URL(url)?.host === BLOG.defaultImageHost) {
+  try {
+    if (new URL(url)?.host === BLOG.defaultImageHost) {
+      return url
+    }
+    return defaultMapImageUrl(url, block)
+  } catch (e) {
     return url
   }
-  return defaultMapImageUrl(url, block)
 }
 
 export const environment = process.env.NODE_ENV || 'development'
