@@ -1,9 +1,14 @@
 import { getAllPostsList, getAllTagsFromPosts } from '@/lib/notion'
 import SearchLayout from '@/layouts/search'
+import BLOG from '@/blog.config'
+import { useLocale } from '@/lib/locale'
 
 export default function Tag({ tags, posts, currentTag }) {
+  const locale = useLocale()
+
   return (
     <SearchLayout
+      title={`${locale.TAG} ${currentTag} - ${BLOG.title}`}
       hiddenTags
       tags={tags}
       posts={posts}

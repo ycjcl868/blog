@@ -5,13 +5,15 @@ import Container from '@/components/Container'
 import Tags from '@/components/Tags'
 
 interface SearchLayoutProps {
+  title?: string
   posts: any[]
   tags: object
-  currentTag: string
+  currentTag?: string
   hiddenTags?: boolean
 }
 
 const SearchLayout: FC<SearchLayoutProps> = ({
+  title,
   hiddenTags = false,
   tags,
   posts,
@@ -35,7 +37,7 @@ const SearchLayout: FC<SearchLayoutProps> = ({
   )
 
   return (
-    <Container>
+    <Container title={title}>
       {!hiddenTags && (
         <div className='relative'>
           <input

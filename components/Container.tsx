@@ -5,6 +5,7 @@ import Head from 'next/head'
 
 const Container: React.FC<any> = ({
   children,
+  title,
   layout,
   fullWidth,
   coverImage,
@@ -12,7 +13,7 @@ const Container: React.FC<any> = ({
 }) => {
   const url = BLOG.path.length ? `${BLOG.link}/${BLOG.path}` : BLOG.link
   const meta = {
-    title: BLOG.title,
+    title: title || BLOG.title,
     type: 'website',
     ...customMeta
   }
