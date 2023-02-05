@@ -37,11 +37,10 @@ export const mapImageUrl = (url: string, block: Block) => {
     if (new URL(url)?.host === BLOG.defaultImageHost) {
       return url
     }
-    return defaultMapImageUrl(url, block)
   } catch (e) {
     console.error('[mapImageUrl ERROR]', url, e)
-    return url
   }
+  return defaultMapImageUrl(url, block)
 }
 
 export const environment = process.env.NODE_ENV || 'development'
