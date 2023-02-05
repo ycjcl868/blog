@@ -30,7 +30,16 @@ const Code = dynamic(() =>
       import('prismjs/components/prism-php'),
       import('prismjs/components/prism-javascript'),
       import('prismjs/components/prism-markup'),
-      import('prismjs/components/prism-typescript')
+      import('prismjs/components/prism-typescript'),
+      import('prismjs/components/prism-jsx'),
+      import('prismjs/components/prism-less'),
+      import('prismjs/components/prism-js-templates'),
+      import('prismjs/components/prism-git'),
+      import('prismjs/components/prism-graphql'),
+      import('prismjs/components/prism-solidity'),
+      import('prismjs/components/prism-sql'),
+      import('prismjs/components/prism-wasm'),
+      import('prismjs/components/prism-yaml')
     ])
     return m.Code
   })
