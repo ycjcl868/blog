@@ -38,7 +38,7 @@ export const mapImageUrl = (url: string, block: Block) => {
       return url
     }
   } catch (e) {
-    console.error('[mapImageUrl ERROR]', url, e)
+    console.warn('[mapImageUrl WARN]', url, e)
   }
   return defaultMapImageUrl(url, block)
 }
