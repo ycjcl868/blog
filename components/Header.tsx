@@ -25,7 +25,9 @@ const NavBar = () => {
                 key={link.id}
                 className='block mx-2 text-black dark:text-gray-50 nav'
               >
-                <Link href={link.to}>{link.name}</Link>
+                <Link className='tracking-wider' href={link.to}>
+                  {link.name}
+                </Link>
               </li>
             )
         )}
@@ -34,7 +36,7 @@ const NavBar = () => {
   )
 }
 
-const Header = ({ navBarTitle, fullWidth }) => {
+const Header = ({ fullWidth }) => {
   const useSticky = !BLOG.autoCollapsedNavBar
   const navRef = useRef(null)
   const sentinalRef = useRef([])
@@ -84,15 +86,6 @@ const Header = ({ navBarTitle, fullWidth }) => {
           >
             ✨ {BLOG.title}
           </Link>
-          {navBarTitle ? (
-            <p className='ml-2 font-medium text-day dark:text-night header-name'>
-              {navBarTitle}
-            </p>
-          ) : (
-            <p className='ml-2 font-medium text-day dark:text-night header-name'>
-              <span className='font-normal'>{BLOG.description}</span>
-            </p>
-          )}
         </div>
         <NavBar />
         <div>
