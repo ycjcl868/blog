@@ -2,6 +2,7 @@ import BLOG from '@/blog.config'
 import { useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import dynamic from 'next/dynamic'
+import { ReactCusdis } from 'react-cusdis'
 import { useRouter } from 'next/router'
 
 const GitalkComponent = dynamic(
@@ -13,12 +14,6 @@ const GitalkComponent = dynamic(
 const UtterancesComponent = dynamic(
   () => {
     return import('@/components/Utterances')
-  },
-  { ssr: false }
-)
-const CusdisComponent = dynamic(
-  (): any => {
-    return import('react-cusdis').then((m) => m.ReactCusdis)
   },
   { ssr: false }
 )
@@ -56,7 +51,7 @@ const Comments = ({ frontMatter }) => {
         <UtterancesComponent issueTerm={frontMatter.id} />
       )}
       {BLOG.comment && BLOG.comment.provider === 'cusdis' && (
-        <CusdisComponent
+        <ReactCusdis
           lang='zh-cn'
           attrs={{
             host: BLOG.comment.cusdisConfig.host,
