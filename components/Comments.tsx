@@ -1,4 +1,3 @@
-import { fetchCusdisLang } from '@/lib/cusdisLang'
 import BLOG from '@/blog.config'
 import { useEffect } from 'react'
 import { useTheme } from 'next-themes'
@@ -58,7 +57,7 @@ const Comments = ({ frontMatter }) => {
       )}
       {BLOG.comment && BLOG.comment.provider === 'cusdis' && (
         <CusdisComponent
-          lang={fetchCusdisLang()}
+          lang='zh-cn'
           attrs={{
             host: BLOG.comment.cusdisConfig.host,
             appId: BLOG.comment.cusdisConfig.appId,
