@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import BLOG from '@/blog.config'
 
 interface NewCommentBody {
   type: 'new_comment'
@@ -23,7 +24,11 @@ export default async function handler(
   const { type, data } = req.body as NewCommentBody
   console.log('req.body', req.body)
 
-  if (method === 'POST' && type === 'new_comment') {
+  if (
+    BLOG.comment.cusdisConfig.autoApproval &&
+    method === 'POST' &&
+    type === 'new_comment'
+  ) {
     try {
       const { approve_link = '' } = data || {}
       const { search } = new URL(approve_link)
