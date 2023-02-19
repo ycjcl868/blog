@@ -1,7 +1,9 @@
 /* eslint-disable camelcase */
-import axios from 'axios'
-import type { NextApiRequest, NextApiResponse } from 'next'
 import BLOG from '@/blog.config'
+
+export const config = {
+  runtime: 'edge'
+}
 
 interface NewCommentBody {
   type: 'new_comment'
@@ -16,13 +18,9 @@ interface NewCommentBody {
   }
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: Request) {
   const { method } = req
-  const { type, data } = req.body as NewCommentBody
-  console.log('req.body', req.body)
+  const { type, data } = (await req.json()) as NewCommentBody
 
   if (
     BLOG.comment.cusdisConfig.autoApproval &&
@@ -34,10 +32,18 @@ export default async function handler(
       const { search } = new URL(approve_link)
 
       if (search) {
-        const ret = await axios.post(
-          `https://cusdis.com/api/open/approve${search}`
+        const ret = await fetch(`https://cusdis.com/api/open/approve${search}`)
+        const data = await ret.text()
+
+        return new Response(
+          JSON.stringify({
+            success: data === 'Approved!',
+            message: data
+          }),
+          {
+            status: ret.status
+          }
         )
-        return res.status(ret.status).json(ret.data)
       }
       console.error('approve_link', approve_link)
     } catch (e) {
@@ -45,7 +51,12 @@ export default async function handler(
     }
   }
 
-  res.status(200).json({
-    success: false
-  })
+  return new Response(
+    JSON.stringify({
+      success: false
+    }),
+    {
+      status: 200
+    }
+  )
 }
