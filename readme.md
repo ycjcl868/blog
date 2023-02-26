@@ -32,7 +32,7 @@ pnpm i
 
 复制这个 [Notion 模板](https://ycjcl868.notion.site/b7e25fb9b29a48269e92e36f65a3ffbb)，并分享到 Web 公网。
 
-![](https://user-images.githubusercontent.com/13595509/221388122-92d9fc24-b163-4e30-8cd1-a534d53fb53a.png)
+![](https://user-images.githubusercontent.com/13595509/221388324-00c684dc-2eb8-4748-bd8e-91c8cf7320be.png)
 
 ## 🔨 本地开发
 
