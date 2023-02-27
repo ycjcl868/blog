@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Router from 'next/router'
+import { Analytics } from '@vercel/analytics/react'
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
 import 'prismjs'
@@ -56,6 +57,7 @@ function MyApp({ Component, pageProps }) {
           </ThemeProvider>
         </>
       </LocaleProvider>
+      <Analytics />
     </>
   )
 }
