@@ -3,6 +3,7 @@
   "version": "1.3.0",
   "homepage": "https://www.rustc.cloud",
   "license": "MIT",
+  "packageManager": "pnpm@6.11.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/ycjcl868/blog.git"
@@ -21,10 +22,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.3",
+    "@notionhq/client": "^2.2.4",
     "@vercel/analytics": "^0.1.11",
     "autosize": "^6.0.1",
-    "axios": "^1.3.4",
+    "axios": "^1.3.5",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
@@ -33,7 +34,7 @@
     "lodash.pick": "^4.4.0",
     "lodash.throttle": "^4.1.1",
     "lqip-modern": "^2.0.0",
-    "next": "^13.2.4",
+    "next": "^13.3.0",
     "next-axiom": "^0.17.0",
     "next-themes": "^0.2.1",
     "node-polyglot": "^2.5.0",
@@ -70,12 +71,12 @@
     "eslint-plugin-react": "^7.32.2",
     "husky": "^7.0.4",
     "lint-staged": "^12.5.0",
-    "next-sitemap": "^3.1.52",
+    "next-sitemap": "^4.0.7",
     "notion-types": "^6.16.0",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.4",
+    "prettier": "^2.8.7",
     "prettier-plugin-organize-imports": "^3.2.2",
-    "tailwindcss": "^3.2.7",
+    "tailwindcss": "^3.3.1",
     "typescript": "^4.9.5"
   },
   "bugs": {
