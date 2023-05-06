@@ -12,7 +12,7 @@ const NavBar = () => {
     { name: locale.NAV.INDEX, to: '/', show: true },
     { name: locale.NAV.ABOUT, to: '/about', show: BLOG.showAbout },
     { name: locale.NAV.SEARCH, to: '/search', show: true },
-    { name: locale.NAV.RSS, to: '/feed', show: true }
+    { name: locale.NAV.RSS, to: '/feed', show: true, external: true }
   ].map((link, id) => ({ ...link, id }))
 
   return (
@@ -25,7 +25,11 @@ const NavBar = () => {
                 key={link.id}
                 className='block mx-2 text-black dark:text-gray-50 nav'
               >
-                <Link className='tracking-wider' href={link.to}>
+                <Link
+                  className='tracking-wider'
+                  target={link.external ? '_blank' : null}
+                  href={link.to}
+                >
                   {link.name}
                 </Link>
               </li>
