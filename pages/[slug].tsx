@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
     ) || []
 
   return {
-    revalidate: 1,
+    revalidate: 10,
     props: { post, blockMap, coverImage, tableOfContent }
   }
 }

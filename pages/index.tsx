@@ -19,7 +19,7 @@ export async function getStaticProps() {
   }
 }
 
-const blog = ({ postsToShow, page, showNext }) => {
+const Blog = ({ postsToShow, page, showNext }) => {
   return (
     <Container title={BLOG.title} description={BLOG.description}>
       {postsToShow.map((post) => (
@@ -30,4 +30,4 @@ const blog = ({ postsToShow, page, showNext }) => {
   )
 }
 
-export default blog
+export default Blog
