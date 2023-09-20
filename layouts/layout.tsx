@@ -52,13 +52,6 @@ const Collection = dynamic(() =>
 const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
-const Pdf = dynamic(
-  () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
-  {
-    ssr: false
-  }
-)
-
 const TweetEmbed = dynamic(() => import('react-tweet-embed'), { ssr: false })
 
 const Tweet = ({ id }: { id: string }) => {
@@ -91,7 +84,6 @@ const Layout: React.FC<LayoutProps> = ({
       Equation,
       Code,
       Collection,
-      Pdf,
       nextImage: Image,
       nextLink: Link,
       Tweet
