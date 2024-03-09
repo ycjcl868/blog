@@ -1,6 +1,5 @@
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import queryString from 'query-string'
 import BLOG from '@/blog.config'
 
 export default async function handler(
@@ -11,7 +10,8 @@ export default async function handler(
   const { url: queryUrl, ...query } = req.query
 
   const path = Array.isArray(queryUrl) ? queryUrl.join('/') : ''
-  const url = `https://api.github.com/${path}?${queryString.stringify(query)}`
+  const params = new URLSearchParams(query as Record<string, string>).toString()
+  const url = `https://api.github.com/${path}?${params}`
 
   console.error('url', url)
 

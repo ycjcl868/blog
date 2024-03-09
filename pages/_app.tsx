@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Router from 'next/router'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/react'
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps }) {
           <ThemeProvider attribute='class'>
             <Component {...pageProps} />
           </ThemeProvider>
+          <SpeedInsights />
         </>
       </LocaleProvider>
       <Analytics />
