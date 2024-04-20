@@ -77,7 +77,7 @@ const Header = ({ fullWidth }) => {
       <div className='observer-element h-4 md:h-12' ref={sentinalRef}></div>
       <div
         className={`sticky-nav m-auto w-full h-6 flex flex-row justify-between items-center mb-4 md:mb-12 py-8 bg-opacity-60 ${
-          !fullWidth ? 'max-w-5xl px-4' : 'px-4 md:px-24'
+          !fullWidth ? 'max-w-4xl px-4' : 'px-4 md:px-24'
         }`}
         id='sticky-nav'
         ref={navRef}
