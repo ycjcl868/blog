@@ -14,8 +14,7 @@ export async function getStaticProps() {
       page: 1, // current page is 1
       postsToShow,
       showNext
-    },
-    revalidate: 10
+    }
   }
 }
 
