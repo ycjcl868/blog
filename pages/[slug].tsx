@@ -1,6 +1,6 @@
-import { GetStaticProps, GetServerSideProps, PageConfig } from 'next'
+import { GetServerSideProps, PageConfig } from 'next'
 import Layout from '@/layouts/layout'
-import { getPostBlocks, getAllPostsList, getPost } from '@/lib/notion'
+import { getPostBlocks, getPost } from '@/lib/notion'
 import {
   getPageTableOfContents,
   uuidToId,
@@ -8,7 +8,6 @@ import {
 } from 'notion-utils'
 import { PageBlock, Block } from 'notion-types'
 import { mapImageUrl } from '@/lib/utils'
-import BLOG from '@/blog.config'
 
 const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
   if (!post) return null

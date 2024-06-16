@@ -9,12 +9,9 @@ export const config: PageConfig = {
   runtime: 'experimental-edge'
 }
 
-export async function getgetServerSideProps() {
-  console.log('aaaaaaaaaaa')
+export async function getServerSideProps() {
   const posts = await getAllPostsList({ includePages: false })
-  console.log('bbbbbbbbbbbbbb')
   const postsToShow = posts.slice(0, BLOG.postsPerPage)
-  console.log('ccccccccccc')
   const totalPosts = posts.length
   const showNext = totalPosts > BLOG.postsPerPage
   return {

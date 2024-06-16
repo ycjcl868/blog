@@ -601,11 +601,11 @@ export class NotionAPI {
     }
 
     const url = `${this._apiBaseUrl}/${endpoint}`
-
     return ky
       .post(url, {
         ...gotOptions,
-        json: body,
+        method: 'POST',
+        body: JSON.stringify(body),
         headers
       })
       .json()

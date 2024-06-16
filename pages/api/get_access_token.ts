@@ -5,12 +5,11 @@ export const config = {
 }
 
 export default async function handler(req, res) {
-  console.log('reqreq', req)
   const { body } = req
 
   const data = await ky
     .post('https://github.com/login/oauth/access_token', {
-      json: body,
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json'
