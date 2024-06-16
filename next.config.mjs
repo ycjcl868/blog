@@ -9,6 +9,16 @@ const nextConfig = {
   experimental: {
     optimizeCss: true
   },
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: '/feed',
+        destination: '/atom.xml',
+        permanent: true
+      }
+    ]
+  },
   images: {
     minimumCacheTTL: 60,
     remotePatterns: [
