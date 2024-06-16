@@ -9,6 +9,7 @@ const nextConfig = {
   experimental: {
     optimizeCss: true
   },
+  output: 'export',
   async redirects() {
     return [
       // Basic redirect
