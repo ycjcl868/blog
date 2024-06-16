@@ -9,6 +9,22 @@ const nextConfig = {
   experimental: {
     optimizeCss: true
   },
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: '/feed',
+        destination: '/rss.xml',
+        permanent: true
+      },
+      // Wildcard path matching
+      {
+        source: '/blog/:slug',
+        destination: '/news/:slug',
+        permanent: true
+      }
+    ]
+  },
   images: {
     minimumCacheTTL: 60,
     remotePatterns: [
