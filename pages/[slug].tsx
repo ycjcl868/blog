@@ -24,7 +24,7 @@ const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
 }
 
 export const config: PageConfig = {
-  runtime: 'edge'
+  runtime: 'experimental-edge'
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

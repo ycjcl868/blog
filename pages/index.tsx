@@ -6,7 +6,7 @@ import BLOG from '@/blog.config'
 import { PageConfig } from 'next'
 
 export const config: PageConfig = {
-  runtime: 'edge'
+  runtime: 'experimental-edge'
 }
 
 export async function getStaticProps() {

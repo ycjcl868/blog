@@ -16,7 +16,7 @@ const Page = ({ postsToShow, page, showNext }) => {
 }
 
 export const config: PageConfig = {
-  runtime: 'edge'
+  runtime: 'experimental-edge'
 }
 
 export async function getStaticProps(context) {
