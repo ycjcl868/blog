@@ -1,4 +1,3 @@
-import { PageConfig } from 'next'
 import Container from '@/components/Container'
 import BlogPost from '@/components/BlogPost'
 import Pagination from '@/components/Pagination'
@@ -13,10 +12,6 @@ const Page = ({ postsToShow, page, showNext }) => {
       <Pagination page={page} showNext={showNext} />
     </Container>
   )
-}
-
-export const config: PageConfig = {
-  runtime: 'experimental-edge'
 }
 
 export async function getStaticProps(context) {
