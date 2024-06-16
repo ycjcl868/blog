@@ -16,7 +16,7 @@ const Page = ({ postsToShow, page, showNext }) => {
 }
 
 export const config: PageConfig = {
-  unstable_runtimeJS: false
+  runtime: 'edge'
 }
 
 export async function getStaticProps(context) {

@@ -3,6 +3,11 @@ import BlogPost from '@/components/BlogPost'
 import Pagination from '@/components/Pagination'
 import { getAllPostsList } from '@/lib/notion'
 import BLOG from '@/blog.config'
+import { PageConfig } from 'next'
+
+export const config: PageConfig = {
+  runtime: 'edge'
+}
 
 export async function getStaticProps() {
   const posts = await getAllPostsList({ includePages: false })

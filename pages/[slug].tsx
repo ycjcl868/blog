@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticProps, GetStaticPaths, PageConfig } from 'next'
 import Layout from '@/layouts/layout'
 import { getPostBlocks, getAllPostsList, getPost } from '@/lib/notion'
 import {
@@ -21,6 +21,10 @@ const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
       fullWidth={post.fullWidth}
     />
   )
+}
+
+export const config: PageConfig = {
+  runtime: 'edge'
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
