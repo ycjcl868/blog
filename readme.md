@@ -1,6 +1,6 @@
 # 📝 Notion Blog
 
-一个基于 Next.js 和 Notion 构建，部署在 Cloudflare Pages 的无成本、可实时更新的博客站点（Cloudflare worker 定时触发器）。
+一个基于 Next.js 和 Notion 构建，部署在 Cloudflare Pages ，使用 Edge Function 的无成本、可实时更新的博客站点。
 
 ![](https://user-images.githubusercontent.com/13595509/221388253-a719a869-c4b9-4387-a513-101caa35df27.png)
 
