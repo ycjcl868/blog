@@ -1,17 +1,22 @@
-import axios from 'axios'
+import ky from 'ky'
 
 export const config = {
   runtime: 'edge'
 }
 
 export default async function handler(req, res) {
+  console.log('reqreq', req)
   const { body } = req
 
-  const response = await axios('https://github.com/login/oauth/access_token', {
-    method: 'post',
-    data: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json', accept: 'application/json' }
-  })
+  const data = await ky
+    .post('https://github.com/login/oauth/access_token', {
+      json: body,
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      }
+    })
+    .json()
 
-  res.status(200).json(response.data)
+  res.status(200).json(data)
 }

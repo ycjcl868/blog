@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetStaticProps, GetServerSideProps, PageConfig } from 'next'
 import Layout from '@/layouts/layout'
 import { getPostBlocks, getAllPostsList, getPost } from '@/lib/notion'
 import {
@@ -23,15 +23,13 @@ const BlogPost = ({ post, coverImage, blockMap, tableOfContent }) => {
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getAllPostsList({ includePages: true })
-  return {
-    paths: posts.map((row) => `${BLOG.path}/${row.slug}`),
-    fallback: true
-  }
+export const config: PageConfig = {
+  runtime: 'experimental-edge'
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params: { slug }
+}) => {
   const [post] = await getPost({ slug })
 
   if (!post) {

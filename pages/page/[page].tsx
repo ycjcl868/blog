@@ -3,6 +3,7 @@ import BlogPost from '@/components/BlogPost'
 import Pagination from '@/components/Pagination'
 import { getAllPostsList } from '@/lib/notion'
 import BLOG from '@/blog.config'
+import { PageConfig } from 'next'
 
 const Page = ({ postsToShow, page, showNext }) => {
   return (
@@ -14,7 +15,11 @@ const Page = ({ postsToShow, page, showNext }) => {
   )
 }
 
-export async function getStaticProps(context) {
+export const config: PageConfig = {
+  runtime: 'experimental-edge'
+}
+
+export async function getServerSideProps(context) {
   const { page } = context.params // Get Current Page No.
   const posts = await getAllPostsList({ includePages: false })
   const postsToShow = posts.slice(
@@ -29,19 +34,6 @@ export async function getStaticProps(context) {
       postsToShow,
       showNext
     }
-  }
-}
-
-export async function getStaticPaths() {
-  const posts = await getAllPostsList({ includePages: false })
-  const totalPosts = posts.length
-  const totalPages = Math.ceil(totalPosts / BLOG.postsPerPage)
-  return {
-    // remove first page, we 're not gonna handle that.
-    paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
-      params: { page: '' + (i + 2) }
-    })),
-    fallback: true
   }
 }
 

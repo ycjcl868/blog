@@ -37,7 +37,6 @@
     "next-axiom": "^0.17.0",
     "next-themes": "^0.2.1",
     "node-polyglot": "^2.5.0",
-    "notion-client": "^6.16.0",
     "notion-utils": "^6.16.0",
     "nprogress": "^0.2.0",
     "p-map": "^5.5.0",

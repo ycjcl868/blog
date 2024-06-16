@@ -2,6 +2,7 @@ import { getAllPostsList, getAllTagsFromPosts } from '@/lib/notion'
 import SearchLayout from '@/layouts/search'
 import BLOG from '@/blog.config'
 import { useLocale } from '@/lib/locale'
+import { PageConfig } from 'next'
 
 export default function Tag({ tags, posts, currentTag }) {
   const locale = useLocale()
@@ -17,7 +18,11 @@ export default function Tag({ tags, posts, currentTag }) {
   )
 }
 
-export async function getStaticProps({ params }) {
+export const config: PageConfig = {
+  runtime: 'experimental-edge'
+}
+
+export async function getServerSideProps({ params }) {
   const currentTag = params.tag?.toLowerCase()
   const posts = await getAllPostsList({ includePages: false })
   const tags = getAllTagsFromPosts(posts)
@@ -33,14 +38,5 @@ export async function getStaticProps({ params }) {
       posts: filteredPosts,
       currentTag
     }
-  }
-}
-
-export async function getStaticPaths() {
-  const posts = await getAllPostsList({ includePages: false })
-  const tags = getAllTagsFromPosts(posts)
-  return {
-    paths: Object.keys(tags).map((tag) => ({ params: { tag } })),
-    fallback: true
   }
 }
