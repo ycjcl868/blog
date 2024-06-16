@@ -1,5 +1,10 @@
 import { getAllPostsList } from '@/lib/notion'
 import { generateRss } from '@/lib/rss'
+import { PageConfig } from 'next'
+
+export const config: PageConfig = {
+  runtime: 'experimental-edge'
+}
 
 export async function getServerSideProps({ res }) {
   res.setHeader('Content-Type', 'text/xml')
