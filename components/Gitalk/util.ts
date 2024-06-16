@@ -1,4 +1,4 @@
-import axios from 'axios'
+import ky from 'ky'
 
 export const queryParse = (search = window.location.search) => {
   if (!search) return {}
@@ -20,14 +20,14 @@ export const queryStringify = (query) => {
   return queryString
 }
 
-export const axiosJSON = axios.create({
+export const axiosJSON = ky.create({
   headers: {
     Accept: 'application/json'
   }
 })
 
-export const axiosGithub = axios.create({
-  baseURL: 'https://proxy.rustc.cloud/?https://api.github.com',
+export const axiosGithub = ky.create({
+  prefixUrl: 'https://proxy.rustc.cloud/?https://api.github.com',
   headers: {
     Accept: 'application/json'
   }

@@ -1,4 +1,4 @@
-import got from 'got'
+import ky from 'ky'
 import lqip from 'lqip-modern'
 import { ExtendedRecordMap, PreviewImage, PreviewImageMap } from 'notion-types'
 import { getPageImageUrls, normalizeUrl } from 'notion-utils'
@@ -19,7 +19,8 @@ export async function getPreviewImageMap(
       urls,
       async (url) => {
         const cacheKey = normalizeUrl(url)
-        return [cacheKey, await getPreviewImage(url, { cacheKey })]
+        const previewImage = await getPreviewImage(url, { cacheKey })
+        return previewImage ? [cacheKey, previewImage] : null
       },
       {
         concurrency: 8
@@ -35,9 +36,9 @@ async function createPreviewImage(
   { cacheKey }: { cacheKey: string }
 ): Promise<PreviewImage | null> {
   try {
-    const { body } = await got(url, { responseType: 'buffer' })
+    const response = await ky.get(url).arrayBuffer()
+    const body = Buffer.from(response)
     const result = await lqip(body)
-    console.log('lqip', { ...result.metadata, url, cacheKey })
 
     const previewImage = {
       originalWidth: result.metadata.originalWidth,

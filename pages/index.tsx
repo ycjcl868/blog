@@ -3,8 +3,13 @@ import BlogPost from '@/components/BlogPost'
 import Pagination from '@/components/Pagination'
 import { getAllPostsList } from '@/lib/notion'
 import BLOG from '@/blog.config'
+import { PageConfig } from 'next'
 
-export async function getStaticProps() {
+export const config: PageConfig = {
+  runtime: 'experimental-edge'
+}
+
+export async function getServerSideProps() {
   const posts = await getAllPostsList({ includePages: false })
   const postsToShow = posts.slice(0, BLOG.postsPerPage)
   const totalPosts = posts.length

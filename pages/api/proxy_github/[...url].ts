@@ -1,4 +1,4 @@
-import axios from 'axios'
+import ky from 'ky'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import BLOG from '@/blog.config'
 
@@ -19,17 +19,27 @@ export default async function handler(
 
   console.error('url', url)
 
-  const response = await axios(url, {
+  const response = await ky(url, {
     method,
     ...(method === 'POST' ? { data: JSON.stringify(body) } : {}),
     headers: headers as any,
-    auth: {
-      username: BLOG.comment.gitalkConfig.clientID,
-      password: BLOG.comment.gitalkConfig.clientSecret
+    credentials: 'include',
+    hooks: {
+      beforeRequest: [
+        (request) => {
+          request.headers.set(
+            'Authorization',
+            `Basic ${btoa(
+              `${BLOG.comment.gitalkConfig.clientID}:${BLOG.comment.gitalkConfig.clientSecret}`
+            )}`
+          )
+        }
+      ]
     }
   })
 
   const status = response.status
+  const data = response.json()
 
-  res.status(status).json(response.data)
+  res.status(status).json(data)
 }
