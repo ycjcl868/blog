@@ -3,8 +3,7 @@ import { generateRss } from '@/lib/rss'
 import path from 'path'
 import fs from 'fs'
 
-export async function getServerSideProps({ res }) {
-  res.setHeader('Content-Type', 'text/xml')
+export async function getStaticProps() {
   const posts = await getAllPostsList({ includePages: false })
   const latestPosts = posts.slice(0, 10)
   const xmlFeed = generateRss(latestPosts)
