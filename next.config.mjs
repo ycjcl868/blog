@@ -7,6 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: true,
   experimental: {
+    runtime: 'experimental-edge',
     optimizeCss: true
   },
   images: {
