@@ -24,7 +24,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**'
+        hostname: 'imagedelivery.net',
+        port: ''
       }
     ],
     formats: ['image/avif', 'image/webp'],
