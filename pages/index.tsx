@@ -9,7 +9,7 @@ export const config: PageConfig = {
   runtime: 'experimental-edge'
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const posts = await getAllPostsList({ includePages: false })
   const postsToShow = posts.slice(0, BLOG.postsPerPage)
   const totalPosts = posts.length
@@ -19,7 +19,8 @@ export async function getServerSideProps() {
       page: 1, // current page is 1
       postsToShow,
       showNext
-    }
+    },
+    revalidate: 10
   }
 }
 

@@ -19,7 +19,7 @@ export const config: PageConfig = {
   runtime: 'experimental-edge'
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const { page } = context.params // Get Current Page No.
   const posts = await getAllPostsList({ includePages: false })
   const postsToShow = posts.slice(
@@ -33,7 +33,21 @@ export async function getServerSideProps(context) {
       page, // Current Page
       postsToShow,
       showNext
-    }
+    },
+    revalidate: 10
+  }
+}
+
+export async function getStaticPaths() {
+  const posts = await getAllPostsList({ includePages: false })
+  const totalPosts = posts.length
+  const totalPages = Math.ceil(totalPosts / BLOG.postsPerPage)
+  return {
+    // remove first page, we 're not gonna handle that.
+    paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
+      params: { page: '' + (i + 2) }
+    })),
+    fallback: true
   }
 }
 
