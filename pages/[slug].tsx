@@ -27,7 +27,8 @@ export const config: PageConfig = {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({
-  params: { slug }
+  params: { slug },
+  res
 }) => {
   const [post] = await getPost({ slug })
 
@@ -59,6 +60,11 @@ export const getServerSideProps: GetServerSideProps = async ({
         indentLevel
       })
     ) || []
+
+  res.setHeader(
+    'Cache-Control',
+    'public, max-age=60, stale-while-revalidate=300'
+  )
 
   return {
     props: { post, blockMap, coverImage, tableOfContent }

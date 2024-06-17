@@ -9,11 +9,17 @@ export const config: PageConfig = {
   runtime: 'experimental-edge'
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ res }) {
   const posts = await getAllPostsList({ includePages: false })
   const postsToShow = posts.slice(0, BLOG.postsPerPage)
   const totalPosts = posts.length
   const showNext = totalPosts > BLOG.postsPerPage
+
+  res.setHeader(
+    'Cache-Control',
+    'public, max-age=60, stale-while-revalidate=300'
+  )
+
   return {
     props: {
       page: 1, // current page is 1

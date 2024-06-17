@@ -22,7 +22,7 @@ export const config: PageConfig = {
   runtime: 'experimental-edge'
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, res }) {
   const currentTag = params.tag?.toLowerCase()
   const posts = await getAllPostsList({ includePages: false })
   const tags = getAllTagsFromPosts(posts)
@@ -31,6 +31,10 @@ export async function getServerSideProps({ params }) {
       post &&
       post.tags &&
       post.tags?.map((t) => t?.toLowerCase()).includes(currentTag)
+  )
+  res.setHeader(
+    'Cache-Control',
+    'public, max-age=60, stale-while-revalidate=300'
   )
   return {
     props: {
