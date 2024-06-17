@@ -22,7 +22,7 @@ export const config: PageConfig = {
   runtime: 'experimental-edge'
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const currentTag = params.tag?.toLowerCase()
   const posts = await getAllPostsList({ includePages: false })
   const tags = getAllTagsFromPosts(posts)
@@ -37,16 +37,6 @@ export async function getStaticProps({ params }) {
       tags,
       posts: filteredPosts,
       currentTag
-    },
-    revalidate: 10
-  }
-}
-
-export async function getStaticPaths() {
-  const posts = await getAllPostsList({ includePages: false })
-  const tags = getAllTagsFromPosts(posts)
-  return {
-    paths: Object.keys(tags).map((tag) => ({ params: { tag } })),
-    fallback: true
+    }
   }
 }
