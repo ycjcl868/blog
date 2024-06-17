@@ -20,8 +20,17 @@ const nextConfig = {
     ]
   },
   images: {
-    loader: 'custom',
-    loaderFile: './imageLoader.js'
+    minimumCacheTTL: 60,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'imagedelivery.net',
+        port: ''
+      }
+    ],
+    formats: ['image/avif', 'image/webp'],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
   },
   eslint: {
     dirs: ['components', 'layouts', 'lib', 'pages'],
