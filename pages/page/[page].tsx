@@ -30,7 +30,7 @@ export async function getServerSideProps(context) {
   const showNext = page * BLOG.postsPerPage < totalPosts
   context.res.setHeader(
     'Cache-Control',
-    'public, max-age=60, stale-while-revalidate=300'
+    'public, s-maxage=10, stale-while-revalidate=59'
   )
   return {
     props: {
