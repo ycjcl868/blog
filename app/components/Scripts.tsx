@@ -1,20 +1,20 @@
-import BLOG from '#/blog.config'
+import BLOG from "#/blog.config";
 
 const Scripts = () => (
   <>
-    {BLOG.analytics && BLOG.analytics.providers.includes('ackee') && (
+    {BLOG.analytics?.providers?.includes("ackee") && (
       <script
         src={BLOG.analytics.ackeeConfig.tracker}
         data-ackee-server={BLOG.analytics.ackeeConfig.dataAckeeServer}
         data-ackee-domain-id={BLOG.analytics.ackeeConfig.domainId}
       />
     )}
-    {BLOG.analytics && BLOG.analytics.providers.includes('ga') && (
+    {BLOG.analytics?.providers?.includes("ga") && (
       <>
         <script
           src={`https://www.googletagmanager.com/gtag/js?id=${BLOG.analytics.gaConfig.measurementId}`}
         />
-        <script id='google-analytics'>
+        <script id="google-analytics">
           {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
@@ -26,12 +26,12 @@ const Scripts = () => (
         </script>
       </>
     )}
-    {BLOG.analytics && BLOG.analytics.providers.includes('cnzz') && (
+    {BLOG.analytics?.providers?.includes("cnzz") && (
       <script
         src={`https://v1.cnzz.com/z_stat.php?id=${BLOG.analytics.cnzzConfig.id}&web_id=${BLOG.analytics.cnzzConfig.id}`}
       />
     )}
   </>
-)
+);
 
-export default Scripts
+export default Scripts;
