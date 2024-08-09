@@ -234,6 +234,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+        <Scripts crossOrigin="anonymous" src="/polyfill.js" />
       </body>
     </html>
   );
