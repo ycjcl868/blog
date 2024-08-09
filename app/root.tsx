@@ -15,7 +15,8 @@ import { IconContext } from "react-icons";
 import NProgress from "nprogress";
 import "prismjs";
 import nProgressStyles from "nprogress/nprogress.css?url";
-import katexStyles from "katex/dist/katex.min.css?url";
+import "katex/dist/katex.min.css";
+import "react-notion-x/src/styles.css";
 import { LocaleProvider } from "~/libs/locale";
 import "~/styles/globals.css";
 import "~/styles/notion.css";
@@ -26,8 +27,6 @@ import "./tailwind.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: nProgressStyles },
-  { rel: "stylesheet", href: notionStyles },
-  { rel: "stylesheet", href: katexStyles },
 ];
 
 const Ackee = lazy(() => import("~/components/Ackee"));
