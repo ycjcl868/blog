@@ -10,16 +10,6 @@ import { getAllPostsList } from "~/libs/notion";
 import { useLoaderData } from "@remix-run/react";
 import BLOG from "#/blog.config";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    {
-      name: "description",
-      content: "Welcome to Remix on Cloudflare!",
-    },
-  ];
-};
-
 export const loader = async (params: LoaderFunctionArgs) => {
   const { context } = params;
   const { NOTION_ACCESS_TOKEN, NOTION_PAGE_ID } = context.cloudflare.env;
@@ -51,7 +41,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
 export default function Index() {
   const { page, postsToShow, showNext } = useLoaderData<typeof loader>();
   return (
-    <Container title={BLOG.title} description={BLOG.description}>
+    <Container description={BLOG.description}>
       {postsToShow.map((post) => (
         <BlogPost key={post.id} post={post} />
       ))}

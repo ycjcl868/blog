@@ -1,5 +1,9 @@
 import Layout from "~/layouts/layout";
-import { json, type LoaderFunctionArgs } from "@remix-run/cloudflare";
+import {
+  json,
+  MetaFunction,
+  type LoaderFunctionArgs,
+} from "@remix-run/cloudflare";
 import { getPostBlocks, getPost } from "~/libs/notion";
 import {
   getPageTableOfContents,
@@ -9,6 +13,7 @@ import {
 import { PageBlock, Block } from "notion-types";
 import { mapImageUrl } from "~/libs/utils";
 import { useLoaderData } from "@remix-run/react";
+import BLOG from "#/blog.config";
 
 const BlogPost = () => {
   const { post, coverImage, blockMap, tableOfContent } =
@@ -23,6 +28,52 @@ const BlogPost = () => {
       fullWidth={post.fullWidth}
     />
   );
+};
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const title = data?.post?.title || BLOG.title;
+  const description = data?.post?.description || BLOG.description;
+  const url = `${BLOG.link}/${data?.post?.slug}`;
+  const image = data?.coverImage;
+
+  return [
+    { title: title },
+    {
+      name: "description",
+      content: description,
+    },
+    { title: title },
+    { property: "og:title", content: title },
+    { name: "twitter:title", content: title },
+    {
+      name: "description",
+      content: description,
+    },
+    {
+      property: "og:description",
+      content: description,
+    },
+    {
+      name: "twitter:description",
+      content: description,
+    },
+    {
+      property: "og:url",
+      content: url,
+    },
+    ...(image
+      ? [
+          {
+            name: "twitter:image",
+            content: image,
+          },
+          {
+            property: "og:image",
+            content: image,
+          },
+        ]
+      : []),
+  ];
 };
 
 export const loader = async (params: LoaderFunctionArgs) => {
