@@ -5,6 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
   useNavigation,
+  useRouteError,
 } from "@remix-run/react";
 import { ThemeProvider } from "remix-theme";
 import { useEffect, lazy, Suspense } from "react";
@@ -31,6 +32,24 @@ export const links: LinksFunction = () => [
 ];
 
 const Ackee = lazy(() => import("~/components/Ackee"));
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  console.error(error);
+  return (
+    <html lang="en">
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {/* add the UI you want your users to see */}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const url = BLOG.path.length ? `${BLOG.link}/${BLOG.path}` : BLOG.link;
