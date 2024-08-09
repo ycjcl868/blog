@@ -1,4 +1,5 @@
 /* NOTION CSS OVERRIDE */
+@import url('react-notion-x/src/styles.css');
 
 .notion {
   @apply text-gray-600 dark:text-gray-300;

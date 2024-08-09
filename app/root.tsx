@@ -15,7 +15,6 @@ import { IconContext } from "react-icons";
 import NProgress from "nprogress";
 import "prismjs";
 import nProgressStyles from "nprogress/nprogress.css?url";
-import notionStyles from "react-notion-x/src/styles.css?url";
 import katexStyles from "katex/dist/katex.min.css?url";
 import { LocaleProvider } from "~/libs/locale";
 import "~/styles/globals.css";
