@@ -1,11 +1,16 @@
 import BLOG from "#/blog.config";
 import { useEffect, lazy, Suspense } from "react";
 import { useTheme } from "remix-theme";
-import { ReactCusdis } from "react-cusdis";
 import { useLocation } from "@remix-run/react";
+import { ClientOnly } from "./ClientOnly";
 
 const GitalkComponent = lazy(() => import("~/components/Gitalk"));
 const UtterancesComponent = lazy(() => import("~/components/Utterances"));
+const CusdisComponent = lazy(() =>
+  import("react-cusdis").then((mod) => ({
+    default: mod.ReactCusdis,
+  }))
+);
 
 const Comments = ({ frontMatter }) => {
   const location = useLocation();
@@ -40,22 +45,28 @@ const Comments = ({ frontMatter }) => {
         </Suspense>
       )}
       {BLOG.comment && BLOG.comment.provider === "utterances" && (
-        <UtterancesComponent issueTerm={frontMatter.id} />
+        <Suspense fallback="">
+          <UtterancesComponent issueTerm={frontMatter.id} />
+        </Suspense>
       )}
       {BLOG.comment && BLOG.comment.provider === "cusdis" && (
-        <Suspense fallback="">
-          <ReactCusdis
-            lang="zh-cn"
-            attrs={{
-              host: BLOG.comment.cusdisConfig.host,
-              appId: BLOG.comment.cusdisConfig.appId,
-              pageId: frontMatter.id,
-              pageTitle: frontMatter.title,
-              pageUrl: BLOG.link + location.pathname,
-              theme: "auto",
-            }}
-          />
-        </Suspense>
+        <ClientOnly>
+          {() => (
+            <Suspense fallback="">
+              <CusdisComponent
+                lang="zh-cn"
+                attrs={{
+                  host: BLOG.comment.cusdisConfig.host,
+                  appId: BLOG.comment.cusdisConfig.appId,
+                  pageId: frontMatter.id,
+                  pageTitle: frontMatter.title,
+                  pageUrl: BLOG.link + location.pathname,
+                  theme: "auto",
+                }}
+              />
+            </Suspense>
+          )}
+        </ClientOnly>
       )}
     </div>
   );
