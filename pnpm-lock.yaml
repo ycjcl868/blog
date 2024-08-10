@@ -19,13 +19,16 @@ importers:
         version: 2.11.1(@cloudflare/workers-types@4.20240806.0)(typescript@5.5.4)
       '@remix-run/react':
         specifier: ^2.10.3
-        version: 2.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
+        version: 2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4)
       autosize:
         specifier: ^6.0.1
         version: 6.0.1
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -75,42 +78,42 @@ importers:
         specifier: ^1.29.0
         version: 1.29.0
       react:
-        specifier: ^18.2.0
-        version: 18.3.1
+        specifier: canary
+        version: 19.0.0-rc-2d2cc042-20240809
       react-cusdis:
         specifier: ^2.1.3
-        version: 2.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 2.1.3(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
       react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
+        specifier: canary
+        version: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
       react-flip-move:
         specifier: ^3.0.5
-        version: 3.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 3.0.5(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
       react-icons:
         specifier: ^4.12.0
-        version: 4.12.0(react@18.3.1)
+        version: 4.12.0(react@19.0.0-rc-2d2cc042-20240809)
       react-notion-x:
         specifier: ^6.16.0
-        version: 6.16.0(@babel/runtime@7.25.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(webpack@5.93.0(esbuild@0.17.19))
+        version: 6.16.0(@babel/runtime@7.25.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(webpack@5.93.0(esbuild@0.17.19))
       react-tweet-embed:
         specifier: ^2.0.0
-        version: 2.0.0(react@18.3.1)
+        version: 2.0.0(react@19.0.0-rc-2d2cc042-20240809)
       react-use:
         specifier: ^17.5.1
-        version: 17.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      remix-theme:
-        specifier: ^0.0.4
-        version: 0.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 17.5.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
+      remix-themes:
+        specifier: ^1.5.0
+        version: 1.5.0(@remix-run/react@2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4))(@remix-run/server-runtime@2.11.1(typescript@5.5.4))
       use-ackee:
         specifier: ^3.0.1
-        version: 3.1.0(react@18.3.1)
+        version: 3.1.0(react@19.0.0-rc-2d2cc042-20240809)
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20240806.0
         version: 4.20240806.0
       '@remix-run/dev':
         specifier: ^2.10.3
-        version: 2.11.1(@remix-run/react@2.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))(@types/node@22.1.0)(terser@5.31.4)(typescript@5.5.4)(vite@5.4.0(@types/node@22.1.0)(terser@5.31.4))(wrangler@3.57.1(@cloudflare/workers-types@4.20240806.0))
+        version: 2.11.1(@remix-run/react@2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4))(@types/node@22.1.0)(terser@5.31.4)(typescript@5.5.4)(vite@5.4.0(@types/node@22.1.0)(terser@5.31.4))(wrangler@3.57.1(@cloudflare/workers-types@4.20240806.0))
       '@types/nprogress':
         specifier: ^0.2.3
         version: 0.2.3
@@ -2210,6 +2213,10 @@ packages:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
 
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
+
   color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
 
@@ -4196,10 +4203,10 @@ packages:
       react: ^17.0.0
       react-dom: ^17.0.0
 
-  react-dom@18.3.1:
-    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
+  react-dom@19.0.0-rc-2d2cc042-20240809:
+    resolution: {integrity: sha512-fe+8TmO3zevW08+LPk9qS93LE2Y5H87l3q6dHNM7zQpelCNCeaPGeSoHAsehx2e2LRv7Iapb/qJLAUUUT9pnvw==}
     peerDependencies:
-      react: ^18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
 
   react-fast-compare@3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
@@ -4299,8 +4306,8 @@ packages:
       react: '*'
       react-dom: '*'
 
-  react@18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+  react@19.0.0-rc-2d2cc042-20240809:
+    resolution: {integrity: sha512-+yW7RLHtdV9YKmHxFJoKrC80vJPv2If5J8MVw7Ui7NTcBs7bIpwSIaY2vrciPRb7B7JqG3TsZHxo12q/inYUhw==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -4362,11 +4369,11 @@ packages:
   remark-rehype@10.1.0:
     resolution: {integrity: sha512-EFmR5zppdBp0WQeDVZ/b66CWJipB2q2VLNFMabzDSGR66Z2fQii83G5gTBbgGEnEEA0QRussvrFHxk1HWGJskw==}
 
-  remix-theme@0.0.4:
-    resolution: {integrity: sha512-dastCCVjEMcpzWMWW/50NELx3raWawsc3aNaziu90ze7+9+M5HxhreBkuuguisgWv3n/xWKSoDnkDT0GhTXXxA==}
+  remix-themes@1.5.0:
+    resolution: {integrity: sha512-U7uUCynxOGDYs2EFu6Ivlfm/hxG6EqfCoIE9wC/L6ozJv0NNOsPIsp7qtUqRGRxLwOWqZk2J77uPz9oraYIBfw==}
     peerDependencies:
-      react: '*'
-      react-dom: '*'
+      '@remix-run/react': '>= 1'
+      '@remix-run/server-runtime': '>= 1'
 
   require-like@0.1.2:
     resolution: {integrity: sha512-oyrU88skkMtDdauHDuKVrgR+zuItqr6/c//FXzvmxRGMexSDc6hNvJInGW3LL46n+8b50RykrvwSUIIQH2LQ5A==}
@@ -4455,8 +4462,8 @@ packages:
   sax@1.4.1:
     resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
 
-  scheduler@0.23.2:
-    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
+  scheduler@0.25.0-rc-2d2cc042-20240809:
+    resolution: {integrity: sha512-Pce2RM+MMbQhcPWp21DiVnqlyjo4/Dz4cyW2pQpgz1fFoiuQL0Vfjt6A8M990V/2eBECcVvKAoKzYSAeLPmj6g==}
 
   schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
@@ -6394,10 +6401,10 @@ snapshots:
 
   '@jspm/core@2.0.1': {}
 
-  '@matejmazur/react-katex@3.1.3(katex@0.15.6)(react@18.3.1)':
+  '@matejmazur/react-katex@3.1.3(katex@0.15.6)(react@19.0.0-rc-2d2cc042-20240809)':
     dependencies:
       katex: 0.15.6
-      react: 18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
 
   '@mdx-js/mdx@2.3.0':
     dependencies:
@@ -6491,7 +6498,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.4
 
-  '@remix-run/dev@2.11.1(@remix-run/react@2.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4))(@types/node@22.1.0)(terser@5.31.4)(typescript@5.5.4)(vite@5.4.0(@types/node@22.1.0)(terser@5.31.4))(wrangler@3.57.1(@cloudflare/workers-types@4.20240806.0))':
+  '@remix-run/dev@2.11.1(@remix-run/react@2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4))(@types/node@22.1.0)(terser@5.31.4)(typescript@5.5.4)(vite@5.4.0(@types/node@22.1.0)(terser@5.31.4))(wrangler@3.57.1(@cloudflare/workers-types@4.20240806.0))':
     dependencies:
       '@babel/core': 7.25.2
       '@babel/generator': 7.25.0
@@ -6504,7 +6511,7 @@ snapshots:
       '@mdx-js/mdx': 2.3.0
       '@npmcli/package-json': 4.0.1
       '@remix-run/node': 2.11.1(typescript@5.5.4)
-      '@remix-run/react': 2.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
+      '@remix-run/react': 2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4)
       '@remix-run/router': 1.19.0
       '@remix-run/server-runtime': 2.11.1(typescript@5.5.4)
       '@types/mdx': 2.0.13
@@ -6579,14 +6586,14 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.4
 
-  '@remix-run/react@2.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)':
+  '@remix-run/react@2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4)':
     dependencies:
       '@remix-run/router': 1.19.0
       '@remix-run/server-runtime': 2.11.1(typescript@5.5.4)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.26.0(react@18.3.1)
-      react-router-dom: 6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
+      react-router: 6.26.0(react@19.0.0-rc-2d2cc042-20240809)
+      react-router-dom: 6.26.0(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
       turbo-stream: 2.2.0
     optionalDependencies:
       typescript: 5.5.4
@@ -7367,6 +7374,8 @@ snapshots:
   cli-spinners@2.9.2: {}
 
   clone@1.0.4: {}
+
+  clsx@2.1.1: {}
 
   color-convert@1.9.3:
     dependencies:
@@ -9250,15 +9259,15 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nano-css@5.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  nano-css@5.6.2(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
       css-tree: 1.1.3
       csstype: 3.1.3
       fastest-stable-stringify: 2.0.2
       inline-style-prefixer: 7.0.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
       rtl-css-js: 1.16.1
       stacktrace-js: 2.0.2
       stylis: 4.3.2
@@ -9688,90 +9697,89 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-cusdis@2.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-cusdis@2.1.3(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
 
-  react-dom@18.3.1(react@18.3.1):
+  react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
-      loose-envify: 1.4.0
-      react: 18.3.1
-      scheduler: 0.23.2
+      react: 19.0.0-rc-2d2cc042-20240809
+      scheduler: 0.25.0-rc-2d2cc042-20240809
 
   react-fast-compare@3.2.2: {}
 
-  react-flip-move@3.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-flip-move@3.0.5(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
 
-  react-hotkeys-hook@3.4.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-hotkeys-hook@3.4.7(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       hotkeys-js: 3.9.4
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
 
-  react-icons@4.12.0(react@18.3.1):
+  react-icons@4.12.0(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
-      react: 18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
 
-  react-image@4.1.0(@babel/runtime@7.25.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-image@4.1.0(@babel/runtime@7.25.0)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       '@babel/runtime': 7.25.0
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
 
-  react-intersection-observer@6.4.2(react@18.3.1):
+  react-intersection-observer@6.4.2(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       '@babel/runtime': 7.25.0
       invariant: 2.2.4
-      react: 18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
 
   react-is@16.13.1: {}
 
-  react-lazy-images@1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-lazy-images@1.1.0(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-intersection-observer: 6.4.2(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
+      react-intersection-observer: 6.4.2(react@19.0.0-rc-2d2cc042-20240809)
       unionize: 2.2.0
 
   react-lifecycles-compat@3.0.4: {}
 
-  react-modal@3.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-modal@3.16.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       exenv: 1.2.2
       prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
       react-lifecycles-compat: 3.0.4
       warning: 4.0.3
 
-  react-notion-x@6.16.0(@babel/runtime@7.25.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(webpack@5.93.0(esbuild@0.17.19)):
+  react-notion-x@6.16.0(@babel/runtime@7.25.0)(@types/react@18.3.3)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(webpack@5.93.0(esbuild@0.17.19)):
     dependencies:
       '@fisch0920/medium-zoom': 1.0.7
-      '@matejmazur/react-katex': 3.1.3(katex@0.15.6)(react@18.3.1)
+      '@matejmazur/react-katex': 3.1.3(katex@0.15.6)(react@19.0.0-rc-2d2cc042-20240809)
       katex: 0.15.6
       notion-types: 6.16.0
       notion-utils: 6.16.0
       prismjs: 1.29.0
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
       react-fast-compare: 3.2.2
-      react-hotkeys-hook: 3.4.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-image: 4.1.0(@babel/runtime@7.25.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-lazy-images: 1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-modal: 3.16.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-pdf: 5.7.2(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(webpack@5.93.0(esbuild@0.17.19))
-      react-use: 17.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-hotkeys-hook: 3.4.7(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
+      react-image: 4.1.0(@babel/runtime@7.25.0)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
+      react-lazy-images: 1.1.0(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
+      react-modal: 3.16.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
+      react-pdf: 5.7.2(@types/react@18.3.3)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(webpack@5.93.0(esbuild@0.17.19))
+      react-use: 17.5.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
     transitivePeerDependencies:
       - '@babel/runtime'
       - '@types/react'
       - webpack
       - worker-loader
 
-  react-pdf@5.7.2(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(webpack@5.93.0(esbuild@0.17.19)):
+  react-pdf@5.7.2(@types/react@18.3.3)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(webpack@5.93.0(esbuild@0.17.19)):
     dependencies:
       '@babel/runtime': 7.25.0
       file-loader: 6.2.0(webpack@5.93.0(esbuild@0.17.19))
@@ -9781,8 +9789,8 @@ snapshots:
       merge-refs: 1.3.0(@types/react@18.3.3)
       pdfjs-dist: 2.12.313
       prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
     transitivePeerDependencies:
@@ -9792,28 +9800,28 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react-router-dom@6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-router-dom@6.26.0(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       '@remix-run/router': 1.19.0
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.26.0(react@18.3.1)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
+      react-router: 6.26.0(react@19.0.0-rc-2d2cc042-20240809)
 
-  react-router@6.26.0(react@18.3.1):
+  react-router@6.26.0(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       '@remix-run/router': 1.19.0
-      react: 18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
 
-  react-tweet-embed@2.0.0(react@18.3.1):
+  react-tweet-embed@2.0.0(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
-      react: 18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
 
-  react-universal-interface@0.6.2(react@18.3.1)(tslib@2.6.3):
+  react-universal-interface@0.6.2(react@19.0.0-rc-2d2cc042-20240809)(tslib@2.6.3):
     dependencies:
-      react: 18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
       tslib: 2.6.3
 
-  react-use@17.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-use@17.5.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       '@types/js-cookie': 2.2.7
       '@xobotyi/scrollbar-width': 1.9.5
@@ -9821,10 +9829,10 @@ snapshots:
       fast-deep-equal: 3.1.3
       fast-shallow-equal: 1.0.0
       js-cookie: 2.2.1
-      nano-css: 5.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-universal-interface: 0.6.2(react@18.3.1)(tslib@2.6.3)
+      nano-css: 5.6.2(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)
+      react: 19.0.0-rc-2d2cc042-20240809
+      react-dom: 19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809)
+      react-universal-interface: 0.6.2(react@19.0.0-rc-2d2cc042-20240809)(tslib@2.6.3)
       resize-observer-polyfill: 1.5.1
       screenfull: 5.2.0
       set-harmonic-interval: 1.0.1
@@ -9832,9 +9840,7 @@ snapshots:
       ts-easing: 0.2.0
       tslib: 2.6.3
 
-  react@18.3.1:
-    dependencies:
-      loose-envify: 1.4.0
+  react@19.0.0-rc-2d2cc042-20240809: {}
 
   read-cache@1.0.0:
     dependencies:
@@ -9938,10 +9944,10 @@ snapshots:
       mdast-util-to-hast: 12.3.0
       unified: 10.1.2
 
-  remix-theme@0.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  remix-themes@1.5.0(@remix-run/react@2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4))(@remix-run/server-runtime@2.11.1(typescript@5.5.4)):
     dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      '@remix-run/react': 2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4)
+      '@remix-run/server-runtime': 2.11.1(typescript@5.5.4)
 
   require-like@0.1.2: {}
 
@@ -10047,9 +10053,7 @@ snapshots:
 
   sax@1.4.1: {}
 
-  scheduler@0.23.2:
-    dependencies:
-      loose-envify: 1.4.0
+  scheduler@0.25.0-rc-2d2cc042-20240809: {}
 
   schema-utils@3.3.0:
     dependencies:
@@ -10638,10 +10642,10 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  use-ackee@3.1.0(react@18.3.1):
+  use-ackee@3.1.0(react@19.0.0-rc-2d2cc042-20240809):
     dependencies:
       ackee-tracker: 5.1.0
-      react: 18.3.1
+      react: 19.0.0-rc-2d2cc042-20240809
 
   util-deprecate@1.0.2: {}
 

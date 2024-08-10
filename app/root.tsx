@@ -5,13 +5,18 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useNavigation,
   useRouteError,
 } from "@remix-run/react";
-import { ThemeProvider } from "remix-theme";
+import clsx from "clsx";
 import { useEffect, lazy, Suspense } from "react";
 import { ClientOnly } from "~/components/ClientOnly";
-import { LinksFunction, MetaFunction } from "@remix-run/cloudflare";
+import {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/cloudflare";
 import { IconContext } from "react-icons";
 import NProgress from "nprogress";
 import "prismjs";
@@ -25,6 +30,12 @@ import "~/styles/gitalk.css";
 import BLOG from "#/blog.config";
 import CJK from "#/cjk";
 import "./tailwind.css";
+import { themeSessionResolver } from "./sessions.server";
+import {
+  useTheme,
+  ThemeProvider,
+  PreventFlashOnWrongTheme,
+} from "remix-themes";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: nProgressStyles },
@@ -90,14 +101,24 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function App() {
+  const data = useLoaderData<typeof loader>();
+  const [theme] = useTheme();
+
   const meta = {
     title: BLOG.title,
     type: "website",
   };
 
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      style={{
+        // @ts-ignore
+        colorScheme: theme,
+      }}
+      className={clsx(theme)}
+    >
       <head>
         <meta name="robots" content="follow, index" />
         <meta property="og:locale" content={BLOG.lang} />
@@ -125,8 +146,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
-        {BLOG.font && BLOG.font === "serif" ? (
+        {BLOG?.font === "serif" ? (
           <>
             <link
               rel="preload"
@@ -231,7 +253,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         )}
       </head>
       <body>
-        {children}
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <Scripts crossOrigin="anonymous" src="/polyfill.js" />
@@ -240,8 +262,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { getTheme } = await themeSessionResolver(request);
+  return {
+    theme: getTheme(),
+  };
+}
+
 export default function AppWithProviders() {
   const navigation = useNavigation();
+  const data = useLoaderData<typeof loader>();
   useEffect(() => {
     if (navigation.state === "loading" || navigation.state === "submitting") {
       NProgress.start();
@@ -266,7 +296,12 @@ export default function AppWithProviders() {
               )}
             </ClientOnly>
           )}
-          <Outlet />
+          <ThemeProvider
+            specifiedTheme={data.theme}
+            themeAction="/action/set-theme"
+          >
+            <App />
+          </ThemeProvider>
         </>
       </LocaleProvider>
     </IconContext.Provider>

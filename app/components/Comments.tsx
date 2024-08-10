@@ -1,6 +1,6 @@
 import BLOG from "#/blog.config";
 import { useEffect, lazy, Suspense } from "react";
-import { useTheme } from "remix-theme";
+import { useTheme, Theme } from "remix-themes";
 import { useLocation } from "@remix-run/react";
 import { ClientOnly } from "./ClientOnly";
 
@@ -14,9 +14,9 @@ const CusdisComponent = lazy(() =>
 
 const Comments = ({ frontMatter }) => {
   const location = useLocation();
-  const { theme } = useTheme();
+  const [theme] = useTheme();
 
-  const cusdisTheme = theme === "dark" ? "dark" : "light";
+  const cusdisTheme = theme === Theme.DARK ? Theme.DARK : Theme.LIGHT;
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.CUSDIS) {

@@ -26,6 +26,5 @@ export const loader = async (params: LoaderFunctionArgs) => {
 
 export default function Search() {
   const { posts, tags } = useLoaderData<typeof loader>();
-  console.log("tags", tags);
   return <SearchLayout tags={tags} posts={posts} />;
 }

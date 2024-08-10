@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@remix-run/react";
 import { IoSunnyOutline, IoMoonSharp } from "react-icons/io5";
-import { useTheme } from "remix-theme";
+import { Theme, useTheme } from "remix-themes";
 import BLOG from "#/blog.config";
 import { useLocale } from "~/libs/locale";
 
@@ -44,7 +44,7 @@ const Header = ({ fullWidth }) => {
   const useSticky = !BLOG.autoCollapsedNavBar;
   const navRef = useRef(null);
   const sentinalRef = useRef([]);
-  const { theme, setTheme } = useTheme();
+  const [theme, setTheme] = useTheme();
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -94,11 +94,13 @@ const Header = ({ fullWidth }) => {
         <NavBar />
         <div>
           <a
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            onClick={() =>
+              setTheme(theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)
+            }
             title={`Toggle dark mode - current ${theme}`}
             className="hover:text-blue-400 cursor-pointer text-xl"
           >
-            {hasMounted && theme === "dark" ? (
+            {hasMounted && theme === Theme.DARK ? (
               <IoMoonSharp />
             ) : (
               <IoSunnyOutline />
