@@ -240,7 +240,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+export default function AppWithProviders() {
   const navigation = useNavigation();
   useEffect(() => {
     if (navigation.state === "loading" || navigation.state === "submitting") {
@@ -266,9 +266,7 @@ export default function App() {
               )}
             </ClientOnly>
           )}
-          <ThemeProvider attribute="class">
-            <Outlet />
-          </ThemeProvider>
+          <Outlet />
         </>
       </LocaleProvider>
     </IconContext.Provider>
