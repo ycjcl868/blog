@@ -52,7 +52,7 @@ const Header = ({ fullWidth }) => {
   }, []);
 
   const handler = ([entry]) => {
-    if (navRef && navRef.current && useSticky) {
+    if (navRef?.current && useSticky) {
       if (!entry.isIntersecting && entry !== undefined) {
         navRef.current?.classList.add("sticky-nav-full");
       } else {
