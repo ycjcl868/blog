@@ -14,6 +14,8 @@ import { PageBlock, Block } from "notion-types";
 import { mapImageUrl } from "~/libs/utils";
 import { useLoaderData } from "@remix-run/react";
 import BLOG from "#/blog.config";
+import { themeSessionResolver } from "~/sessions.server";
+import { Theme } from "remix-themes";
 
 const BlogPost = () => {
   const { post, coverImage, blockMap, tableOfContent } =
@@ -34,7 +36,11 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const title = data?.post?.title || BLOG.title;
   const description = data?.post?.description || BLOG.description;
   const url = `${BLOG.link}/${data?.post?.slug}`;
-  const image = data?.coverImage;
+  const image =
+    data?.coverImage ||
+    `${BLOG.ogImageGenerateURL}/${encodeURIComponent(BLOG.title)}.png?theme=${
+      data?.theme === Theme.DARK ? "dark" : "light"
+    }&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`;
 
   return [
     { title: title },
@@ -79,6 +85,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 export const loader = async (params: LoaderFunctionArgs) => {
   const { slug } = params.params;
   const { NOTION_ACCESS_TOKEN, NOTION_PAGE_ID } = params.context.cloudflare.env;
+  const { getTheme } = await themeSessionResolver(params.request);
   const [post] = await getPost({
     slug,
     notionPageId: NOTION_PAGE_ID,
@@ -113,7 +120,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     ) || [];
 
   return json(
-    { post, blockMap, coverImage, tableOfContent },
+    { post, blockMap, coverImage, tableOfContent, theme: getTheme() },
     {
       headers: {
         "Cache-Control": "public, stale-while-revalidate=60",

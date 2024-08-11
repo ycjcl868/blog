@@ -33,6 +33,7 @@ import "./tailwind.css";
 import { themeSessionResolver } from "./sessions.server";
 import {
   useTheme,
+  Theme,
   ThemeProvider,
   PreventFlashOnWrongTheme,
 } from "remix-themes";
@@ -64,11 +65,20 @@ export function ErrorBoundary() {
   );
 }
 
-export const meta: MetaFunction = () => {
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { getTheme } = await themeSessionResolver(request);
+  return {
+    theme: getTheme(),
+  };
+}
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const url = BLOG.path.length ? `${BLOG.link}/${BLOG.path}` : BLOG.link;
   const image = `${BLOG.ogImageGenerateURL}/${encodeURIComponent(
     BLOG.title
-  )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`;
+  )}.png?theme=${
+    data?.theme === Theme.DARK ? "dark" : "light"
+  }&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`;
 
   return [
     { title: BLOG.title },
@@ -260,13 +270,6 @@ export function App() {
       </body>
     </html>
   );
-}
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const { getTheme } = await themeSessionResolver(request);
-  return {
-    theme: getTheme(),
-  };
 }
 
 export default function AppWithProviders() {
