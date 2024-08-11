@@ -1,13 +1,13 @@
 # 📝 Notion Blog
 
-一个基于 Next.js 和 Notion 构建，部署在 Cloudflare Pages ，使用 Edge Function 的无成本、可实时更新的博客站点。
+一个基于 Remix 和 Notion 构建，部署在 Cloudflare Pages ，使用 Edge Function 的无成本、可实时更新的博客站点。
 
 ![](https://user-images.githubusercontent.com/13595509/221388253-a719a869-c4b9-4387-a513-101caa35df27.png)
 
 ## 🔥 特性
 
 - 直接使用你的 Notion 页面创建博客，实时更新
-- 使用 [Next.js](https://nextjs.org/) 构建，最新的技术栈
+- 使用 [Remix](https://remix.run/) 构建，最新的技术栈
 - 已经部署到 Vercel，无需费用
 - 使用 [TailwindCSS](https://tailwindcss.com/) 设计简洁美观的博客
 - 支持分类标签和搜索功能
@@ -36,7 +36,7 @@ pnpm i
 
 ## 🔨 本地开发
 
-新建 `.env.local`，配置如下：
+新建 `.dev.vars`，配置如下：
 
 ```bash
 NOTION_PAGE_ID=xxxx   # Notion 共享到 Web 时的 ID，通常是地址后 32 位数字
