@@ -18,7 +18,7 @@ import BLOG from "#/blog.config";
 import { themeSessionResolver } from "~/sessions.server";
 import { Theme } from "remix-themes";
 import "prismjs";
-import katexStyles from "katex/dist/katex.min.css";
+import katexStyles from "katex/dist/katex.min.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: katexStyles },
