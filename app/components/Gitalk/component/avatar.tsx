@@ -1,19 +1,27 @@
-import { useState } from 'react'
-import GithubSVG from '../assets/icon/github.svg'
+import { useState } from "react";
+import { Image } from "@udisc/remix-image";
+import GithubSVG from "../assets/icon/github.svg";
 
 const Avatar = ({ src, className, alt, defaultSrc = GithubSVG }) => {
-  const [imgSrc, setImageSrc] = useState(src || defaultSrc)
+  const [imgSrc, setImageSrc] = useState(src || defaultSrc);
   return (
     <div className={`gt-avatar ${className}`}>
-      <img
+      <Image
         src={imgSrc}
         alt={`@${alt}`}
-        width={50}
-        height={50}
+        placeholder="blur"
+        responsive={[
+          {
+            size: {
+              width: 50,
+              height: 50,
+            },
+          },
+        ]}
         onError={() => setImageSrc(defaultSrc)}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Avatar
+export default Avatar;

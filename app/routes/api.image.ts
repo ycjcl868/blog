@@ -14,7 +14,7 @@ const cache = new MemoryCache({
 
 export const loader: LoaderFunction = ({ request, context }) => {
   const resolver: Resolver = async (asset, url, options, basePath) => {
-    if (asset.startsWith("/") && (asset.length === 1 || asset[1] !== "/")) {
+    if (asset.startsWith("/")) {
       // @ts-ignore
       const imageResponse = await context.cloudflare.env.ASSETS.fetch(
         url,

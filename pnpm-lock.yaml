@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@cloudflare/kv-asset-handler':
+        specifier: ^0.3.4
+        version: 0.3.4
       '@notionhq/client':
         specifier: ^2.2.15
         version: 2.2.15
@@ -22,7 +25,7 @@ importers:
         version: 2.11.1(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(typescript@5.5.4)
       '@udisc/remix-image':
         specifier: ^1.5.0
-        version: 1.5.0(@cloudflare/kv-asset-handler@0.3.2)(@udisc/hybrid-disk-cache@0.4.0)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(remix@1.19.3)
+        version: 1.5.0(@cloudflare/kv-asset-handler@0.3.4)(@udisc/hybrid-disk-cache@0.4.0)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(remix@1.19.3)
       autosize:
         specifier: ^6.0.1
         version: 6.0.1
@@ -810,6 +813,10 @@ packages:
 
   '@cloudflare/kv-asset-handler@0.3.2':
     resolution: {integrity: sha512-EeEjMobfuJrwoctj7FA1y1KEbM0+Q1xSjobIEyie9k4haVEBB7vkDvsasw1pM3rO39mL2akxIAzLMUAtrMHZhA==}
+    engines: {node: '>=16.13'}
+
+  '@cloudflare/kv-asset-handler@0.3.4':
+    resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
 
   '@cloudflare/workerd-darwin-64@1.20240512.0':
@@ -6162,6 +6169,10 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
+  '@cloudflare/kv-asset-handler@0.3.4':
+    dependencies:
+      mime: 3.0.0
+
   '@cloudflare/workerd-darwin-64@1.20240512.0':
     optional: true
 
@@ -7013,9 +7024,9 @@ snapshots:
       better-sqlite3: 9.6.0
       fs-extra: 10.1.0
 
-  '@udisc/remix-image@1.5.0(@cloudflare/kv-asset-handler@0.3.2)(@udisc/hybrid-disk-cache@0.4.0)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(remix@1.19.3)':
+  '@udisc/remix-image@1.5.0(@cloudflare/kv-asset-handler@0.3.4)(@udisc/hybrid-disk-cache@0.4.0)(react-dom@19.0.0-rc-2d2cc042-20240809(react@19.0.0-rc-2d2cc042-20240809))(react@19.0.0-rc-2d2cc042-20240809)(remix@1.19.3)':
     dependencies:
-      '@cloudflare/kv-asset-handler': 0.3.2
+      '@cloudflare/kv-asset-handler': 0.3.4
       '@udisc/hybrid-disk-cache': 0.4.0
       clsx: 1.2.1
       is-svg: 4.4.0

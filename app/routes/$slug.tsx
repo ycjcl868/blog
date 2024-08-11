@@ -1,6 +1,7 @@
 import Layout from "~/layouts/layout";
 import {
   json,
+  LinksFunction,
   MetaFunction,
   type LoaderFunctionArgs,
 } from "@remix-run/cloudflare";
@@ -10,12 +11,18 @@ import {
   uuidToId,
   getPageImageUrls,
 } from "notion-utils";
+import "prismjs";
+import katexSytles from "katex/dist/katex.min.css?url";
 import { PageBlock, Block } from "notion-types";
 import { mapImageUrl } from "~/libs/utils";
 import { useLoaderData } from "@remix-run/react";
 import BLOG from "#/blog.config";
 import { themeSessionResolver } from "~/sessions.server";
 import { Theme } from "remix-themes";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: katexSytles },
+];
 
 const BlogPost = () => {
   const { post, coverImage, blockMap, tableOfContent } =
