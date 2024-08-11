@@ -1,12 +1,13 @@
 import { useMemo, Suspense, lazy } from "react";
 import { NotionRenderer } from "react-notion-x";
-import { useTheme } from "remix-themes";
+import { useTheme, Theme } from "remix-themes";
 import { ExtendedRecordMap } from "notion-types";
 import type { TableOfContentsEntry } from "notion-utils";
 import Container from "~/components/Container";
 import TagItem from "~/components/TagItem";
 import { Link, useNavigate } from "@remix-run/react";
 import BLOG from "#/blog.config";
+import { Image, remixImageLoader } from "@udisc/remix-image";
 import dayjs from "dayjs";
 import { useLocale } from "~/libs/locale";
 import { mapPageUrl, mapImageUrl } from "~/libs/utils";
@@ -109,6 +110,14 @@ const Layout: React.FC<LayoutProps> = ({
           }}
         </ClientOnly>
       ),
+      nextImage: (props) => (
+        <Image
+          loaderUrl="/api/image"
+          loader={remixImageLoader}
+          placeholder="blur"
+          {...props}
+        />
+      ),
       nextLink: (props) => <Link to={props.href} {...props} />,
       Tweet,
     }),
@@ -170,13 +179,14 @@ const Layout: React.FC<LayoutProps> = ({
           {blockMap && (
             <div className={frontMatter.type !== "Page" ? "-mt-4" : ""}>
               <NotionRenderer
+                forceCustomImages
                 recordMap={blockMap}
                 components={components}
                 mapPageUrl={mapPageUrl}
                 previewImages={!!blockMap.preview_images}
                 rootDomain={new URL(BLOG.link)?.host}
                 mapImageUrl={mapImageUrl}
-                darkMode={theme === "dark"}
+                darkMode={theme === Theme.DARK}
                 pageAside={false}
               />
             </div>

@@ -37,9 +37,11 @@ import {
   ThemeProvider,
   PreventFlashOnWrongTheme,
 } from "remix-themes";
+import remixImageStyles from "@udisc/remix-image/remix-image.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: nProgressStyles },
+  { rel: "stylesheet", href: remixImageStyles },
 ];
 
 const Ackee = lazy(() => import("~/components/Ackee"));
