@@ -19,9 +19,7 @@ import {
 } from "@remix-run/cloudflare";
 import { IconContext } from "react-icons";
 import NProgress from "nprogress";
-import "prismjs";
 import nProgressStyles from "nprogress/nprogress.css?url";
-import "katex/dist/katex.min.css";
 import "react-notion-x/src/styles.css";
 import { LocaleProvider } from "~/libs/locale";
 import "~/styles/globals.css";
@@ -37,11 +35,9 @@ import {
   ThemeProvider,
   PreventFlashOnWrongTheme,
 } from "remix-themes";
-import remixImageStyles from "@udisc/remix-image/remix-image.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: nProgressStyles },
-  { rel: "stylesheet", href: remixImageStyles },
 ];
 
 const Ackee = lazy(() => import("~/components/Ackee"));
