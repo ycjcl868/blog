@@ -1,6 +1,7 @@
 import Layout from "~/layouts/layout";
 import {
   json,
+  LinksFunction,
   MetaFunction,
   type LoaderFunctionArgs,
 } from "@remix-run/cloudflare";
@@ -16,6 +17,12 @@ import { useLoaderData } from "@remix-run/react";
 import BLOG from "#/blog.config";
 import { themeSessionResolver } from "~/sessions.server";
 import { Theme } from "remix-themes";
+import "prismjs";
+import katexStyles from "katex/dist/katex.min.css";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: katexStyles },
+];
 
 const BlogPost = () => {
   const { post, coverImage, blockMap, tableOfContent } =
