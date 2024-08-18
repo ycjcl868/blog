@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef } from "react";
 import { Link } from "@remix-run/react";
 import { IoSunnyOutline, IoMoonSharp } from "react-icons/io5";
 import { Theme, useTheme } from "remix-themes";
@@ -40,7 +40,8 @@ const NavBar = () => {
   );
 };
 
-const Header = ({ fullWidth }) => {
+const Header = forwardRef((props, ref) => {
+  const { fullWidth } = props;
   const useSticky = !BLOG.autoCollapsedNavBar;
   const navRef = useRef(null);
   const sentinalRef = useRef([]);
@@ -73,7 +74,7 @@ const Header = ({ fullWidth }) => {
   }, [sentinalRef]);
 
   return (
-    <>
+    <div ref={ref}>
       <div className="observer-element h-4 md:h-12" ref={sentinalRef}></div>
       <div
         className={`sticky-nav m-auto w-full h-6 flex flex-row justify-between items-center mb-4 md:mb-12 py-8 bg-opacity-60 ${
@@ -108,8 +109,8 @@ const Header = ({ fullWidth }) => {
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
-};
+});
 
 export default Header;
