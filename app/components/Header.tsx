@@ -1,18 +1,18 @@
-import { useEffect, useRef, useState, forwardRef } from "react";
-import { Link } from "@remix-run/react";
-import { IoSunnyOutline, IoMoonSharp } from "react-icons/io5";
-import { Theme, useTheme } from "remix-themes";
-import BLOG from "#/blog.config";
-import { useLocale } from "~/libs/locale";
+import BLOG from '#/blog.config';
+import { Link } from '@remix-run/react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import { IoMoonSharp, IoSunnyOutline } from 'react-icons/io5';
+import { Theme, useTheme } from 'remix-themes';
+import { useLocale } from '~/libs/locale';
 
 const NavBar = () => {
   const locale = useLocale();
 
   const links = [
-    { name: locale.NAV.INDEX, to: "/", show: true },
-    { name: locale.NAV.ABOUT, to: "/about", show: BLOG.showAbout },
-    { name: locale.NAV.SEARCH, to: "/search", show: true },
-    { name: locale.NAV.RSS, to: "/atom.xml", show: true, external: true },
+    { name: locale.NAV.INDEX, to: '/', show: true },
+    { name: locale.NAV.ABOUT, to: '/about', show: BLOG.showAbout },
+    { name: locale.NAV.SEARCH, to: '/search', show: true },
+    { name: locale.NAV.RSS, to: '/atom.xml', show: true, external: true },
   ].map((link, id) => ({ ...link, id }));
 
   return (
@@ -27,7 +27,7 @@ const NavBar = () => {
               >
                 <Link
                   className="tracking-wider"
-                  target={link.external ? "_blank" : null}
+                  target={link.external ? '_blank' : null}
                   to={link.to}
                 >
                   {link.name}
@@ -55,12 +55,12 @@ const Header = forwardRef((props, ref) => {
   const handler = ([entry]) => {
     if (navRef?.current && useSticky) {
       if (!entry.isIntersecting && entry !== undefined) {
-        navRef.current?.classList.add("sticky-nav-full");
+        navRef.current?.classList.add('sticky-nav-full');
       } else {
-        navRef.current?.classList.remove("sticky-nav-full");
+        navRef.current?.classList.remove('sticky-nav-full');
       }
     } else {
-      navRef.current?.classList.add("remove-sticky");
+      navRef.current?.classList.add('remove-sticky');
     }
   };
   useEffect(() => {
@@ -78,7 +78,7 @@ const Header = forwardRef((props, ref) => {
       <div className="observer-element h-4 md:h-12" ref={sentinalRef}></div>
       <div
         className={`sticky-nav m-auto w-full h-6 flex flex-row justify-between items-center mb-4 md:mb-12 py-8 bg-opacity-60 ${
-          !fullWidth ? "max-w-4xl px-4" : "px-4 md:px-24"
+          !fullWidth ? 'max-w-4xl px-4' : 'px-4 md:px-24'
         }`}
         id="sticky-nav"
         ref={navRef}
@@ -112,5 +112,7 @@ const Header = forwardRef((props, ref) => {
     </div>
   );
 });
+
+Header.displayName = 'Header';
 
 export default Header;
