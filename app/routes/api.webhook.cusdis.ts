@@ -1,8 +1,8 @@
-import BLOG from "#/blog.config";
-import { ActionFunctionArgs, json } from "@remix-run/cloudflare";
+import BLOG from '#/blog.config';
+import { ActionFunctionArgs, json } from '@remix-run/cloudflare';
 
 interface NewCommentBody {
-  type: "new_comment";
+  type: 'new_comment';
   data: {
     by_nickname: string;
     by_email: string;
@@ -18,9 +18,9 @@ export async function action(params: ActionFunctionArgs) {
   const { request } = params;
   const { type, data } = await request.json<NewCommentBody>();
 
-  if (BLOG.comment.cusdisConfig.autoApproval && type === "new_comment") {
+  if (BLOG.comment.cusdisConfig.autoApproval && type === 'new_comment') {
     try {
-      const { approve_link = "" } = data || {};
+      const { approve_link = '' } = data || {};
       const { search } = new URL(approve_link);
 
       if (search) {
@@ -28,13 +28,13 @@ export async function action(params: ActionFunctionArgs) {
         const data = await ret.text();
 
         return json({
-          success: data === "Approved!",
+          success: data === 'Approved!',
           message: data,
         });
       }
-      console.error("approve_link", approve_link);
+      console.error('approve_link', approve_link);
     } catch (e) {
-      console.error("ERROR", e);
+      console.error('ERROR', e);
     }
   }
 

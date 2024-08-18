@@ -1,3 +1,10 @@
+import BLOG from '#/blog.config';
+import CJK from '#/cjk';
+import {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from '@remix-run/cloudflare';
 import {
   isRouteErrorResponse,
   Links,
@@ -8,39 +15,32 @@ import {
   useLoaderData,
   useNavigation,
   useRouteError,
-} from "@remix-run/react";
-import clsx from "clsx";
-import { useEffect, lazy, Suspense } from "react";
-import { ClientOnly } from "~/components/ClientOnly";
+} from '@remix-run/react';
+import clsx from 'clsx';
+import NProgress from 'nprogress';
+import nProgressStyles from 'nprogress/nprogress.css?url';
+import { lazy, Suspense, useEffect } from 'react';
+import { IconContext } from 'react-icons';
+import 'react-notion-x/src/styles.css';
 import {
-  LinksFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/cloudflare";
-import { IconContext } from "react-icons";
-import NProgress from "nprogress";
-import nProgressStyles from "nprogress/nprogress.css?url";
-import "react-notion-x/src/styles.css";
-import { LocaleProvider } from "~/libs/locale";
-import "~/styles/globals.css";
-import "~/styles/notion.css";
-import "~/styles/gitalk.css";
-import BLOG from "#/blog.config";
-import CJK from "#/cjk";
-import "./tailwind.css";
-import { themeSessionResolver } from "./sessions.server";
-import {
-  useTheme,
+  PreventFlashOnWrongTheme,
   Theme,
   ThemeProvider,
-  PreventFlashOnWrongTheme,
-} from "remix-themes";
+  useTheme,
+} from 'remix-themes';
+import { ClientOnly } from '~/components/ClientOnly';
+import { LocaleProvider } from '~/libs/locale';
+import '~/styles/gitalk.css';
+import '~/styles/globals.css';
+import '~/styles/notion.css';
+import { themeSessionResolver } from './sessions.server';
+import './tailwind.css';
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: nProgressStyles },
+  { rel: 'stylesheet', href: nProgressStyles },
 ];
 
-const Ackee = lazy(() => import("~/components/Ackee"));
+const Ackee = lazy(() => import('~/components/Ackee'));
 
 export function ErrorBoundary() {
   const error = useRouteError();
@@ -55,7 +55,7 @@ export function ErrorBoundary() {
             ? `${error.status} ${error.statusText}`
             : error instanceof Error
             ? error.message
-            : "Unknown Error"}
+            : 'Unknown Error'}
         </h1>
         <Scripts />
       </body>
@@ -75,35 +75,35 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const image = `${BLOG.ogImageGenerateURL}/${encodeURIComponent(
     BLOG.title
   )}.png?theme=${
-    data?.theme === Theme.DARK ? "dark" : "light"
+    data?.theme === Theme.DARK ? 'dark' : 'light'
   }&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`;
 
   return [
     { title: BLOG.title },
-    { property: "og:title", content: BLOG.title },
-    { name: "twitter:title", content: BLOG.title },
+    { property: 'og:title', content: BLOG.title },
+    { name: 'twitter:title', content: BLOG.title },
     {
-      name: "description",
+      name: 'description',
       content: BLOG.description,
     },
     {
-      property: "og:description",
+      property: 'og:description',
       content: BLOG.description,
     },
     {
-      name: "twitter:description",
+      name: 'twitter:description',
       content: BLOG.description,
     },
     {
-      property: "og:url",
+      property: 'og:url',
       content: url,
     },
     {
-      name: "twitter:image",
+      name: 'twitter:image',
       content: image,
     },
     {
-      property: "og:image",
+      property: 'og:image',
       content: image,
     },
   ];
@@ -115,7 +115,7 @@ export function App() {
 
   const meta = {
     title: BLOG.title,
-    type: "website",
+    type: 'website',
   };
 
   return (
@@ -139,10 +139,10 @@ export function App() {
           />
         )}
         {BLOG.seo.keywords && (
-          <meta name="keywords" content={BLOG.seo.keywords.join(", ")} />
+          <meta name="keywords" content={BLOG.seo.keywords.join(', ')} />
         )}
         <meta name="twitter:card" content="summary_large_image" />
-        {meta.type === "article" && (
+        {meta.type === 'article' && (
           <>
             <meta
               property="article:published_time"
@@ -156,7 +156,7 @@ export function App() {
         <Meta />
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
-        {BLOG?.font === "serif" ? (
+        {BLOG?.font === 'serif' ? (
           <>
             <link
               rel="preload"
@@ -192,7 +192,7 @@ export function App() {
           </>
         )}
 
-        {["zh", "ja", "ko"].includes(
+        {['zh', 'ja', 'ko'].includes(
           BLOG.lang.slice(0, 2).toLocaleLowerCase()
         ) && (
           <>
@@ -205,20 +205,20 @@ export function App() {
               rel="preload preconnect"
               as="style"
               href={`https://fonts.loli.net/css2?family=Noto+${
-                BLOG.font === "serif" ? "Serif" : "Sans"
+                BLOG.font === 'serif' ? 'Serif' : 'Sans'
               }+${CJK()}:wght@400;500;700&display=swap`}
             />
             <link
               rel="stylesheet preconnect prefetch"
               href={`https://fonts.loli.net/css2?family=Noto+${
-                BLOG.font === "serif" ? "Serif" : "Sans"
+                BLOG.font === 'serif' ? 'Serif' : 'Sans'
               }+${CJK()}:wght@400;500;700&display=swap`}
             />
             <noscript>
               <link
                 rel="stylesheet preconnect prefetch"
                 href={`https://fonts.loli.net/css2?family=Noto+${
-                  BLOG.font === "serif" ? "Serif" : "Sans"
+                  BLOG.font === 'serif' ? 'Serif' : 'Sans'
                 }+${CJK()}:wght@400;500;700&display=swap`}
               />
             </noscript>
@@ -236,7 +236,7 @@ export function App() {
           title="RSS 2.0"
           href="/atom.xml"
         ></link>
-        {BLOG.appearance === "auto" ? (
+        {BLOG.appearance === 'auto' ? (
           <>
             <meta
               name="theme-color"
@@ -253,7 +253,7 @@ export function App() {
           <meta
             name="theme-color"
             content={
-              BLOG.appearance === "dark"
+              BLOG.appearance === 'dark'
                 ? BLOG.darkBackground
                 : BLOG.lightBackground
             }
@@ -274,7 +274,7 @@ export default function AppWithProviders() {
   const navigation = useNavigation();
   const data = useLoaderData<typeof loader>();
   useEffect(() => {
-    if (navigation.state === "loading" || navigation.state === "submitting") {
+    if (navigation.state === 'loading' || navigation.state === 'submitting') {
       NProgress.start();
     } else {
       NProgress.done();
@@ -282,10 +282,10 @@ export default function AppWithProviders() {
   }, [navigation.state]);
 
   return (
-    <IconContext.Provider value={{ style: { verticalAlign: "middle" } }}>
+    <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
       <LocaleProvider>
         <>
-          {BLOG.isProd && BLOG?.analytics?.providers.includes("ackee") && (
+          {BLOG.isProd && BLOG?.analytics?.providers.includes('ackee') && (
             <ClientOnly>
               {() => (
                 <Suspense fallback="">

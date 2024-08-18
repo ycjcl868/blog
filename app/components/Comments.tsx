@@ -1,13 +1,13 @@
-import BLOG from "#/blog.config";
-import { useEffect, lazy, Suspense } from "react";
-import { useTheme, Theme } from "remix-themes";
-import { useLocation } from "@remix-run/react";
-import { ClientOnly } from "./ClientOnly";
+import BLOG from '#/blog.config';
+import { useLocation } from '@remix-run/react';
+import { lazy, Suspense, useEffect } from 'react';
+import { Theme, useTheme } from 'remix-themes';
+import { ClientOnly } from './ClientOnly';
 
-const GitalkComponent = lazy(() => import("~/components/Gitalk"));
-const UtterancesComponent = lazy(() => import("~/components/Utterances"));
+const GitalkComponent = lazy(() => import('~/components/Gitalk'));
+const UtterancesComponent = lazy(() => import('~/components/Utterances'));
 const CusdisComponent = lazy(() =>
-  import("react-cusdis").then((mod) => ({
+  import('react-cusdis').then((mod) => ({
     default: mod.ReactCusdis,
   }))
 );
@@ -19,14 +19,14 @@ const Comments = ({ frontMatter }) => {
   const cusdisTheme = theme === Theme.DARK ? Theme.DARK : Theme.LIGHT;
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.CUSDIS) {
+    if (typeof window !== 'undefined' && window.CUSDIS) {
       window.CUSDIS.setTheme(cusdisTheme);
     }
   }, [cusdisTheme]);
 
   return (
     <div>
-      {BLOG.comment && BLOG.comment.provider === "gitalk" && (
+      {BLOG.comment && BLOG.comment.provider === 'gitalk' && (
         <Suspense fallback="">
           <GitalkComponent
             options={{
@@ -44,12 +44,12 @@ const Comments = ({ frontMatter }) => {
           />
         </Suspense>
       )}
-      {BLOG.comment && BLOG.comment.provider === "utterances" && (
+      {BLOG.comment && BLOG.comment.provider === 'utterances' && (
         <Suspense fallback="">
           <UtterancesComponent issueTerm={frontMatter.id} />
         </Suspense>
       )}
-      {BLOG.comment && BLOG.comment.provider === "cusdis" && (
+      {BLOG.comment && BLOG.comment.provider === 'cusdis' && (
         <ClientOnly>
           {() => (
             <Suspense fallback="">
@@ -61,7 +61,7 @@ const Comments = ({ frontMatter }) => {
                   pageId: frontMatter.id,
                   pageTitle: frontMatter.title,
                   pageUrl: BLOG.link + location.pathname,
-                  theme: "auto",
+                  theme: 'auto',
                 }}
               />
             </Suspense>

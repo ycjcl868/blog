@@ -4,7 +4,7 @@ const Button = ({
   onClick,
   onMouseDown,
   text,
-  isLoading
+  isLoading,
 }) => (
   <button
     ref={(el) => getRef && getRef(el)}
@@ -12,9 +12,9 @@ const Button = ({
     onClick={onClick}
     onMouseDown={onMouseDown}
   >
-    <span className='gt-btn-text'>{text}</span>
-    {isLoading && <span className='gt-btn-loading gt-spinner' />}
+    <span className="gt-btn-text">{text}</span>
+    {isLoading && <span className="gt-btn-loading gt-spinner" />}
   </button>
-)
+);
 
-export default Button
+export default Button;

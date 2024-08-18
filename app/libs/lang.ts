@@ -1,4 +1,4 @@
-import BLOG from '#/blog.config'
+import BLOG from '#/blog.config';
 
 const lang = {
   en: {
@@ -7,17 +7,17 @@ const lang = {
       LIFE: 'Life',
       RSS: 'RSS',
       SEARCH: 'Search',
-      ABOUT: 'About'
+      ABOUT: 'About',
     },
     PAGINATION: {
       PREV: 'Prev',
-      NEXT: 'Next'
+      NEXT: 'Next',
     },
     POST: {
       BACK: 'Back',
-      TOP: 'Top'
+      TOP: 'Top',
     },
-    TAG: 'Tag'
+    TAG: 'Tag',
   },
   'zh-CN': {
     NAV: {
@@ -25,38 +25,38 @@ const lang = {
       LIFE: '生活',
       RSS: 'RSS',
       SEARCH: '搜索',
-      ABOUT: '关于'
+      ABOUT: '关于',
     },
     PAGINATION: {
       PREV: '上一页',
-      NEXT: '下一页'
+      NEXT: '下一页',
     },
     POST: {
       BACK: '返回',
-      TOP: '回到顶部'
+      TOP: '回到顶部',
     },
-    TAG: '标签'
-  }
-}
+    TAG: '标签',
+  },
+};
 
 export const fetchLocaleLang = () => {
   switch (BLOG.lang.toLowerCase()) {
     case 'zh-cn':
     case 'zh-sg':
-      return lang['zh-CN']
+      return lang['zh-CN'];
     case 'zh-hk':
-      return lang['zh-HK']
+      return lang['zh-HK'];
     case 'zh-tw':
-      return lang['zh-TW']
+      return lang['zh-TW'];
     case 'ja':
     case 'ja-jp':
-      return lang.ja
+      return lang.ja;
     case 'es':
     case 'es-ES':
-      return lang.es
+      return lang.es;
     case 'en':
     case 'en-us':
     default:
-      return lang.en
+      return lang.en;
   }
-}
+};

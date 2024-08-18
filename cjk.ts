@@ -1,23 +1,23 @@
-import BLOG from './blog.config'
+import BLOG from './blog.config';
 
 function CJK() {
   switch (BLOG.lang.toLowerCase()) {
     case 'zh-cn':
     case 'zh-sg':
-      return 'SC'
+      return 'SC';
     case 'zh':
     case 'zh-hk':
     case 'zh-tw':
-      return 'TC'
+      return 'TC';
     case 'ja':
     case 'ja-jp':
-      return 'JP'
+      return 'JP';
     case 'ko':
     case 'ko-kr':
-      return 'KR'
+      return 'KR';
     default:
-      return null
+      return null;
   }
 }
 
-export default CJK
+export default CJK;

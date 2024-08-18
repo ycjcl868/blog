@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { useSyncExternalStore } from 'react'
+import * as React from 'react';
+import { useSyncExternalStore } from 'react';
 
 function subscribe() {
   // biome-ignore lint/suspicious/noEmptyBlockStatements: Mock function
-  return () => {}
+  return () => {};
 }
 
 /**
@@ -28,7 +28,7 @@ export function useHydrated() {
     subscribe,
     () => true,
     () => false
-  )
+  );
 }
 
 type Props = {
@@ -37,9 +37,9 @@ type Props = {
    * as the client rendered children. This will avoid content layout
    * shift which is disgusting
    */
-  children(): React.ReactNode
-  fallback?: React.ReactNode
-}
+  children(): React.ReactNode;
+  fallback?: React.ReactNode;
+};
 
 /**
  * Render the children only after the JS has loaded client-side. Use an optional
@@ -57,5 +57,5 @@ type Props = {
  * ```
  */
 export function ClientOnly({ children, fallback = null }: Props) {
-  return useHydrated() ? <>{children()}</> : <>{fallback}</>
+  return useHydrated() ? <>{children()}</> : <>{fallback}</>;
 }

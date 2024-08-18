@@ -1,15 +1,15 @@
 export function getAllTagsFromPosts(posts) {
-  const taggedPosts = posts.filter((post) => post?.tags)
+  const taggedPosts = posts.filter((post) => post?.tags);
   const tags = [...taggedPosts.map((p) => p.tags).flat()]?.map((t) =>
     t?.toLowerCase()
-  )
-  const tagObj = {}
+  );
+  const tagObj = {};
   tags.forEach((tag) => {
     if (tag in tagObj) {
-      tagObj[tag]++
+      tagObj[tag]++;
     } else {
-      tagObj[tag] = 1
+      tagObj[tag] = 1;
     }
-  })
-  return tagObj
+  });
+  return tagObj;
 }

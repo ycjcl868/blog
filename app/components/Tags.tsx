@@ -1,20 +1,20 @@
-import { useMemo } from 'react'
-import { Link } from '@remix-run/react'
+import { Link } from '@remix-run/react';
+import { useMemo } from 'react';
 
 const Tags = ({ tags, currentTag }) => {
   const sortedTagKeys = useMemo(() => {
     return Object.keys(tags || {})?.sort((a) => {
-      return a === currentTag ? -1 : 0
-    })
-  }, [tags, currentTag])
+      return a === currentTag ? -1 : 0;
+    });
+  }, [tags, currentTag]);
 
-  if (!tags) return null
+  if (!tags) return null;
 
   return (
-    <div className='tag-container'>
-      <ul className='flex max-w-full mt-4 overflow-x-auto'>
+    <div className="tag-container">
+      <ul className="flex max-w-full mt-4 overflow-x-auto">
         {sortedTagKeys.map((key) => {
-          const selected = key === currentTag
+          const selected = key === currentTag;
           return (
             <li
               key={key}
@@ -26,17 +26,17 @@ const Tags = ({ tags, currentTag }) => {
             >
               <Link
                 key={key}
-                className='px-4 py-2 block'
+                className="px-4 py-2 block"
                 to={selected ? '/search' : `/tag/${encodeURIComponent(key)}`}
               >
                 {`${key} (${tags[key]})`}
               </Link>
             </li>
-          )
+          );
         })}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Tags
+export default Tags;

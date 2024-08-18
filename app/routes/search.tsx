@@ -1,8 +1,8 @@
-import BLOG from "#/blog.config";
-import { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
-import { getAllPostsList, getAllTagsFromPosts } from "~/libs/notion";
-import SearchLayout from "~/layouts/search";
-import { useLoaderData } from "@remix-run/react";
+import BLOG from '#/blog.config';
+import { LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare';
+import { useLoaderData } from '@remix-run/react';
+import SearchLayout from '~/layouts/search';
+import { getAllPostsList, getAllTagsFromPosts } from '~/libs/notion';
 
 export const meta: MetaFunction = () => {
   return [{ title: `Search - ${BLOG.title}` }];

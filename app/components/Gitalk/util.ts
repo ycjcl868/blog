@@ -1,70 +1,70 @@
-import ky from 'ky'
+import ky from 'ky';
 
 export const queryParse = (search = window.location.search) => {
-  if (!search) return {}
-  const queryString = search[0] === '?' ? search.substring(1) : search
-  const query = {}
+  if (!search) return {};
+  const queryString = search[0] === '?' ? search.substring(1) : search;
+  const query = {};
   queryString.split('&').forEach((queryStr) => {
-    const [key, value] = queryStr.split('=')
+    const [key, value] = queryStr.split('=');
     /* istanbul ignore else */
-    if (key) query[decodeURIComponent(key)] = decodeURIComponent(value)
-  })
+    if (key) query[decodeURIComponent(key)] = decodeURIComponent(value);
+  });
 
-  return query
-}
+  return query;
+};
 
 export const queryStringify = (query) => {
   const queryString = Object.keys(query)
     .map((key) => `${key}=${encodeURIComponent(query[key] || '')}`)
-    .join('&')
-  return queryString
-}
+    .join('&');
+  return queryString;
+};
 
 export const axiosJSON = ky.create({
   headers: {
-    Accept: 'application/json'
-  }
-})
+    Accept: 'application/json',
+  },
+});
 
 export const axiosGithub = ky.create({
   prefixUrl: 'https://proxy.rustc.cloud/?https://api.github.com',
   headers: {
-    Accept: 'application/json'
-  }
-})
+    Accept: 'application/json',
+  },
+});
 
 export const getMetaContent = (name, content) => {
-  content || (content = 'content')
-  const el = window.document.querySelector(`meta[name='${name}']`)
-  return el && el.getAttribute(content)
-}
+  content || (content = 'content');
+  const el = window.document.querySelector(`meta[name='${name}']`);
+  return el && el.getAttribute(content);
+};
 
 export const formatErrorMsg = (err) => {
-  let msg = 'Error: '
+  let msg = 'Error: ';
   if (err.response && err.response.data && err.response.data.message) {
-    msg += `${err.response.data.message}. `
+    msg += `${err.response.data.message}. `;
     err.response.data.errors &&
-      (msg += err.response.data.errors.map((e) => e.message).join(', '))
+      (msg += err.response.data.errors.map((e) => e.message).join(', '));
   } else {
-    msg += err.message
+    msg += err.message;
   }
-  return msg
-}
+  return msg;
+};
 
 export const hasClassInParent = (element, ...className) => {
   /* istanbul ignore next */
-  let yes = false
+  let yes = false;
   /* istanbul ignore next */
-  if (typeof element.className === 'undefined') return false
+  if (typeof element.className === 'undefined') return false;
   /* istanbul ignore next */
-  const classes = element.className.split(' ')
+  const classes = element.className.split(' ');
   /* istanbul ignore next */
   className.forEach((c, i) => {
     /* istanbul ignore next */
-    yes = yes || classes.indexOf(c) >= 0
-  })
+    yes = yes || classes.indexOf(c) >= 0;
+  });
   /* istanbul ignore next */
-  if (yes) return yes
+  if (yes) return yes;
   /* istanbul ignore next */
-  return element.parentNode && hasClassInParent(element.parentNode, className)
-}
+  return element.parentNode && hasClassInParent(element.parentNode, className);
+};

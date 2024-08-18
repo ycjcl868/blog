@@ -1,14 +1,10 @@
-import {
-  json,
-  type LoaderFunctionArgs,
-  type MetaFunction,
-} from "@remix-run/cloudflare";
-import Container from "~/components/Container";
-import BlogPost from "~/components/BlogPost";
-import Pagination from "~/components/Pagination";
-import { getAllPostsList } from "~/libs/notion";
-import { useLoaderData } from "@remix-run/react";
-import BLOG from "#/blog.config";
+import BLOG from '#/blog.config';
+import { json, type LoaderFunctionArgs } from '@remix-run/cloudflare';
+import { useLoaderData } from '@remix-run/react';
+import BlogPost from '~/components/BlogPost';
+import Container from '~/components/Container';
+import Pagination from '~/components/Pagination';
+import { getAllPostsList } from '~/libs/notion';
 
 export const loader = async (params: LoaderFunctionArgs) => {
   const { context } = params;
@@ -32,7 +28,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     },
     {
       headers: {
-        "Cache-Control": "public, stale-while-revalidate=60",
+        'Cache-Control': 'public, stale-while-revalidate=60',
       },
     }
   );

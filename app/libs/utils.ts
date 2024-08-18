@@ -1,9 +1,9 @@
-import { Block } from "notion-types";
-import BLOG from "#/blog.config";
-import { defaultMapImageUrl, type MapImageUrlFn } from "react-notion-x";
+import BLOG from '#/blog.config';
+import { Block } from 'notion-types';
+import { defaultMapImageUrl, type MapImageUrlFn } from 'react-notion-x';
 
 const buildJsDelivrLink = (user, repo, version, path) => {
-  if (version === "latest") {
+  if (version === 'latest') {
     return `https://cdn.jsdelivr.net/gh/${user}/${repo}/${path}`;
   }
 
@@ -25,11 +25,11 @@ export const gitHub2jsDelivr = (gitHub: string) => {
 };
 
 export const mapPageUrl = (id) => {
-  return "https://www.notion.so/" + id.replace(/-/g, "");
+  return 'https://www.notion.so/' + id.replace(/-/g, '');
 };
 
 export const mapCoverUrl = (url: string) => {
-  return "https://www.notion.so" + url;
+  return 'https://www.notion.so' + url;
 };
 
 export const mapImageUrl: MapImageUrlFn = (url: string, block: Block) => {
@@ -38,11 +38,11 @@ export const mapImageUrl: MapImageUrlFn = (url: string, block: Block) => {
       return url;
     }
   } catch (e) {
-    console.warn("[mapImageUrl WARN]", url, e);
+    console.warn('[mapImageUrl WARN]', url, e);
     return url;
   }
-  return defaultMapImageUrl(url, block) || "";
+  return defaultMapImageUrl(url, block) || '';
 };
 
-export const environment = process.env.NODE_ENV || "development";
-export const isDev = environment === "development";
+export const environment = process.env.NODE_ENV || 'development';
+export const isDev = environment === 'development';

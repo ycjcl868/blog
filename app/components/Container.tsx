@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import Header from "~/components/Header";
-import Footer from "~/components/Footer";
-import BLOG from "#/blog.config";
+import BLOG from '#/blog.config';
+import { motion } from 'framer-motion';
+import Footer from '~/components/Footer';
+import Header from '~/components/Header';
 
 const Container: React.FC<any> = ({
   children,
@@ -12,7 +12,7 @@ const Container: React.FC<any> = ({
 }) => {
   const meta = {
     title: title || BLOG.title,
-    type: "website",
+    type: 'website',
     ...customMeta,
   };
 
@@ -20,19 +20,19 @@ const Container: React.FC<any> = ({
     <div>
       <motion.div
         className={`wrapper ${
-          BLOG.font === "serif" ? "font-serif" : "font-sans"
+          BLOG.font === 'serif' ? 'font-serif' : 'font-sans'
         }`}
         initial={{ opacity: 0, y: 10, scale: 1, translateZ: 0 }}
         animate={{ opacity: 1, y: 0, scale: 1, translateZ: 0 }}
         transition={{ duration: 0.6 }}
       >
         <Header
-          navBarTitle={layout === "blog" ? meta.title : null}
+          navBarTitle={layout === 'blog' ? meta.title : null}
           fullWidth={fullWidth}
         />
         <motion.main
           className={`m-auto flex-grow w-full transition-all ${
-            !fullWidth ? "max-w-[52rem] px-4 md:px-0" : "px-4 md:px-24"
+            !fullWidth ? 'max-w-[52rem] px-4 md:px-0' : 'px-4 md:px-24'
           }`}
         >
           {children}

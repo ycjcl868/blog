@@ -1,58 +1,58 @@
-import { FC, useState, useEffect } from 'react'
-import cs from 'classnames'
-import throttle from 'lodash.throttle'
-import type { TableOfContentsEntry } from 'notion-utils'
-import { RiListCheck } from 'react-icons/ri'
+import cs from 'classnames';
+import throttle from 'lodash.throttle';
+import type { TableOfContentsEntry } from 'notion-utils';
+import { FC, useEffect, useState } from 'react';
+import { RiListCheck } from 'react-icons/ri';
 
-const throttleMs = 100
+const throttleMs = 100;
 
 const TableOfContent: FC<{
-  tableOfContent: Array<TableOfContentsEntry>
-  className?: string
-  mobile?: boolean
+  tableOfContent: Array<TableOfContentsEntry>;
+  className?: string;
+  mobile?: boolean;
 }> = ({ className, tableOfContent }) => {
-  const [activeSection, setActiveSection] = useState(null)
+  const [activeSection, setActiveSection] = useState(null);
 
   useEffect(() => {
     const actionSectionScrollSpy = throttle(() => {
-      const sections = document.getElementsByClassName('notion-h')
+      const sections = document.getElementsByClassName('notion-h');
 
-      let prevBBox: DOMRect = null
-      let currentSectionId = activeSection
+      let prevBBox: DOMRect = null;
+      let currentSectionId = activeSection;
 
       for (let i = 0; i < sections.length; ++i) {
-        const section = sections[i]
-        if (!section || !(section instanceof Element)) continue
+        const section = sections[i];
+        if (!section || !(section instanceof Element)) continue;
 
         if (!currentSectionId) {
-          currentSectionId = section.getAttribute('data-id')
+          currentSectionId = section.getAttribute('data-id');
         }
 
-        const bbox = section.getBoundingClientRect()
-        const prevHeight = prevBBox ? bbox.top - prevBBox.bottom : 0
-        const offset = Math.max(150, prevHeight / 4)
+        const bbox = section.getBoundingClientRect();
+        const prevHeight = prevBBox ? bbox.top - prevBBox.bottom : 0;
+        const offset = Math.max(150, prevHeight / 4);
 
         // GetBoundingClientRect returns values relative to the viewport
         if (bbox.top - offset < 0) {
-          currentSectionId = section.getAttribute('data-id')
+          currentSectionId = section.getAttribute('data-id');
 
-          prevBBox = bbox
-          continue
+          prevBBox = bbox;
+          continue;
         }
 
-        break
+        break;
       }
 
-      setActiveSection(currentSectionId)
-    }, throttleMs)
-    window.addEventListener('scroll', actionSectionScrollSpy)
+      setActiveSection(currentSectionId);
+    }, throttleMs);
+    window.addEventListener('scroll', actionSectionScrollSpy);
 
-    actionSectionScrollSpy()
+    actionSectionScrollSpy();
 
     return () => {
-      window.removeEventListener('scroll', actionSectionScrollSpy)
-    }
-  }, [activeSection])
+      window.removeEventListener('scroll', actionSectionScrollSpy);
+    };
+  }, [activeSection]);
 
   return (
     <div
@@ -70,15 +70,15 @@ const TableOfContent: FC<{
           'acrylic'
         )}
         style={{
-          maxWidth: 'calc(100vw - 4rem)'
+          maxWidth: 'calc(100vw - 4rem)',
         }}
-        id='tableOfContent'
+        id="tableOfContent"
       >
-        <h3 className='uppercase text-black dark:text-white text-lg whitespace-nowrap my-1 font-light flex items-center gap-1'>
+        <h3 className="uppercase text-black dark:text-white text-lg whitespace-nowrap my-1 font-light flex items-center gap-1">
           <RiListCheck />
           目录
         </h3>
-        <nav className='max-h-[500px] overflow-y-auto scrollbar-thin'>
+        <nav className="max-h-[500px] overflow-y-auto scrollbar-thin">
           {tableOfContent.map(({ id, indentLevel, text }) => (
             <a
               key={id}
@@ -91,10 +91,10 @@ const TableOfContent: FC<{
               )}
             >
               <span
-                className='notion-table-of-contents-item-body'
+                className="notion-table-of-contents-item-body"
                 style={{
                   display: 'inline-block',
-                  marginLeft: indentLevel * 16
+                  marginLeft: indentLevel * 16,
                 }}
               >
                 {text}
@@ -104,7 +104,7 @@ const TableOfContent: FC<{
         </nav>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TableOfContent
+export default TableOfContent;

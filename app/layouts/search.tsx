@@ -1,8 +1,8 @@
-import { useMemo, useState, FC } from "react";
-import pick from "lodash.pick";
-import BlogPost from "~/components/BlogPost";
-import Container from "~/components/Container";
-import Tags from "~/components/Tags";
+import pick from 'lodash.pick';
+import { FC, useMemo, useState } from 'react';
+import BlogPost from '~/components/BlogPost';
+import Container from '~/components/Container';
+import Tags from '~/components/Tags';
 
 interface SearchLayoutProps {
   title?: string;
@@ -19,11 +19,11 @@ const SearchLayout: FC<SearchLayoutProps> = ({
   posts,
   currentTag,
 }) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const filteredBlogPosts = useMemo(() => {
     if (posts) {
       return posts.filter((post) => {
-        const tagContent = post.tags ? post.tags.join(" ") : "";
+        const tagContent = post.tags ? post.tags.join(' ') : '';
         const searchContent = post.title + post.summary + tagContent;
         return searchContent.toLowerCase().includes(searchValue.toLowerCase());
       });
@@ -43,7 +43,7 @@ const SearchLayout: FC<SearchLayoutProps> = ({
           <input
             type="text"
             placeholder={
-              currentTag ? `Search in #${currentTag}` : "Search Articles"
+              currentTag ? `Search in #${currentTag}` : 'Search Articles'
             }
             className="block w-full border px-4 py-2 border-black bg-white text-black dark:bg-night dark:border-white dark:text-white"
             onChange={(e) => setSearchValue(e.target.value)}
@@ -65,7 +65,7 @@ const SearchLayout: FC<SearchLayoutProps> = ({
         </div>
       )}
       <Tags tags={filteredTags} currentTag={currentTag} />
-      <div className={"article-container my-8"}>
+      <div className={'article-container my-8'}>
         {!filteredBlogPosts.length && (
           <p className="text-gray-500 dark:text-gray-300">No posts found.</p>
         )}

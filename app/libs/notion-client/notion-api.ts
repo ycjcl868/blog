@@ -1,15 +1,15 @@
 // import { promises as fs } from 'fs'
-import * as notion from "notion-types";
-import ky, { Options as OptionsOfJSONResponseBody } from "ky";
+import ky, { Options as OptionsOfJSONResponseBody } from 'ky';
+import * as notion from 'notion-types';
 import {
   getBlockCollectionId,
   getPageContentBlockIds,
   parsePageId,
   uuidToId,
-} from "notion-utils";
-import pMap from "p-map";
+} from 'notion-utils';
+import pMap from 'p-map';
 
-import * as types from "./types";
+import * as types from './types';
 
 /**
  * Main Notion API client.
@@ -21,10 +21,10 @@ export class NotionAPI {
   private readonly _userTimeZone: string;
 
   constructor({
-    apiBaseUrl = "https://www.notion.so/api/v3",
+    apiBaseUrl = 'https://www.notion.so/api/v3',
     authToken,
     activeUser,
-    userTimeZone = "America/New_York",
+    userTimeZone = 'America/New_York',
   }: {
     apiBaseUrl?: string;
     authToken?: string;
@@ -115,8 +115,8 @@ export class NotionAPI {
         const block = recordMap.block[blockId].value;
         const collectionId =
           block &&
-          (block.type === "collection_view" ||
-            block.type === "collection_view_page") &&
+          (block.type === 'collection_view' ||
+            block.type === 'collection_view_page') &&
           getBlockCollectionId(block, recordMap);
 
         if (collectionId) {
@@ -181,7 +181,7 @@ export class NotionAPI {
             // It's possible for public pages to link to private collections, in which case
             // Notion returns a 400 error
             console.warn(
-              "NotionAPI collectionQuery error",
+              'NotionAPI collectionQuery error',
               pageId,
               err.message
             );
@@ -225,27 +225,27 @@ export class NotionAPI {
 
       if (
         block &&
-        (block.type === "pdf" ||
-          block.type === "audio" ||
-          (block.type === "image" && block.file_ids?.length) ||
-          block.type === "video" ||
-          block.type === "file" ||
-          block.type === "page")
+        (block.type === 'pdf' ||
+          block.type === 'audio' ||
+          (block.type === 'image' && block.file_ids?.length) ||
+          block.type === 'video' ||
+          block.type === 'file' ||
+          block.type === 'page')
       ) {
         const source =
-          block.type === "page"
+          block.type === 'page'
             ? block.format?.page_cover
             : block.properties?.source?.[0]?.[0];
         // console.log(block, source)
 
         if (source) {
-          if (!source.includes("secure.notion-static.com")) {
+          if (!source.includes('secure.notion-static.com')) {
             return [];
           }
 
           return {
             permissionRecord: {
-              table: "block",
+              table: 'block',
               id: block.id,
             },
             url: source,
@@ -272,7 +272,7 @@ export class NotionAPI {
           }
         }
       } catch (err) {
-        console.warn("NotionAPI getSignedfileUrls error", err);
+        console.warn('NotionAPI getSignedfileUrls error', err);
       }
     }
   }
@@ -304,7 +304,7 @@ export class NotionAPI {
     };
 
     return this.fetch<notion.PageChunk>({
-      endpoint: "loadPageChunk",
+      endpoint: 'loadPageChunk',
       body,
       gotOptions,
     });
@@ -316,7 +316,7 @@ export class NotionAPI {
     collectionView: any,
     {
       limit = 9999,
-      searchQuery = "",
+      searchQuery = '',
       userTimeZone = this._userTimeZone,
       loadContentCover = true,
       gotOptions,
@@ -331,7 +331,7 @@ export class NotionAPI {
     } = {}
   ) {
     const type = collectionView?.type;
-    const isBoardType = type === "board";
+    const isBoardType = type === 'board';
     const groupBy = isBoardType
       ? collectionView?.format?.board_columns_by
       : collectionView?.format?.collection_group_by;
@@ -353,10 +353,10 @@ export class NotionAPI {
     }
 
     let loader: any = {
-      type: "reducer",
+      type: 'reducer',
       reducers: {
         collection_group_results: {
-          type: "results",
+          type: 'results',
           limit,
           loadContentCover,
         },
@@ -365,7 +365,7 @@ export class NotionAPI {
       ...collectionView?.query2,
       filter: {
         filters: filters,
-        operator: "and",
+        operator: 'and',
       },
       searchQuery,
       userTimeZone,
@@ -377,17 +377,17 @@ export class NotionAPI {
         collectionView?.format?.collection_groups ||
         [];
       const iterators = [
-        isBoardType ? "board" : "group_aggregation",
-        "results",
+        isBoardType ? 'board' : 'group_aggregation',
+        'results',
       ];
       const operators = {
-        checkbox: "checkbox_is",
-        url: "string_starts_with",
-        text: "string_starts_with",
-        select: "enum_is",
-        multi_select: "enum_contains",
-        created_time: "date_is_within",
-        ["undefined"]: "is_empty",
+        checkbox: 'checkbox_is',
+        url: 'string_starts_with',
+        text: 'string_starts_with',
+        select: 'enum_is',
+        multi_select: 'enum_contains',
+        created_time: 'date_is_within',
+        ['undefined']: 'is_empty',
       };
 
       const reducersQuery = {};
@@ -399,23 +399,23 @@ export class NotionAPI {
 
         for (const iterator of iterators) {
           const iteratorProps =
-            iterator === "results"
+            iterator === 'results'
               ? {
                   type: iterator,
                   limit,
                 }
               : {
-                  type: "aggregation",
+                  type: 'aggregation',
                   aggregation: {
-                    aggregator: "count",
+                    aggregator: 'count',
                   },
                 };
 
-          const isUncategorizedValue = typeof value === "undefined";
+          const isUncategorizedValue = typeof value === 'undefined';
           const isDateValue = value?.range;
           // TODO: review dates reducers
           const queryLabel = isUncategorizedValue
-            ? "uncategorized"
+            ? 'uncategorized'
             : isDateValue
             ? value.range?.start_date || value.range?.end_date
             : value?.value || value;
@@ -426,17 +426,17 @@ export class NotionAPI {
           reducersQuery[`${iterator}:${type}:${queryLabel}`] = {
             ...iteratorProps,
             filter: {
-              operator: "and",
+              operator: 'and',
               filters: [
                 {
                   property,
                   filter: {
                     operator: !isUncategorizedValue
                       ? operators[type]
-                      : "is_empty",
+                      : 'is_empty',
                     ...(!isUncategorizedValue && {
                       value: {
-                        type: "exact",
+                        type: 'exact',
                         value: queryValue,
                       },
                     }),
@@ -448,12 +448,12 @@ export class NotionAPI {
         }
       }
 
-      const reducerLabel = isBoardType ? "board_columns" : `${type}_groups`;
+      const reducerLabel = isBoardType ? 'board_columns' : `${type}_groups`;
       loader = {
-        type: "reducer",
+        type: 'reducer',
         reducers: {
           [reducerLabel]: {
-            type: "groups",
+            type: 'groups',
             groupBy,
             ...(collectionView?.query2?.filter && {
               filter: collectionView?.query2?.filter,
@@ -469,7 +469,7 @@ export class NotionAPI {
         //TODO: add filters here
         filter: {
           filters: filters,
-          operator: "and",
+          operator: 'and',
         },
       };
     }
@@ -491,7 +491,7 @@ export class NotionAPI {
     // }
 
     return this.fetch<notion.CollectionInstance>({
-      endpoint: "queryCollection",
+      endpoint: 'queryCollection',
       body: {
         collection: {
           id: collectionId,
@@ -510,9 +510,9 @@ export class NotionAPI {
     gotOptions?: OptionsOfJSONResponseBody
   ) {
     return this.fetch<notion.RecordValues<notion.User>>({
-      endpoint: "getRecordValues",
+      endpoint: 'getRecordValues',
       body: {
-        requests: userIds.map((id) => ({ id, table: "notion_user" })),
+        requests: userIds.map((id) => ({ id, table: 'notion_user' })),
       },
       gotOptions,
     });
@@ -523,11 +523,11 @@ export class NotionAPI {
     gotOptions?: OptionsOfJSONResponseBody
   ) {
     return this.fetch<notion.PageChunk>({
-      endpoint: "syncRecordValues",
+      endpoint: 'syncRecordValues',
       body: {
         requests: blockIds.map((blockId) => ({
           // TODO: when to use table 'space' vs 'block'?
-          table: "block",
+          table: 'block',
           id: blockId,
           version: -1,
         })),
@@ -541,7 +541,7 @@ export class NotionAPI {
     gotOptions?: OptionsOfJSONResponseBody
   ) {
     return this.fetch<types.SignedUrlResponse>({
-      endpoint: "getSignedFileUrls",
+      endpoint: 'getSignedFileUrls',
       body: {
         urls,
       },
@@ -554,11 +554,11 @@ export class NotionAPI {
     gotOptions?: OptionsOfJSONResponseBody
   ) {
     const body = {
-      type: "BlocksInAncestor",
-      source: "quick_find_public",
+      type: 'BlocksInAncestor',
+      source: 'quick_find_public',
       ancestorId: parsePageId(params.ancestorId),
       sort: {
-        field: "relevance",
+        field: 'relevance',
       },
       limit: params.limit || 20,
       query: params.query,
@@ -577,7 +577,7 @@ export class NotionAPI {
     };
 
     return this.fetch<notion.SearchResults>({
-      endpoint: "search",
+      endpoint: 'search',
       body,
       gotOptions,
     });
@@ -597,7 +597,7 @@ export class NotionAPI {
     const headers: any = {
       ...clientHeaders,
       ...gotOptions?.headers,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     };
 
     if (this._authToken) {
@@ -605,14 +605,14 @@ export class NotionAPI {
     }
 
     if (this._activeUser) {
-      headers["x-notion-active-user-header"] = this._activeUser;
+      headers['x-notion-active-user-header'] = this._activeUser;
     }
 
     const url = `${this._apiBaseUrl}/${endpoint}`;
     return ky
       .post(url, {
         ...gotOptions,
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(body),
         retry: 3,
         headers,

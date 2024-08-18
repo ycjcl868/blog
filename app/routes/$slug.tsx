@@ -1,27 +1,27 @@
-import Layout from "~/layouts/layout";
+import BLOG from '#/blog.config';
 import {
   json,
   LinksFunction,
   MetaFunction,
   type LoaderFunctionArgs,
-} from "@remix-run/cloudflare";
-import { getPostBlocks, getPost } from "~/libs/notion";
+} from '@remix-run/cloudflare';
+import { useLoaderData } from '@remix-run/react';
+import katexStyles from 'katex/dist/katex.min.css?url';
+import { Block, PageBlock } from 'notion-types';
 import {
+  getPageImageUrls,
   getPageTableOfContents,
   uuidToId,
-  getPageImageUrls,
-} from "notion-utils";
-import { PageBlock, Block } from "notion-types";
-import { mapImageUrl } from "~/libs/utils";
-import { useLoaderData } from "@remix-run/react";
-import BLOG from "#/blog.config";
-import { themeSessionResolver } from "~/sessions.server";
-import { Theme } from "remix-themes";
-import "prismjs";
-import katexStyles from "katex/dist/katex.min.css?url";
+} from 'notion-utils';
+import 'prismjs';
+import { Theme } from 'remix-themes';
+import Layout from '~/layouts/layout';
+import { getPost, getPostBlocks } from '~/libs/notion';
+import { mapImageUrl } from '~/libs/utils';
+import { themeSessionResolver } from '~/sessions.server';
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: katexStyles },
+  { rel: 'stylesheet', href: katexStyles },
 ];
 
 const BlogPost = () => {
@@ -46,42 +46,42 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   const image =
     data?.coverImage ||
     `${BLOG.ogImageGenerateURL}/${encodeURIComponent(BLOG.title)}.png?theme=${
-      data?.theme === Theme.DARK ? "dark" : "light"
+      data?.theme === Theme.DARK ? 'dark' : 'light'
     }&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`;
 
   return [
     { title: title },
     {
-      name: "description",
+      name: 'description',
       content: description,
     },
     { title: title },
-    { property: "og:title", content: title },
-    { name: "twitter:title", content: title },
+    { property: 'og:title', content: title },
+    { name: 'twitter:title', content: title },
     {
-      name: "description",
+      name: 'description',
       content: description,
     },
     {
-      property: "og:description",
+      property: 'og:description',
       content: description,
     },
     {
-      name: "twitter:description",
+      name: 'twitter:description',
       content: description,
     },
     {
-      property: "og:url",
+      property: 'og:url',
       content: url,
     },
     ...(image
       ? [
           {
-            name: "twitter:image",
+            name: 'twitter:image',
             content: image,
           },
           {
-            property: "og:image",
+            property: 'og:image',
             content: image,
           },
         ]
@@ -100,12 +100,12 @@ export const loader = async (params: LoaderFunctionArgs) => {
   });
 
   if (!post) {
-    throw new Response("", { status: 404 });
+    throw new Response('', { status: 404 });
   }
 
   const blockMap = await getPostBlocks(post.id);
 
-  const [coverImage = ""] =
+  const [coverImage = ''] =
     getPageImageUrls(blockMap, {
       mapImageUrl: (url: string, block: Block) => {
         if (block.format?.page_cover) {
@@ -130,7 +130,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     { post, blockMap, coverImage, tableOfContent, theme: getTheme() },
     {
       headers: {
-        "Cache-Control": "public, stale-while-revalidate=60",
+        'Cache-Control': 'public, stale-while-revalidate=60',
       },
     }
   );

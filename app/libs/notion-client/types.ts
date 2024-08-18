@@ -1,15 +1,15 @@
-import * as notion from 'notion-types'
+import * as notion from 'notion-types';
 
 export interface SignedUrlRequest {
-  permissionRecord: PermissionRecord
-  url: string
+  permissionRecord: PermissionRecord;
+  url: string;
 }
 
 export interface PermissionRecord {
-  table: string
-  id: notion.ID
+  table: string;
+  id: notion.ID;
 }
 
 export interface SignedUrlResponse {
-  signedUrls: string[]
+  signedUrls: string[];
 }

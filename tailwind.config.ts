@@ -1,14 +1,14 @@
-import BLOG from './blog.config'
-import { fontFamily } from 'tailwindcss/defaultTheme'
-import type { Config } from 'tailwindcss'
-import CJK from './cjk'
+import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
+import BLOG from './blog.config';
+import CJK from './cjk';
 
 const fontSansCJK = !CJK()
   ? []
-  : [`"Noto Sans CJK ${CJK()}"`, `"Noto Sans ${CJK()}"`]
+  : [`"Noto Sans CJK ${CJK()}"`, `"Noto Sans ${CJK()}"`];
 const fontSerifCJK = !CJK()
   ? []
-  : [`"Noto Serif CJK ${CJK()}"`, `"Noto Serif ${CJK()}"`]
+  : [`"Noto Serif CJK ${CJK()}"`, `"Noto Serif ${CJK()}"`];
 
 export default {
   content: ['./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}'],
@@ -17,11 +17,11 @@ export default {
     extend: {
       colors: {
         day: {
-          DEFAULT: BLOG.lightBackground || '#ffffff'
+          DEFAULT: BLOG.lightBackground || '#ffffff',
         },
         night: {
-          DEFAULT: BLOG.darkBackground || '#111827'
-        }
+          DEFAULT: BLOG.darkBackground || '#111827',
+        },
       },
       fontFamily: {
         sans: ['"IBM Plex Sans"', ...fontFamily.sans, ...fontSansCJK],
@@ -32,10 +32,10 @@ export default {
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
-          'sans-serif'
-        ]
-      }
-    }
+          'sans-serif',
+        ],
+      },
+    },
   },
-  plugins: []
-} satisfies Config
+  plugins: [],
+} satisfies Config;
