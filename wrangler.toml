@@ -1,7 +1,15 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "blog"
 compatibility_date = "2024-08-06"
-pages_build_output_dir = "./build/client"
+main = "./worker.ts"
+workers_dev = true
+minify = true
+
+[site]
+bucket = "./build/client"
+
+[build]
+command = "npm run build"
 
 [placement]
 mode = "smart"
