@@ -24,6 +24,7 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   build: {
+    target: 'es2015',
     minify: true,
     cssMinify: true,
   },
