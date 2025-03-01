@@ -128,3 +128,7 @@ pre[class*='language-'] {
     max-width: var(--notion-max-width);
   }
 }
+
+.notion-simple-table {
+  width: 100%;
+}
