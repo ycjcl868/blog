@@ -103,7 +103,9 @@ export const loader = async (params: LoaderFunctionArgs) => {
     throw new Response('', { status: 404 });
   }
 
-  const blockMap = await getPostBlocks(post.id);
+  const blockMap = await getPostBlocks(post.id, {
+    notionToken: NOTION_ACCESS_TOKEN,
+  });
 
   const [coverImage = ''] =
     getPageImageUrls(blockMap, {
