@@ -1,8 +1,10 @@
+import { Client } from '@notionhq/client';
 import { getDateValue, getTextContent } from 'notion-utils';
-import { NotionAPI } from '~/libs/notion-client';
 
 async function getPageProperties(id, block, schema, authToken) {
-  const api = new NotionAPI({ authToken });
+  const notion = new Client({
+    auth: authToken,
+  });
   const rawProperties = Object.entries(block?.[id]?.value?.properties || []);
   const excludeProperties = ['date', 'select', 'multi_select', 'person'];
   const properties = {};
@@ -33,14 +35,15 @@ async function getPageProperties(id, block, schema, authToken) {
           for (let i = 0; i < rawUsers.length; i++) {
             if (rawUsers[i][0][1]) {
               const userId = rawUsers[i][0];
-              const res = await api.getUsers(userId);
-              const resValue =
-                res?.recordMapWithRoles?.notion_user?.[userId[1]]?.value;
+              const res = await notion.users.retrieve({
+                user_id: userId,
+              });
+
               const user = {
-                id: resValue?.id,
-                first_name: resValue?.given_name,
-                last_name: resValue?.family_name,
-                profile_photo: resValue?.profile_photo,
+                id: res?.id,
+                first_name: res?.name,
+                last_name: res?.name,
+                profile_photo: res?.avatar_url,
               };
               users.push(user);
             }

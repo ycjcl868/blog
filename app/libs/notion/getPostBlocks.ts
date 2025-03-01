@@ -1,9 +1,14 @@
-import { NotionAPI } from '~/libs/notion-client';
+import { Client } from '@notionhq/client';
+import { NotionCompatAPI } from 'notion-compat';
 
-export async function getPostBlocks(id) {
-  const authToken = null;
-  const api = new NotionAPI({ authToken });
-  const pageBlock = await api.getPage(id);
+export async function getPostBlocks(
+  id: string,
+  options: {
+    notionToken: string;
+  }
+) {
+  const notion = new NotionCompatAPI(new Client({ auth: options.notionToken }));
+  const pageBlock = await notion.getPage(id);
 
   // ref: https://github.com/transitive-bullshit/nextjs-notion-starter-kit/issues/279#issuecomment-1245467818
   if (pageBlock && pageBlock.signed_urls) {

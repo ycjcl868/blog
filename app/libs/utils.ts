@@ -1,6 +1,7 @@
 import BLOG from '#/blog.config';
 import { Block } from 'notion-types';
-import { defaultMapImageUrl, type MapImageUrlFn } from 'react-notion-x';
+import { defaultMapImageUrl } from 'notion-utils';
+import { type MapImageUrlFn } from 'react-notion-x';
 
 const buildJsDelivrLink = (user, repo, version, path) => {
   if (version === 'latest') {
@@ -32,9 +33,12 @@ export const mapCoverUrl = (url: string) => {
   return 'https://www.notion.so' + url;
 };
 
-export const mapImageUrl: MapImageUrlFn = (url: string, block: Block) => {
+export const mapImageUrl: MapImageUrlFn = (
+  url: string | undefined,
+  block: Block
+) => {
   try {
-    if (new URL(url)?.host === BLOG.defaultImageHost) {
+    if (new URL(url || '').host === BLOG.defaultImageHost) {
       return url;
     }
   } catch (e) {
