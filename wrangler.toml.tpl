@@ -43,7 +43,7 @@ mode = "smart"
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#kv-namespaces
 [[kv_namespaces]]
 binding = "KV"
-id = "${CLOUDFLARE_KV_ID}"
+id = "${CLOUDFLARE_KV_ID}" # replace with your KV ID
 
 # Bind a Queue producer. Use this binding to schedule an arbitrary task that may be processed later by a Queue consumer.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#queue-producers

@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
+    "build": "node scripts/build.js && remix vite:build",
     "deploy": "npm run build && wrangler pages deploy",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
@@ -53,6 +53,7 @@
     "use-ackee": "^3.0.1"
   },
   "devDependencies": {
+    "dotenv": "^16.4.7",
     "@cloudflare/workers-types": "^4.20240806.0",
     "@remix-run/dev": "^2.16.0",
     "@types/nprogress": "^0.2.3",
