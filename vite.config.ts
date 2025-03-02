@@ -18,6 +18,7 @@ export default defineConfig({
       ssr: true,
       future: {
         // v3_lazyRouteDiscovery: true,
+        unstable_optimizeDeps: true,
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,
