@@ -25,13 +25,16 @@ export const loader = async (params: LoaderFunctionArgs) => {
     }
   );
 
-  const postsToShow = posts.slice(0, BLOG.postsPerPage);
+  const page = Number(params?.params?.pageId) || 1;
+  const startIdx = (page - 1) * BLOG.postsPerPage;
+  const postsToShow = posts.slice(startIdx, startIdx + BLOG.postsPerPage);
+
   const totalPosts = posts.length;
-  const showNext = totalPosts > BLOG.postsPerPage;
+  const showNext = startIdx + BLOG.postsPerPage < totalPosts;
 
   return json(
     {
-      page: 1, // current page is 1
+      page,
       postsToShow,
       showNext,
     },
@@ -50,7 +53,7 @@ export default function Index() {
       {postsToShow.map((post) => (
         <BlogPost key={post.id} post={post} />
       ))}
-      {showNext && <Pagination page={page} showNext={showNext} />}
+      <Pagination page={page} showNext={showNext} />
     </Container>
   );
 }

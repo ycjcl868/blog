@@ -8,6 +8,7 @@ const Pagination = ({ page, showNext }) => {
   let additionalClassName = 'justify-between';
   if (currentPage === 1 && showNext) additionalClassName = 'justify-end';
   if (currentPage !== 1 && !showNext) additionalClassName = 'justify-start';
+
   return (
     <div
       className={`flex font-medium text-black dark:text-gray-100 ${additionalClassName}`}
