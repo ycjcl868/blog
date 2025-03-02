@@ -1,5 +1,3 @@
-import { sha256 } from 'cf-workers-hash';
-
 export const CACHE_KEY = {
   blogList: 'blog_list',
   getBlogDetail: (slug: string) => `blog_detail_${slug}`,
@@ -17,8 +15,23 @@ interface CachedData<T> {
   lastUpdated: string;
 }
 
-const generateContentHash = (content: any): Promise<string> => {
-  return sha256(JSON.stringify(content));
+const generateContentHash = async (content: any): Promise<string> => {
+  const contentBuffer = new TextEncoder().encode(JSON.stringify(content));
+
+  const digest = await crypto.subtle.digest(
+    {
+      name: 'SHA-256',
+    },
+    contentBuffer
+  );
+
+  const contentHash = [...new Uint8Array(digest)]
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+
+  console.log('contentHash', contentHash);
+
+  return contentHash;
 };
 
 async function updateCacheIfNeeded<T>(
