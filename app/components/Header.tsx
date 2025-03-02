@@ -94,19 +94,24 @@ const Header = forwardRef((props, ref) => {
         </div>
         <NavBar />
         <div>
-          <a
+          <button
             onClick={() =>
               setTheme(theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)
             }
             title={`Toggle dark mode - current ${theme}`}
-            className="hover:text-blue-400 cursor-pointer text-xl"
+            className="hover:text-blue-400 cursor-pointer text-xl border-none bg-transparent p-0"
+            aria-label={
+              theme === Theme.DARK
+                ? 'switch to light mode'
+                : 'switch to dark mode'
+            }
           >
             {hasMounted && theme === Theme.DARK ? (
               <IoMoonSharp />
             ) : (
               <IoSunnyOutline />
             )}
-          </a>
+          </button>
         </div>
       </div>
     </div>

@@ -21,7 +21,12 @@ import nProgressStyles from 'nprogress/nprogress.css?url';
 import { lazy, Suspense, useEffect } from 'react';
 import { IconContext } from 'react-icons';
 import 'react-notion-x/src/styles.css';
-import { PreventFlashOnWrongTheme, Theme, ThemeProvider } from 'remix-themes';
+import {
+  PreventFlashOnWrongTheme,
+  Theme,
+  ThemeProvider,
+  useTheme,
+} from 'remix-themes';
 import { ClientOnly } from '~/components/ClientOnly';
 import { LocaleProvider } from '~/libs/locale';
 import '~/styles/gitalk.css';
@@ -105,14 +110,15 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export function App() {
   const data = useLoaderData<typeof loader>();
+  const [theme] = useTheme();
 
   return (
     <html
       lang="en"
       style={{
-        colorScheme: data.theme ?? undefined,
+        colorScheme: theme ?? data.theme!,
       }}
-      className={clsx(data.theme)}
+      className={clsx(theme ?? data.theme)}
     >
       <head>
         <meta name="robots" content="follow, index" />

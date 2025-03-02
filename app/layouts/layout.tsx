@@ -5,7 +5,7 @@ import { ExtendedRecordMap } from 'notion-types';
 import type { TableOfContentsEntry } from 'notion-utils';
 import { Suspense, lazy, useMemo } from 'react';
 import { NotionRenderer } from 'react-notion-x';
-import { Theme } from 'remix-themes';
+import { Theme, useTheme } from 'remix-themes';
 import { ClientOnly } from '~/components/ClientOnly';
 import Container from '~/components/Container';
 import PostActions from '~/components/PostActions';
@@ -82,10 +82,10 @@ const Layout: React.FC<LayoutProps> = ({
   tableOfContent,
   frontMatter,
   fullWidth = false,
-  theme,
 }) => {
   const locale = useLocale();
   const navigate = useNavigate();
+  const [theme] = useTheme();
   const date = frontMatter?.date?.start_date || frontMatter.createdTime;
 
   const components = useMemo(
