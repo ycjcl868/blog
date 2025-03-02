@@ -26,7 +26,7 @@ export const links: LinksFunction = () => [
 ];
 
 const BlogPost = () => {
-  const { post, coverImage, blockMap, tableOfContent } =
+  const { post, coverImage, blockMap, tableOfContent, theme } =
     useLoaderData<typeof loader>();
   if (!post) return null;
   return (
@@ -35,6 +35,7 @@ const BlogPost = () => {
       coverImage={coverImage}
       tableOfContent={tableOfContent}
       frontMatter={post}
+      theme={theme}
       fullWidth={post.fullWidth}
     />
   );

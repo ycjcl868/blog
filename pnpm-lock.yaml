@@ -111,8 +111,8 @@ importers:
         specifier: ^17.5.1
         version: 17.5.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       remix-themes:
-        specifier: ^1.5.0
-        version: 1.5.0(@remix-run/react@2.16.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.5.4))(@remix-run/server-runtime@2.16.0(typescript@5.5.4))
+        specifier: ^2.0.4
+        version: 2.0.4(react-router@6.30.0(react@19.0.0))
       use-ackee:
         specifier: ^3.0.1
         version: 3.1.0(react@19.0.0)
@@ -4372,11 +4372,10 @@ packages:
   remark-rehype@10.1.0:
     resolution: {integrity: sha512-EFmR5zppdBp0WQeDVZ/b66CWJipB2q2VLNFMabzDSGR66Z2fQii83G5gTBbgGEnEEA0QRussvrFHxk1HWGJskw==}
 
-  remix-themes@1.5.0:
-    resolution: {integrity: sha512-U7uUCynxOGDYs2EFu6Ivlfm/hxG6EqfCoIE9wC/L6ozJv0NNOsPIsp7qtUqRGRxLwOWqZk2J77uPz9oraYIBfw==}
+  remix-themes@2.0.4:
+    resolution: {integrity: sha512-S1vIx86xdsMv+ceaWGWtlVZBMhU4tmZeBOBzOiZnhbHnGBbd5YeyIlZ5EL3BSEhZq35oEcINeTrMrVju9GPYEA==}
     peerDependencies:
-      '@remix-run/react': '>= 1'
-      '@remix-run/server-runtime': '>= 1'
+      react-router: '>=7.0.0'
 
   require-like@0.1.2:
     resolution: {integrity: sha512-oyrU88skkMtDdauHDuKVrgR+zuItqr6/c//FXzvmxRGMexSDc6hNvJInGW3LL46n+8b50RykrvwSUIIQH2LQ5A==}
@@ -9938,10 +9937,9 @@ snapshots:
       mdast-util-to-hast: 12.3.0
       unified: 10.1.2
 
-  remix-themes@1.5.0(@remix-run/react@2.16.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.5.4))(@remix-run/server-runtime@2.16.0(typescript@5.5.4)):
+  remix-themes@2.0.4(react-router@6.30.0(react@19.0.0)):
     dependencies:
-      '@remix-run/react': 2.16.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.5.4)
-      '@remix-run/server-runtime': 2.16.0(typescript@5.5.4)
+      react-router: 6.30.0(react@19.0.0)
 
   require-like@0.1.2: {}
 

@@ -5,7 +5,7 @@ import { ExtendedRecordMap } from 'notion-types';
 import type { TableOfContentsEntry } from 'notion-utils';
 import { Suspense, lazy, useMemo } from 'react';
 import { NotionRenderer } from 'react-notion-x';
-import { Theme, useTheme } from 'remix-themes';
+import { Theme } from 'remix-themes';
 import { ClientOnly } from '~/components/ClientOnly';
 import Container from '~/components/Container';
 import PostActions from '~/components/PostActions';
@@ -17,27 +17,29 @@ import { mapImageUrl, mapPageUrl } from '~/libs/utils';
 const Comments = lazy(() => import('~/components/Comments'));
 const Code = lazy(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
+    await import('prismjs/prism.js');
+
     await Promise.all([
-      import('prismjs/components/prism-bash'),
-      import('prismjs/components/prism-diff'),
-      import('prismjs/components/prism-go'),
-      import('prismjs/components/prism-yaml'),
-      import('prismjs/components/prism-rust'),
-      import('prismjs/components/prism-python'),
-      import('prismjs/components/prism-markup-templating'),
-      import('prismjs/components/prism-php'),
-      import('prismjs/components/prism-javascript'),
-      import('prismjs/components/prism-markup'),
-      import('prismjs/components/prism-typescript'),
-      import('prismjs/components/prism-jsx'),
-      import('prismjs/components/prism-less'),
-      import('prismjs/components/prism-js-templates'),
-      import('prismjs/components/prism-git'),
-      import('prismjs/components/prism-graphql'),
-      import('prismjs/components/prism-solidity'),
-      import('prismjs/components/prism-sql'),
-      import('prismjs/components/prism-wasm'),
-      import('prismjs/components/prism-yaml'),
+      import('prismjs/components/prism-bash.js'),
+      import('prismjs/components/prism-diff.js'),
+      import('prismjs/components/prism-go.js'),
+      import('prismjs/components/prism-yaml.js'),
+      import('prismjs/components/prism-rust.js'),
+      import('prismjs/components/prism-python.js'),
+      import('prismjs/components/prism-markup-templating.js'),
+      import('prismjs/components/prism-php.js'),
+      import('prismjs/components/prism-javascript.js'),
+      import('prismjs/components/prism-markup.js'),
+      import('prismjs/components/prism-typescript.js'),
+      import('prismjs/components/prism-jsx.js'),
+      import('prismjs/components/prism-less.js'),
+      import('prismjs/components/prism-js-templates.js'),
+      import('prismjs/components/prism-git.js'),
+      import('prismjs/components/prism-graphql.js'),
+      import('prismjs/components/prism-solidity.js'),
+      import('prismjs/components/prism-sql.js'),
+      import('prismjs/components/prism-wasm.js'),
+      import('prismjs/components/prism-yaml.js'),
     ]);
     return {
       default: m.Code,
@@ -70,6 +72,7 @@ interface LayoutProps {
   fullWidth?: boolean;
   coverImage?: string;
   tableOfContent?: TableOfContentsEntry[];
+  theme: Theme;
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -79,10 +82,10 @@ const Layout: React.FC<LayoutProps> = ({
   tableOfContent,
   frontMatter,
   fullWidth = false,
+  theme,
 }) => {
   const locale = useLocale();
   const navigate = useNavigate();
-  const [theme] = useTheme();
   const date = frontMatter?.date?.start_date || frontMatter.createdTime;
 
   const components = useMemo(

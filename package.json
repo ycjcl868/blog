@@ -49,7 +49,7 @@
     "react-notion-x": "^7.2.6",
     "react-tweet-embed": "^2.0.0",
     "react-use": "^17.5.1",
-    "remix-themes": "^1.5.0",
+    "remix-themes": "^2.0.4",
     "use-ackee": "^3.0.1"
   },
   "devDependencies": {
