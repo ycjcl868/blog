@@ -19,7 +19,6 @@ const outputPath = path.join(rootDir, 'wrangler.toml');
 
 try {
   let templateContent = fs.readFileSync(templatePath, 'utf8');
-  console.log('process.env.CLOUDFLARE_KV_ID', process.env.CLOUDFLARE_KV_ID);
 
   const variables = {
     CLOUDFLARE_KV_ID: process.env.CLOUDFLARE_KV_ID,
