@@ -1,6 +1,7 @@
 import BLOG from '#/blog.config';
 import { Client } from '@notionhq/client';
 
+// alias
 export const getPropertyValue = (property) => {
   const { type } = property;
 
@@ -20,6 +21,9 @@ export const getPropertyValue = (property) => {
     case 'date': {
       return property[type]?.start || '';
     }
+    case 'last_edited_time': {
+      return property[type] || '';
+    }
     default: {
       return '';
     }
@@ -32,10 +36,12 @@ const handlePost = (post) => {
     const value = getPropertyValue(property);
     return { ...acc, [curr]: value };
   }, {});
+
   return {
     ...(properties || {}),
     id: post.id,
     createdTime: properties.date,
+    editedTime: properties?.last_edited_time,
     slug: properties.slug.replace(/^\//, ''),
   };
 };
