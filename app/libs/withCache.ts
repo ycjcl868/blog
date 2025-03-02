@@ -1,4 +1,4 @@
-import crypto from 'node:crypto';
+import { sha256 } from 'cf-workers-hash';
 
 export const CACHE_KEY = {
   blogList: 'blog_list',
@@ -17,8 +17,8 @@ interface CachedData<T> {
   lastUpdated: string;
 }
 
-const generateContentHash = (content: any): string => {
-  return crypto.createHash('md5').update(JSON.stringify(content)).digest('hex');
+const generateContentHash = (content: any): Promise<string> => {
+  return sha256(JSON.stringify(content));
 };
 
 async function updateCacheIfNeeded<T>(
@@ -34,7 +34,7 @@ async function updateCacheIfNeeded<T>(
   const contentForHash = options.getContentForHash
     ? options.getContentForHash(freshData)
     : freshData;
-  const newContentHash = generateContentHash(contentForHash);
+  const newContentHash = await generateContentHash(contentForHash);
 
   // if content hash is different, update cache
   if (newContentHash !== oldContentHash) {
@@ -64,7 +64,7 @@ async function fetchAndCacheData<T>(
   const contentForHash = options.getContentForHash
     ? options.getContentForHash(data)
     : data;
-  const contentHash = generateContentHash(contentForHash);
+  const contentHash = await generateContentHash(contentForHash);
 
   await KV.put(
     options.cacheKey,
