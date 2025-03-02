@@ -2,14 +2,12 @@
 
 中文 | [English](./README.md)
 
-基于 Remix 和 Notion 构建，部署在 Cloudflare Pages ，使用 Edge Function 的无成本、可实时更新的博客站点。
-
-![](https://user-images.githubusercontent.com/13595509/221388253-a719a869-c4b9-4387-a513-101caa35df27.png)
-
-
 [![Cloudflare Pages](https://img.shields.io/badge/Deployed_on-Cloudflare_Pages-F38020?logo=cloudflare)](https://developers.cloudflare.com/pages/)
 [![Remix Framework](https://img.shields.io/badge/Built_with-Remix-1E1F21?logo=remix)](https://remix.run/)
 
+基于 Remix 和 Notion 构建，部署在 Cloudflare Pages ，使用 Edge Function 的无成本、可实时更新的博客站点。
+
+![](https://user-images.githubusercontent.com/13595509/221388253-a719a869-c4b9-4387-a513-101caa35df27.png)
 
 ## 🔥 特性
 

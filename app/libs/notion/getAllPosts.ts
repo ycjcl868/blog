@@ -40,6 +40,7 @@ const handlePost = (post) => {
   };
 };
 
+const commonFilter = [{ property: 'status', select: { equals: 'Published' } }];
 export const getAllPostsList = async ({
   includePages = false,
   notionPageId,
@@ -52,7 +53,7 @@ export const getAllPostsList = async ({
     database_id: notionPageId,
     filter: {
       and: [
-        { property: 'status', select: { equals: 'Published' } },
+        ...commonFilter,
         ...(includePages
           ? []
           : [
@@ -88,7 +89,7 @@ export const getPost = async ({
     database_id: notionPageId,
     filter: {
       and: [
-        { property: 'status', select: { equals: 'Published' } },
+        ...commonFilter,
         {
           property: 'slug',
           rich_text: {

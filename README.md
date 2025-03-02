@@ -2,19 +2,17 @@
 
 [中文](./README-zh-CN.md) | English
 
+[![Cloudflare Pages](https://img.shields.io/badge/Deployed_on-Cloudflare_Pages-F38020?logo=cloudflare)](https://developers.cloudflare.com/pages/)
+[![Remix Framework](https://img.shields.io/badge/Built_with-Remix-1E1F21?logo=remix)](https://remix.run/)
+
 Built with Remix and Notion, deployed on Cloudflare Pages using Edge Functions for a cost-free, real-time updated blog site.
 
 ![](https://user-images.githubusercontent.com/13595509/221388253-a719a869-c4b9-4387-a513-101caa35df27.png)
 
-
-[![Cloudflare Pages](https://img.shields.io/badge/Deployed_on-Cloudflare_Pages-F38020?logo=cloudflare)](https://developers.cloudflare.com/pages/)
-[![Remix Framework](https://img.shields.io/badge/Built_with-Remix-1E1F21?logo=remix)](https://remix.run/)
-
-
 ## 🔥 Features
 
 - Create blogs directly from your Notion pages with real-time content updates
-- Smart caching (`stale-while-revalidate`) ensures fast page loads while auto-updating content in the background
+- Smart caching ensures fast page loads while auto-updating content in the background
 - Built with modern tech stack using [Remix](https://remix.run/)
 - Zero-cost deployment on Cloudflare Pages
 - Clean and elegant design powered by [TailwindCSS](https://tailwindcss.com/)
@@ -22,6 +20,8 @@ Built with Remix and Notion, deployed on Cloudflare Pages using Edge Functions f
 - RSS Feed support
 - Light/Dark theme toggle
 - [ ] Internationalization support with runtime translation using large language models
+
+https://github.com/user-attachments/assets/375b1a6a-c564-4717-838e-3285f0b90541
 
 ## 📦 Installation
 

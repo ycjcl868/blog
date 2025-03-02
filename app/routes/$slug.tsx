@@ -18,6 +18,7 @@ import { Theme } from 'remix-themes';
 import Layout from '~/layouts/layout';
 import { getPost, getPostBlocks } from '~/libs/notion';
 import { mapImageUrl } from '~/libs/utils';
+import { CACHE_KEY, withKVCache } from '~/libs/withCache';
 import { themeSessionResolver } from '~/sessions.server';
 
 export const links: LinksFunction = () => [
@@ -91,21 +92,48 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export const loader = async (params: LoaderFunctionArgs) => {
   const { slug } = params.params;
-  const { NOTION_ACCESS_TOKEN, NOTION_PAGE_ID } = params.context.cloudflare.env;
+  const { NOTION_ACCESS_TOKEN, NOTION_PAGE_ID, KV } =
+    params.context.cloudflare.env;
   const { getTheme } = await themeSessionResolver(params.request);
-  const [post] = await getPost({
-    slug,
-    notionPageId: NOTION_PAGE_ID,
-    notionAccessToken: NOTION_ACCESS_TOKEN,
-  });
+
+  if (!slug) {
+    throw new Response('404 Not Found', { status: 404 });
+  }
+
+  const [post] = await withKVCache(
+    async () => {
+      return await getPost({
+        slug,
+        notionPageId: NOTION_PAGE_ID,
+        notionAccessToken: NOTION_ACCESS_TOKEN,
+      });
+    },
+    {
+      KV,
+      cacheKey: CACHE_KEY.getBlogDetail(slug),
+    }
+  );
+  console.log('post', post);
 
   if (!post) {
     throw new Response('', { status: 404 });
   }
 
-  const blockMap = await getPostBlocks(post.id, {
-    notionToken: NOTION_ACCESS_TOKEN,
-  });
+  const blockMap = await withKVCache(
+    async () => {
+      return await getPostBlocks(post.id, {
+        notionToken: NOTION_ACCESS_TOKEN,
+      });
+    },
+    {
+      KV,
+      cacheKey: CACHE_KEY.getBlogBlocks(slug, post.id),
+      getContentForHash: (data) => {
+        // @ts-ignore
+        return data?.raw?.page?.last_edited_time;
+      },
+    }
+  );
 
   const [coverImage = ''] =
     getPageImageUrls(blockMap, {

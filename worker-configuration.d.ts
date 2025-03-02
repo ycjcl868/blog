@@ -3,4 +3,5 @@
 interface Env {
   NOTION_PAGE_ID: string;
   NOTION_ACCESS_TOKEN: string;
+  KV: KVNamespace;
 }

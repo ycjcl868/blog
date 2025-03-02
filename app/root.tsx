@@ -1,5 +1,4 @@
 import BLOG from '#/blog.config';
-import CJK from '#/cjk';
 import {
   LinksFunction,
   LoaderFunctionArgs,
@@ -113,11 +112,6 @@ export function App() {
   const data = useLoaderData<typeof loader>();
   const [theme] = useTheme();
 
-  const meta = {
-    title: BLOG.title,
-    type: 'website',
-  };
-
   return (
     <html
       lang="en"
@@ -129,9 +123,9 @@ export function App() {
     >
       <head>
         <meta name="robots" content="follow, index" />
+        <meta charSet="UTF-8" />
         <meta property="og:locale" content={BLOG.lang} />
         <meta property="og:type" content="website" />
-        <meta charSet="UTF-8" />
         {BLOG.seo.googleSiteVerification && (
           <meta
             name="google-site-verification"
@@ -142,15 +136,6 @@ export function App() {
           <meta name="keywords" content={BLOG.seo.keywords.join(', ')} />
         )}
         <meta name="twitter:card" content="summary_large_image" />
-        {meta.type === 'article' && (
-          <>
-            <meta
-              property="article:published_time"
-              content={meta.date || meta.createdTime}
-            />
-            <meta property="article:author" content={BLOG.author} />
-          </>
-        )}
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
@@ -204,24 +189,16 @@ export function App() {
             <link
               rel="preload preconnect"
               as="style"
-              href={`https://fonts.loli.net/css2?family=Noto+${
-                BLOG.font === 'serif' ? 'Serif' : 'Sans'
-              }+${CJK()}:wght@400;500;700&display=swap`}
+              href={`https://cdn.jsdelivr.net/npm/@fontsource/noto-${
+                BLOG.font === 'serif' ? 'serif' : 'sans'
+              }@5.2.1/400.min.css`}
             />
             <link
               rel="stylesheet preconnect prefetch"
-              href={`https://fonts.loli.net/css2?family=Noto+${
-                BLOG.font === 'serif' ? 'Serif' : 'Sans'
-              }+${CJK()}:wght@400;500;700&display=swap`}
+              href={`https://cdn.jsdelivr.net/npm/@fontsource/noto-${
+                BLOG.font === 'serif' ? 'serif' : 'sans'
+              }@5.2.1/400.min.css`}
             />
-            <noscript>
-              <link
-                rel="stylesheet preconnect prefetch"
-                href={`https://fonts.loli.net/css2?family=Noto+${
-                  BLOG.font === 'serif' ? 'Serif' : 'Sans'
-                }+${CJK()}:wght@400;500;700&display=swap`}
-              />
-            </noscript>
           </>
         )}
         <link rel="icon" href="/favicon.png" />
@@ -264,7 +241,7 @@ export function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <Scripts crossOrigin="anonymous" src="/polyfill.js" />
+        <script crossOrigin="anonymous" src="/polyfill.js"></script>
       </body>
     </html>
   );
