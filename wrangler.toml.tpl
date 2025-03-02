@@ -3,9 +3,6 @@ name = "blog"
 compatibility_date = "2024-08-06"
 pages_build_output_dir = "./build/client"
 
-[placement]
-mode = "smart"
-
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
 # rather than the end user may result in better performance.
