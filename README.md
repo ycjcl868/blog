@@ -23,6 +23,12 @@ Built with Remix and Notion, deployed on Cloudflare Pages using Edge Functions f
 
 https://github.com/user-attachments/assets/375b1a6a-c564-4717-838e-3285f0b90541
 
+## 🚀 Performance
+
+[PageSpeed Insights](https://pagespeed.web.dev/analysis/https-www-rustc-cloud/1zuls2fmg9?hl=zh-cn&form_factor=desktop)
+
+![](https://github.com/user-attachments/assets/b505fdf9-1cfa-410d-8f6f-98872263e75b)
+
 ## 📦 Installation
 
 Clone the repository to your local machine:

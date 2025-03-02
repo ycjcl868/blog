@@ -21,6 +21,13 @@
 - 主题 Light/Dark 切换
 - [ ] 国际化支持，运行时大语言模型翻译
 
+## 🚀 性能
+
+[PageSpeed Insights](https://pagespeed.web.dev/analysis/https-www-rustc-cloud/1zuls2fmg9?hl=zh-cn&form_factor=desktop)
+
+![](https://github.com/user-attachments/assets/b505fdf9-1cfa-410d-8f6f-98872263e75b)
+
+
 ## 📦 安装
 
 使用以下指令将该项目克隆到你本地
