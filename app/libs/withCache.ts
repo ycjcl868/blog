@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 
 export const CACHE_KEY = {
   blogList: 'blog_list',
