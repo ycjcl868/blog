@@ -68,11 +68,10 @@ async function updateCacheIfNeeded<T>(
 async function fetchAndCacheData<T>(
   KV: KVNamespace,
   fetchFn: (...args: any[]) => Promise<T>,
-  options: { cacheKey: string; getContentForHash?: (data: T) => any },
-  args: any[]
+  options: { cacheKey: string; getContentForHash?: (data: T) => any }
 ): Promise<T> {
   // fetch data
-  const data = await fetchFn(...args);
+  const data = await fetchFn();
 
   const contentForHash = options.getContentForHash
     ? options.getContentForHash(data)
@@ -102,6 +101,10 @@ export const withKVCache = <T>(
   const { KV, cacheKey, getContentForHash } = options;
 
   return (async () => {
+    if (!KV) {
+      return await fetchFn();
+    }
+
     const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
 
     if (cachedData && cachedData?.contentHash) {
@@ -116,6 +119,6 @@ export const withKVCache = <T>(
     }
 
     // if no cache, fetch and cache data
-    return fetchAndCacheData(KV, fetchFn, { cacheKey, getContentForHash }, []);
+    return fetchAndCacheData(KV, fetchFn, { cacheKey, getContentForHash });
   })();
 };

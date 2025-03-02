@@ -113,7 +113,6 @@ export const loader = async (params: LoaderFunctionArgs) => {
       cacheKey: CACHE_KEY.getBlogDetail(slug),
     }
   );
-  console.log('post', post);
 
   if (!post) {
     throw new Response('', { status: 404 });
