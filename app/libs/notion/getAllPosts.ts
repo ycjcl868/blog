@@ -1,5 +1,6 @@
 import BLOG from '#/blog.config';
 import { Client } from '@notionhq/client';
+import { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
 
 // alias
 export const getPropertyValue = (property) => {
@@ -91,16 +92,27 @@ export const getPost = async ({
     auth: notionAccessToken,
   });
   const slug = _slug.replace(/^\//, '');
-  const dbQuery = {
+  const dbQuery: QueryDatabaseParameters = {
     database_id: notionPageId,
     filter: {
       and: [
-        ...commonFilter,
         {
           property: 'slug',
           rich_text: {
             equals: slug,
           },
+        },
+        {
+          or: [
+            {
+              property: 'status',
+              select: { equals: 'Published' },
+            },
+            {
+              property: 'status',
+              select: { equals: 'Revise' },
+            },
+          ],
         },
       ],
     },

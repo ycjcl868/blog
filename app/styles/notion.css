@@ -132,3 +132,14 @@ pre[class*='language-'] {
 .notion-simple-table {
   width: 100%;
 }
+.notion-simple-table td {
+  border: 1px solid var(--fg-color-1)
+}
+
+.notion .notion-code {
+  font-size: var(--prism-marker-font-size)
+}
+
+.notion-link {
+  color: var(--fg-color);
+}

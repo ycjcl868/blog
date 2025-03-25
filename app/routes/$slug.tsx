@@ -103,11 +103,13 @@ export const loader = async (params: LoaderFunctionArgs) => {
 
   const [post] = await withKVCache(
     async () => {
-      return await getPost({
+      const post = await getPost({
         slug,
         notionPageId: NOTION_PAGE_ID,
         notionAccessToken: NOTION_ACCESS_TOKEN,
       });
+      console.log('post', post);
+      return post;
     },
     {
       KV,
