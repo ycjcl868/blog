@@ -125,6 +125,7 @@ export const withKVCache = <T>(
       const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
 
       if (cachedData && cachedData?.contentHash) {
+        console.log('cached return');
         if (updateCache) {
           // async update cache
           await updateCacheIfNeeded(

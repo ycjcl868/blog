@@ -147,6 +147,8 @@ export const loader = async (params: LoaderFunctionArgs) => {
     }
   );
 
+  console.log('blockMap');
+
   const [coverImage = ''] =
     getPageImageUrls(blockMap, {
       mapImageUrl: (url: string, block: Block) => {
@@ -158,6 +160,8 @@ export const loader = async (params: LoaderFunctionArgs) => {
 
   const keys = Object.keys(blockMap?.block || {});
   const block = blockMap?.block?.[keys[0]]?.value as PageBlock;
+
+  console.log('block');
 
   const pageTableOfContents = getPageTableOfContents(block, blockMap);
 
