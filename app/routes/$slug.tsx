@@ -105,6 +105,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     throw new Response('404 Not Found', { status: 404 });
   }
 
+  console.log('$slug', slug);
   const [posts, contentHash] = await withKVCache(
     async () => {
       const post = await getPost({
@@ -120,6 +121,8 @@ export const loader = async (params: LoaderFunctionArgs) => {
       cacheKey: CACHE_KEY.getBlogDetail(slug),
     }
   );
+
+  console.log('posts', posts.length);
 
   const [post] = posts;
 

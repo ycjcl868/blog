@@ -146,7 +146,8 @@ export const withKVCache = <T>(
       return [data, ''];
     }
     console.log('no cache, fetch and cache data');
-    const contentForHash = getContentForHash ? getContentForHash(data) : data;
+    const contentForHash =
+      getContentForHash && data ? getContentForHash(data) : data;
     const contentHash = await generateContentHash(contentForHash);
 
     return [data, contentHash];
