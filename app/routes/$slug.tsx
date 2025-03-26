@@ -132,6 +132,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
 
   const [blockMap, blockHash] = await withKVCache(
     async () => {
+      console.log('post.id', post.id);
       return await getPostBlocks(post.id, {
         notionToken: NOTION_ACCESS_TOKEN,
       });

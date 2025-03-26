@@ -113,6 +113,7 @@ export const withKVCache = <T>(
   console.log('[withKVCache] updateCache', updateCache);
 
   return (async () => {
+    console.log('cacheKey', cacheKey);
     if (!KV) {
       console.log('no KV');
       const data = await fetchFn();
@@ -121,8 +122,11 @@ export const withKVCache = <T>(
       return [data, contentHash];
     }
 
+    console.log('cacheKey_2', cacheKey);
+
     try {
       const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
+      console.log('cachedData.contentHash', cachedData?.contentHash);
 
       if (cachedData && cachedData?.contentHash) {
         console.log('cached return');
