@@ -113,18 +113,22 @@ export const withKVCache = <T>(
       return [data, contentHash];
     }
 
-    const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
+    try {
+      const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
 
-    if (cachedData && cachedData?.contentHash) {
-      console.log('cache hit');
-      // async update cache
-      updateCacheIfNeeded(
-        KV,
-        fetchFn,
-        { cacheKey, getContentForHash },
-        cachedData.contentHash
-      ).catch(console.error);
-      return [cachedData.data, cachedData.contentHash];
+      if (cachedData && cachedData?.contentHash) {
+        console.log('cache hit');
+        // async update cache
+        updateCacheIfNeeded(
+          KV,
+          fetchFn,
+          { cacheKey, getContentForHash },
+          cachedData.contentHash
+        ).catch(console.error);
+        return [cachedData.data, cachedData.contentHash];
+      }
+    } catch (error) {
+      console.error(error);
     }
 
     // if no cache, fetch and cache data
