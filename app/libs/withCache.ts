@@ -73,6 +73,7 @@ async function fetchAndCacheData<T>(
 ): Promise<T | null> {
   // fetch data
   const data = await fetchFn();
+  console.log('fetchAndCacheData');
 
   if (isEmpty(data)) {
     return data;

@@ -7,8 +7,10 @@ export async function getPostBlocks(
     notionToken: string;
   }
 ) {
+  console.log('getPostBlocks');
   const notion = new NotionCompatAPI(new Client({ auth: options.notionToken }));
   const pageBlock = await notion.getPage(id);
+  console.log('pageBlock', pageBlock.notion_user);
 
   // ref: https://github.com/transitive-bullshit/nextjs-notion-starter-kit/issues/279#issuecomment-1245467818
   if (pageBlock && pageBlock.signed_urls) {
