@@ -9,6 +9,7 @@ export async function getPostBlocks(
 ) {
   console.log('getPostBlocks');
   const notion = new NotionCompatAPI(new Client({ auth: options.notionToken }));
+  console.log('page id', id);
   const pageBlock = await notion.getPage(id);
   console.log('pageBlock', pageBlock.notion_user);
 
