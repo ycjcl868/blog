@@ -82,14 +82,18 @@ async function fetchAndCacheData<T>(
     : data;
   const contentHash = await generateContentHash(contentForHash);
 
-  await KV.put(
-    options.cacheKey,
-    JSON.stringify({
-      data,
-      contentHash,
-      lastUpdated: new Date().toISOString(),
-    })
-  );
+  try {
+    await KV.put(
+      options.cacheKey,
+      JSON.stringify({
+        data,
+        contentHash,
+        lastUpdated: new Date().toISOString(),
+      })
+    );
+  } catch (error) {
+    console.error(error);
+  }
 
   return data;
 }
