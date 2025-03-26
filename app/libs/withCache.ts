@@ -146,6 +146,7 @@ export const withKVCache = <T>(
       console.error(error);
     }
 
+    console.log('no cachedData');
     // if no cache, fetch and cache data
     const data = await fetchAndCacheData(KV, fetchFn, {
       cacheKey,
@@ -153,6 +154,7 @@ export const withKVCache = <T>(
     });
 
     if (isEmpty(data)) {
+      console.log('no data');
       return [data, ''];
     }
     console.log('no cache, fetch and cache data');
@@ -160,6 +162,7 @@ export const withKVCache = <T>(
       getContentForHash && data ? getContentForHash(data) : data;
     const contentHash = await generateContentHash(contentForHash);
 
+    console.log('new contentHash', contentHash);
     return [data, contentHash];
   })();
 };
