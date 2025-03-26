@@ -159,14 +159,19 @@ export const loader = async (params: LoaderFunctionArgs) => {
   const keys = Object.keys(blockMap?.block || {});
   const block = blockMap?.block?.[keys[0]]?.value as PageBlock;
 
-  const tableOfContent =
-    getPageTableOfContents(block, blockMap)?.map(
-      ({ id, text, indentLevel }) => ({
+  const pageTableOfContents = getPageTableOfContents(block, blockMap);
+
+  console.log('pageTableOfContents', typeof pageTableOfContents);
+
+  const tableOfContent = Array.isArray(pageTableOfContents)
+    ? pageTableOfContents?.map(({ id, text, indentLevel }) => ({
         id: uuidToId(id),
         text,
         indentLevel,
-      })
-    ) || [];
+      }))
+    : [];
+
+  console.log('post', post);
 
   return json(
     { post, blockMap, coverImage, tableOfContent, theme: getTheme() },
