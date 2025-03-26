@@ -11,6 +11,11 @@ export const loader = async (params: LoaderFunctionArgs) => {
   const { context } = params;
   const { NOTION_ACCESS_TOKEN, NOTION_PAGE_ID, KV } = context.cloudflare.env;
 
+  const { searchParams } = new URL(params.request.url);
+  const updateCache = !!searchParams.get('update');
+
+  console.log('updateCache', updateCache);
+
   const [posts, contentHash] = await withKVCache(
     async () => {
       return await getAllPostsList({
@@ -22,6 +27,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     {
       KV,
       cacheKey: CACHE_KEY.blogList,
+      updateCache,
     }
   );
 

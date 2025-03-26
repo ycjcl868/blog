@@ -98,11 +98,14 @@ export const withKVCache = <T>(
   fetchFn: (...args: any[]) => Promise<T>,
   options: {
     KV: KVNamespace;
+    updateCache?: boolean;
     cacheKey: CacheKeyValue;
     getContentForHash?: (data: T) => any;
   }
 ): Promise<[T, string]> => {
-  const { KV, cacheKey, getContentForHash } = options;
+  const { KV, cacheKey, getContentForHash, updateCache = false } = options;
+
+  console.log('[withKVCache] updateCache', updateCache);
 
   return (async () => {
     if (!KV) {
@@ -117,14 +120,16 @@ export const withKVCache = <T>(
       const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
 
       if (cachedData && cachedData?.contentHash) {
-        console.log('cache hit');
-        // async update cache
-        updateCacheIfNeeded(
-          KV,
-          fetchFn,
-          { cacheKey, getContentForHash },
-          cachedData.contentHash
-        ).catch(console.error);
+        if (updateCache) {
+          // async update cache
+          await updateCacheIfNeeded(
+            KV,
+            fetchFn,
+            { cacheKey, getContentForHash },
+            cachedData.contentHash
+          ).catch(console.error);
+        }
+
         return [cachedData.data, cachedData.contentHash];
       }
     } catch (error) {
@@ -143,6 +148,7 @@ export const withKVCache = <T>(
     console.log('no cache, fetch and cache data');
     const contentForHash = getContentForHash ? getContentForHash(data) : data;
     const contentHash = await generateContentHash(contentForHash);
+
     return [data, contentHash];
   })();
 };

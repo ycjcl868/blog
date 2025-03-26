@@ -96,6 +96,10 @@ export const loader = async (params: LoaderFunctionArgs) => {
   const { NOTION_ACCESS_TOKEN, NOTION_PAGE_ID, KV } =
     params.context.cloudflare.env;
   const { getTheme } = await themeSessionResolver(params.request);
+  const { searchParams } = new URL(params.request.url);
+  const updateCache = !!searchParams.get('update');
+
+  console.log('updateCache', updateCache);
 
   if (!slug) {
     throw new Response('404 Not Found', { status: 404 });
@@ -112,6 +116,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     },
     {
       KV,
+      updateCache,
       cacheKey: CACHE_KEY.getBlogDetail(slug),
     }
   );
@@ -131,6 +136,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     {
       KV,
       cacheKey: CACHE_KEY.getBlogBlocks(slug, post.id),
+      updateCache,
       getContentForHash: (data) => {
         // @ts-ignore
         return data?.raw?.page?.last_edited_time;
