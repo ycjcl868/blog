@@ -11,7 +11,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
   const { context } = params;
   const { NOTION_ACCESS_TOKEN, NOTION_PAGE_ID, KV } = context.cloudflare.env;
 
-  const posts = await withKVCache(
+  const [posts, contentHash] = await withKVCache(
     async () => {
       return await getAllPostsList({
         includePages: false,
@@ -40,6 +40,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
     },
     {
       headers: {
+        'X-Content-Hash': contentHash,
         'Cache-Control': 'public, stale-while-revalidate=60',
       },
     }

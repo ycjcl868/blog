@@ -101,14 +101,13 @@ export const loader = async (params: LoaderFunctionArgs) => {
     throw new Response('404 Not Found', { status: 404 });
   }
 
-  const [post] = await withKVCache(
+  const [posts, contentHash] = await withKVCache(
     async () => {
       const post = await getPost({
         slug,
         notionPageId: NOTION_PAGE_ID,
         notionAccessToken: NOTION_ACCESS_TOKEN,
       });
-      console.log('post', post);
       return post;
     },
     {
@@ -117,11 +116,13 @@ export const loader = async (params: LoaderFunctionArgs) => {
     }
   );
 
+  const [post] = posts;
+
   if (!post) {
     throw new Response('', { status: 404 });
   }
 
-  const blockMap = await withKVCache(
+  const [blockMap, blockHash] = await withKVCache(
     async () => {
       return await getPostBlocks(post.id, {
         notionToken: NOTION_ACCESS_TOKEN,
@@ -163,6 +164,8 @@ export const loader = async (params: LoaderFunctionArgs) => {
     {
       headers: {
         'Cache-Control': 'public, stale-while-revalidate=60',
+        'X-Content-Hash': contentHash,
+        'X-Block-Hash': blockHash,
       },
     }
   );

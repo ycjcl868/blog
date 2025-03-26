@@ -29,8 +29,6 @@ const generateContentHash = async (content: any): Promise<string> => {
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
 
-  console.log('contentHash', contentHash);
-
   return contentHash;
 };
 
@@ -69,9 +67,13 @@ async function fetchAndCacheData<T>(
   KV: KVNamespace,
   fetchFn: (...args: any[]) => Promise<T>,
   options: { cacheKey: string; getContentForHash?: (data: T) => any }
-): Promise<T> {
+): Promise<T | null> {
   // fetch data
   const data = await fetchFn();
+
+  if (!data) {
+    return null;
+  }
 
   const contentForHash = options.getContentForHash
     ? options.getContentForHash(data)
@@ -97,12 +99,15 @@ export const withKVCache = <T>(
     cacheKey: CacheKeyValue;
     getContentForHash?: (data: T) => any;
   }
-): Promise<T> => {
+): Promise<[T, string]> => {
   const { KV, cacheKey, getContentForHash } = options;
 
   return (async () => {
     if (!KV) {
-      return await fetchFn();
+      const data = await fetchFn();
+      const contentForHash = getContentForHash ? getContentForHash(data) : data;
+      const contentHash = await generateContentHash(contentForHash);
+      return [data, contentHash];
     }
 
     const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
@@ -115,10 +120,20 @@ export const withKVCache = <T>(
         { cacheKey, getContentForHash },
         cachedData.contentHash
       ).catch(console.error);
-      return cachedData.data;
+      return [cachedData.data, cachedData.contentHash];
     }
 
     // if no cache, fetch and cache data
-    return fetchAndCacheData(KV, fetchFn, { cacheKey, getContentForHash });
+    const data = await fetchAndCacheData(KV, fetchFn, {
+      cacheKey,
+      getContentForHash,
+    });
+
+    if (!data) {
+      return [null, ''];
+    }
+    const contentForHash = getContentForHash ? getContentForHash(data) : data;
+    const contentHash = await generateContentHash(contentForHash);
+    return [data, contentHash];
   })();
 };
