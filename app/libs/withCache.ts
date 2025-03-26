@@ -1,3 +1,5 @@
+import isEmpty from 'lodash.isempty';
+
 export const CACHE_KEY = {
   blogList: 'blog_list',
   getBlogDetail: (slug: string) => `blog_detail_${slug}`,
@@ -71,8 +73,8 @@ async function fetchAndCacheData<T>(
   // fetch data
   const data = await fetchFn();
 
-  if (!data) {
-    return null;
+  if (isEmpty(data)) {
+    return data;
   }
 
   const contentForHash = options.getContentForHash
@@ -104,6 +106,7 @@ export const withKVCache = <T>(
 
   return (async () => {
     if (!KV) {
+      console.log('no KV');
       const data = await fetchFn();
       const contentForHash = getContentForHash ? getContentForHash(data) : data;
       const contentHash = await generateContentHash(contentForHash);
@@ -113,6 +116,7 @@ export const withKVCache = <T>(
     const cachedData = await KV.get<CachedData<T>>(cacheKey, 'json');
 
     if (cachedData && cachedData?.contentHash) {
+      console.log('cache hit');
       // async update cache
       updateCacheIfNeeded(
         KV,
@@ -129,9 +133,10 @@ export const withKVCache = <T>(
       getContentForHash,
     });
 
-    if (!data) {
-      return [null, ''];
+    if (isEmpty(data)) {
+      return [data, ''];
     }
+    console.log('no cache, fetch and cache data');
     const contentForHash = getContentForHash ? getContentForHash(data) : data;
     const contentHash = await generateContentHash(contentForHash);
     return [data, contentHash];
