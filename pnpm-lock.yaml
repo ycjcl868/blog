@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@notionhq/client':
-        specifier: ^2.2.16
-        version: 2.2.16
+        specifier: ^2.3.0
+        version: 2.3.0
       '@remix-run/cloudflare':
         specifier: ^2.16.0
         version: 2.16.0(@cloudflare/workers-types@4.20240806.0)(typescript@5.5.4)
@@ -69,10 +69,10 @@ importers:
         specifier: ^2.5.0
         version: 2.6.0
       notion-compat:
-        specifier: ^7.1.6
-        version: 7.1.6(@notionhq/client@2.2.16)
+        specifier: 7.1.6
+        version: 7.1.6(@notionhq/client@2.3.0)
       notion-utils:
-        specifier: ^7.1.6
+        specifier: 7.1.6
         version: 7.1.6
       nprogress:
         specifier: ^0.2.0
@@ -105,7 +105,7 @@ importers:
         specifier: ^4.12.0
         version: 4.12.0(react@19.0.0)
       react-notion-x:
-        specifier: ^7.2.6
+        specifier: 7.2.6
         version: 7.2.6(@babel/runtime@7.25.0)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-tweet-embed:
         specifier: ^2.0.0
@@ -178,7 +178,7 @@ importers:
         specifier: ^4.6.0
         version: 4.6.2(eslint@8.57.0)
       notion-types:
-        specifier: ^7.1.6
+        specifier: 7.1.6
         version: 7.1.6
       postcss:
         specifier: ^8.4.38
@@ -1497,8 +1497,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@notionhq/client@2.2.16':
-    resolution: {integrity: sha512-3GlkfhLw8+Jw8U2iFEmHA6WfCgYhZCXLxgPdqDJkYMFotELNpQO+yGSy2QWURsG8ndu21sLt+FEOfDbNcCtFMg==}
+  '@notionhq/client@2.3.0':
+    resolution: {integrity: sha512-l7WqTCpQqC+HibkB9chghONQTYcxNQT0/rOJemBfmuKQRTu2vuV8B3yA395iKaUdDo7HI+0KvQaz9687Xskzkw==}
     engines: {node: '>=12'}
 
   '@npmcli/fs@3.1.1':
@@ -3315,6 +3315,10 @@ packages:
     resolution: {integrity: sha512-RQrI8rlHY92OLf3rho/Ts8i/XvjgguEjOkO1BEXcU3N8BqPpSzBNwV/G0Ukr+P/l3ivvJUE/Fa/CwbS6HesGNQ==}
     hasBin: true
 
+  katex@0.16.21:
+    resolution: {integrity: sha512-XvqR7FgOHtWupfMiigNzmh+MgUVmDGU2kXZm899ZkPfcuoPuFxyHmXsgATDpFZDAXCI8tvinaVcDo8PIIJSo4A==}
+    hasBin: true
+
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
@@ -4141,6 +4145,10 @@ packages:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
 
+  prismjs@1.30.0:
+    resolution: {integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==}
+    engines: {node: '>=6'}
+
   proc-log@3.0.0:
     resolution: {integrity: sha512-++Vn7NS4Xf9NacaU9Xq3URUuqZETPsf8L4j5/ckhaRYsfPeRyzGw+iDjFhV/Jr3uNmTvvddEJFWh5R1gRgUH8A==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
@@ -4257,12 +4265,11 @@ packages:
   react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
 
-  react-modal@3.16.1:
-    resolution: {integrity: sha512-VStHgI3BVcGo7OXczvnJN7yT2TWHJPDXZWyI/a0ssFNhGZWsPmB8cF0z33ewDXq4VfYMO1vXgiv/g8Nj9NDyWg==}
-    engines: {node: '>=8'}
+  react-modal@3.16.3:
+    resolution: {integrity: sha512-yCYRJB5YkeQDQlTt17WGAgFJ7jr2QYcWa1SHqZ3PluDmnKJ/7+tVU+E6uKyZ0nODaeEj+xCpK4LcSnKXLMC0Nw==}
     peerDependencies:
-      react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
-      react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+      react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18 || ^19
+      react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18 || ^19
 
   react-notion-x@7.2.6:
     resolution: {integrity: sha512-cJJAPAB5dZEItLt9RSQ6rPEgqYLLAIh3SPGlfOETIg/aCb98GDYzLqGYQlTtyEgG+GCiS7erGRFXA72jy67y0A==}
@@ -6420,9 +6427,9 @@ snapshots:
 
   '@jspm/core@2.0.1': {}
 
-  '@matejmazur/react-katex@3.1.3(katex@0.16.11)(react@19.0.0)':
+  '@matejmazur/react-katex@3.1.3(katex@0.16.21)(react@19.0.0)':
     dependencies:
-      katex: 0.16.11
+      katex: 0.16.21
       react: 19.0.0
 
   '@mdx-js/mdx@2.3.0':
@@ -6459,7 +6466,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@notionhq/client@2.2.16':
+  '@notionhq/client@2.3.0':
     dependencies:
       '@types/node-fetch': 2.6.11
       node-fetch: 2.7.0
@@ -8660,6 +8667,10 @@ snapshots:
     dependencies:
       commander: 8.3.0
 
+  katex@0.16.21:
+    dependencies:
+      commander: 8.3.0
+
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
@@ -9276,9 +9287,9 @@ snapshots:
 
   normalize-url@8.0.1: {}
 
-  notion-compat@7.1.6(@notionhq/client@2.2.16):
+  notion-compat@7.1.6(@notionhq/client@2.3.0):
     dependencies:
-      '@notionhq/client': 2.2.16
+      '@notionhq/client': 2.3.0
       notion-types: 7.1.6
       notion-utils: 7.1.6
       p-queue: 8.1.0
@@ -9639,6 +9650,8 @@ snapshots:
 
   prismjs@1.29.0: {}
 
+  prismjs@1.30.0: {}
+
   proc-log@3.0.0: {}
 
   process-nextick-args@2.0.1: {}
@@ -9753,7 +9766,7 @@ snapshots:
 
   react-lifecycles-compat@3.0.4: {}
 
-  react-modal@3.16.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-modal@3.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       exenv: 1.2.2
       prop-types: 15.8.1
@@ -9765,18 +9778,18 @@ snapshots:
   react-notion-x@7.2.6(@babel/runtime@7.25.0)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@fisch0920/medium-zoom': 1.0.7
-      '@matejmazur/react-katex': 3.1.3(katex@0.16.11)(react@19.0.0)
-      katex: 0.16.11
+      '@matejmazur/react-katex': 3.1.3(katex@0.16.21)(react@19.0.0)
+      katex: 0.16.21
       notion-types: 7.1.6
       notion-utils: 7.1.6
-      prismjs: 1.29.0
+      prismjs: 1.30.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       react-fast-compare: 3.2.2
       react-hotkeys-hook: 4.6.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-image: 4.1.0(@babel/runtime@7.25.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-lazy-images: 1.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react-modal: 3.16.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react-modal: 3.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     optionalDependencies:
       react-pdf: 9.2.1(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     transitivePeerDependencies:
