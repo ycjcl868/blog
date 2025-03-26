@@ -27,9 +27,10 @@ const generateContentHash = async (content: any): Promise<string> => {
     contentBuffer
   );
 
-  const contentHash = [...new Uint8Array(digest)]
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
+  let contentHash = '';
+  new Uint8Array(digest).forEach((b) => {
+    contentHash += b.toString(16).padStart(2, '0');
+  });
 
   return contentHash;
 };
