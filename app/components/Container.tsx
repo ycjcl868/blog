@@ -39,7 +39,7 @@ const Container: React.FC<any> = ({
           fullWidth={fullWidth}
         />
         <motion.main
-          className={`m-auto flex-grow w-full transition-all ${
+          className={`m-auto grow w-full transition-all ${
             !fullWidth ? 'max-w-[52rem] px-4 md:px-0' : 'px-4 md:px-24'
           }`}
         >
