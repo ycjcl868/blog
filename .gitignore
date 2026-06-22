@@ -1,11 +1,35 @@
-node_modules
+# build output
+dist/
 
-/.cache
-/build
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# coverage
+coverage/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
 .env
-.dev.vars
+.env.production
 
-.wrangler
-~
+# macOS-specific files
 .DS_Store
-wrangler.toml
+
+# jetbrains setting folder
+.idea/
+
+# build-time generated assets
+public/pagefind/
+public/img/
+content/
+
+# translation cache
+.translate-cache.json

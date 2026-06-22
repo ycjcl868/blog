@@ -1,0 +1,107 @@
+---
+import type { I18nStrings } from "@/i18n/types";
+import {
+  getLocaleInfo,
+  getRelativeLocalePath,
+  translateFor,
+  isLocaleKey,
+} from "@/i18n/utils";
+
+const t = translateFor(Astro.currentLocale);
+const LOCALE = getLocaleInfo(Astro.currentLocale);
+
+// Remove base url from path
+// eg: /AstroPaperI18n/posts/2 => /tags/posts/2
+// eg: /posts/2 => tags/posts/2 (Default BASE_URL is '/')
+const pathname = Astro.url.pathname.slice(import.meta.env.BASE_URL.length);
+
+// Remove current url path and remove trailing slash if exists
+const currentUrlPath = pathname.replaceAll(/^\/+|\/+$/g, "");
+
+// Get url array from path
+// eg: /tags/tailwindcss => ['tags', 'tailwindcss']
+const breadcrumbList = currentUrlPath.split("/");
+
+// Remove locale key at path beginning if exists
+// eg: ['ar', 'tags'] => ['tags']
+if (isLocaleKey(breadcrumbList[0])) {
+  breadcrumbList.splice(0, 1);
+}
+
+// the urls aren't localized yet
+// so we need to keep a separate array of urls in english
+const breadcrumbListUrls = [...breadcrumbList];
+
+if (breadcrumbList[0] !== "posts")
+  breadcrumbList[0] = t(breadcrumbList[0] as keyof I18nStrings);
+
+// if breadcrumb is Home > Posts > 1 <etc>
+// replace Posts with Posts (page number)
+if (breadcrumbList[0] === "posts") {
+  breadcrumbList.splice(
+    0,
+    2,
+    `${t("posts")} (${t("pageWithNo", { no: parseInt(breadcrumbList[1] || "1").toLocaleString(LOCALE.langTag) })})`
+  );
+}
+
+// if breadcrumb is Home > Tags > [tag] > [page] <etc>
+// replace [tag] > [page] with [tag] (page number)
+if (breadcrumbList[0] === "tags" && !isNaN(Number(breadcrumbList[2]))) {
+  breadcrumbList.splice(
+    1,
+    3,
+    `${breadcrumbList[1]} ${
+      Number(breadcrumbList[2]) === 1
+        ? ""
+        : `(${t("pageWithNo", { no: breadcrumbList[2] })})`
+    }`
+  );
+}
+---
+
+<nav
+  class="mx-auto mt-8 mb-1 w-full max-w-app px-4"
+  aria-label={t("a11y.breadcrumb")}
+>
+  <ul
+    class="font-light [&>li]:inline [&>li:not(:last-child)>a]:hover:opacity-100"
+  >
+    <li>
+      <a
+        href={getRelativeLocalePath(Astro.currentLocale, "/")}
+        class="opacity-80">{t("home")}</a
+      >
+      <span aria-hidden="true" class="opacity-80">&raquo;</span>
+    </li>
+    {
+      breadcrumbList.map((breadcrumb, index) =>
+        index + 1 === breadcrumbList.length ? (
+          <li>
+            <span
+              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
+              aria-current="page"
+            >
+              {/* make the last part lowercase in Home > Tags > some-tag */}
+              {decodeURIComponent(breadcrumb)}
+            </span>
+          </li>
+        ) : (
+          // This case happens only in tags section
+          <li>
+            <a
+              href={getRelativeLocalePath(
+                Astro.currentLocale,
+                `/${breadcrumbListUrls[index]}/`
+              )}
+              class="capitalize opacity-70"
+            >
+              {breadcrumb}
+            </a>
+            <span aria-hidden="true">&raquo;</span>
+          </li>
+        )
+      )
+    }
+  </ul>
+</nav>

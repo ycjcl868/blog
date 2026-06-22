@@ -1,0 +1,91 @@
+---
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Hr from "@/components/Hr.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import { SITE } from "@/config";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/i18n/config";
+import { getRelativeLocalePath, translateFor } from "@/i18n/utils";
+import Layout from "@/layouts/Layout.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import { getPostsByLocale } from "@/utils/posts";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () =>
+  SUPPORTED_LOCALES.map(locale => ({
+    params: { locale: locale === DEFAULT_LOCALE ? undefined : locale },
+  }))) satisfies GetStaticPaths;
+
+const { locale = DEFAULT_LOCALE } = Astro.params;
+
+const posts = await getPostsByLocale(locale);
+const t = translateFor(Astro.currentLocale);
+
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+---
+
+<Layout>
+  <Header />
+  <main
+    id="main-content"
+    data-layout="index"
+    data-backurl={getRelativeLocalePath(locale, "/")}
+  >
+    {
+      featuredPosts.length > 0 && (
+        <>
+          <section id="featured" class="pt-12 pb-6">
+            <h2 class="text-2xl font-semibold tracking-wide">
+              {t("featured")}
+            </h2>
+            <ul>
+              {featuredPosts.map(data => (
+                <Card {...data} variant="h3" />
+              ))}
+            </ul>
+          </section>
+          {recentPosts.length > 0 && <Hr />}
+        </>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-6 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">
+            {t("recentPosts")}
+          </h2>
+          <ul>
+            {recentPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && <Card variant="h3" {...data} />
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="my-8 text-center">
+      <LinkButton href="/posts/">
+        {t("allPosts")}{" "}
+        <IconArrowRight class="inline-block rtl:rotate-180" />
+      </LinkButton>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const element = document.querySelector("#main-content") as HTMLElement;
+    const indexLayout = element?.dataset?.layout;
+    const backUrl = element?.dataset?.backurl;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", backUrl ?? "/");
+    }
+  });
+</script>

@@ -1,0 +1,15 @@
+# Old Remix+Notion blog URLs -> new AstroPaper URLs
+# Format: <old-path> <new-path> <status-code>
+
+/monorepo-pkg           /posts/monorepo         301
+/code-review            /posts/code-review      301
+/eslint-gpt             /posts/eslint-gpt       301
+/chrome-tabs            /posts/chrome-tabs      301
+/speed-up-zsh           /posts/speed-up-zsh     301
+/mac-install            /posts/mac-install      301
+/mcp                    /posts/mcp              301
+/ui-tars                /posts/ui-tars          301
+/aio-sandbox            /posts/aio-sandbox      301
+
+# Old atom feed
+/atom.xml               /rss.xml                301

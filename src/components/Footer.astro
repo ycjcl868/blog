@@ -1,0 +1,44 @@
+---
+import { getLocaleInfo, translateFor } from "@/i18n/utils";
+import Hr from "./Hr.astro";
+import Socials from "./Socials.astro";
+import IconRss from "@/assets/icons/IconRss.svg";
+
+export interface Props {
+  noMarginTop?: boolean;
+}
+
+const t = translateFor(Astro.currentLocale);
+
+const LOCALE = getLocaleInfo(Astro.currentLocale);
+
+const currentYear = new Date().toLocaleDateString(LOCALE.langTag, {
+  year: "numeric",
+});
+
+const { noMarginTop = false } = Astro.props;
+---
+
+<footer class:list={["w-full", { "mt-auto": !noMarginTop }]}>
+  <Hr noPadding />
+  <div
+    class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"
+  >
+    <div class="flex items-center gap-3">
+      <Socials centered />
+      <a
+        href="/rss.xml"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block opacity-70 transition-opacity hover:opacity-100"
+        title="RSS"
+        aria-label="RSS Feed"
+      >
+        <IconRss class="size-5" />
+      </a>
+    </div>
+    <div class="my-2 whitespace-nowrap">
+      <span>{t("footer.text", { year: currentYear })}</span>
+    </div>
+  </div>
+</footer>

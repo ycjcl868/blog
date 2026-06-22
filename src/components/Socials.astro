@@ -1,0 +1,31 @@
+---
+import type { I18nStrings } from "@/i18n/types";
+import { translateFor } from "@/i18n/utils";
+import LinkButton from "./LinkButton.astro";
+import { SOCIALS } from "@/constants";
+
+export interface Props {
+  centered?: boolean;
+}
+
+const t = translateFor(Astro.currentLocale);
+
+const { centered = false } = Astro.props;
+---
+
+<div class:list={["flex-wrap justify-center gap-1", { flex: centered }]}>
+  {
+    SOCIALS.map(social => (
+      <LinkButton
+        href={social.href}
+        class="p-2 hover:rotate-6 sm:p-1"
+        title={social.linkTitle(t)}
+      >
+        <social.icon class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" />
+        <span class="sr-only">
+          {t(`socials.${social.name.toLowerCase()}` as keyof I18nStrings)}
+        </span>
+      </LinkButton>
+    ))
+  }
+</div>

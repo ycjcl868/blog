@@ -1,0 +1,30 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+    paths:
+      - "src/**"
+      - "public/**"
+      - "astro.config.ts"
+      - "tsconfig.json"
+      - "eslint.config.mjs"
+      - "remark-collapse.d.ts"
+
+jobs:
+  code_quality:
+    uses: ./.github/workflows/code-standards-checks.yml
+    with:
+      node-version: "20"
+      run-build: true
+
+  unit-tests:
+    uses: ./.github/workflows/tests.yml
+    with:
+      node-version: "20"

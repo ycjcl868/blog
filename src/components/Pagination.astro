@@ -1,0 +1,49 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getLocaleInfo, stripBaseAndLocale, translateFor } from "@/i18n/utils";
+import IconArrowLeft from "@/assets/icons/IconArrowLeft.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import LinkButton from "./LinkButton.astro";
+
+export interface Props {
+  page: Page<CollectionEntry<"blog">>;
+}
+
+const t = translateFor(Astro.currentLocale);
+const LOCALE = getLocaleInfo(Astro.currentLocale);
+
+const { page } = Astro.props;
+
+const currentLocale = Astro.currentLocale;
+---
+
+{
+  page.lastPage > 1 && (
+    <nav
+      class="mt-auto mb-8 flex justify-center"
+      aria-label={t("a11y.pagination")}
+    >
+      <LinkButton
+        disabled={!page.url.prev}
+        href={stripBaseAndLocale(currentLocale, page.url.prev ?? "")}
+        class:list={["me-4 select-none", { "opacity-50": !page.url.prev }]}
+        ariaLabel="Previous"
+      >
+        <IconArrowLeft class="inline-block rtl:rotate-180" />{" "}
+        {t("pagination.prev")}
+      </LinkButton>
+      {page.currentPage.toLocaleString(LOCALE.langTag)} /{" "}
+      {page.lastPage.toLocaleString(LOCALE.langTag)}
+      <LinkButton
+        disabled={!page.url.next}
+        href={stripBaseAndLocale(currentLocale, page.url.next ?? "")}
+        class:list={["ms-4 select-none", { "opacity-50": !page.url.next }]}
+        ariaLabel="Next"
+      >
+        {t("pagination.next")}{" "}
+        <IconArrowRight class="inline-block rtl:rotate-180" />
+      </LinkButton>
+    </nav>
+  )
+}

@@ -1,0 +1,33 @@
+# Charles' Blog
+
+> Personal technical blog by Charles (信鑫), an AI Infrastructure engineer at ByteDance Seed.
+> Topics: Agent Infrastructure, LLM Inference, Sandbox, MCP, GUI Agents, Frontend Engineering.
+
+## About
+
+- Site: https://rustc.cloud
+- Author: Charles (GitHub @ycjcl868, Twitter @ycjcl)
+- Languages: English (default), Chinese (/zh/)
+- Feed: https://rustc.cloud/rss.xml
+
+## Key Projects
+
+- [AIO Sandbox](https://github.com/agent-infra/sandbox) — Unified Docker-based sandbox for AI Agents
+- [UI-TARS Desktop](https://github.com/bytedance/UI-TARS-desktop) — GUI Agent with multimodal vision
+
+## Papers
+
+- [UI-TARS-2 (arXiv:2509.02544)](https://arxiv.org/abs/2509.02544)
+- [UI-TARS (arXiv:2501.12326)](https://arxiv.org/abs/2501.12326)
+
+## Posts
+
+- /posts/aio-sandbox — AIO Sandbox: An Integrated, Customizable Sandbox Environment Built for AI Agents
+- /posts/ui-tars — GUI Agent Implementation Based on UI-TARS
+- /posts/mcp — Building AI Agent Applications with MCP
+- /posts/code-review — AI-Powered Code Review with LLMs and Knowledge Bases
+- /posts/eslint-gpt — Using ChatGPT to Create Team-Specific ESLint Rules
+- /posts/chrome-tabs — The Best Chrome Tab Management Extensions
+- /posts/monorepo — Module Package Design Practices in a Monorepo
+- /posts/mac-install — New MacBook Pro Setup Guide
+- /posts/speed-up-zsh — Speeding Up zsh Cold Start (Oh My Zsh)

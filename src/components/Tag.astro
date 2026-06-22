@@ -1,0 +1,24 @@
+---
+import { getRelativeLocalePath } from "@/i18n/utils";
+
+export interface Props {
+  tag: string;
+  tagName: string;
+  size?: "sm" | "lg";
+}
+
+const { tag, tagName, size = "sm" } = Astro.props;
+---
+
+<li class="inline-block me-2 mb-2">
+  <a
+    href={getRelativeLocalePath(Astro.currentLocale, `/tags/${tag}/`)}
+    transition:name={tag}
+    class:list={[
+      "tag-chip inline-flex items-center rounded-full bg-muted/60 !text-foreground/75 !no-underline transition-colors hover:bg-accent/15 hover:!text-accent",
+      size === "sm" ? "px-2.5 py-0.5 text-xs" : "px-3 py-1 text-sm",
+    ]}
+  >
+    <span class="opacity-50">#</span>&nbsp;{tagName}
+  </a>
+</li>

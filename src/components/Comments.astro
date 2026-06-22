@@ -1,0 +1,52 @@
+---
+/**
+ * giscus comments (GitHub Discussions based).
+ *
+ * To enable: set up giscus at https://giscus.app for your repo, then fill the
+ * GISCUS config in src/config.ts. While unconfigured, this renders nothing —
+ * so the site works out of the box and comments light up once configured.
+ */
+import { GISCUS } from "@/config";
+---
+
+{
+  GISCUS && GISCUS.repo && (
+    <section class="mx-auto mt-8 w-full max-w-app px-4">
+      <script
+        is:inline
+        define:vars={{ GISCUS, theme: "preferred_color_scheme" }}
+      >
+        (function () {
+          function loadGiscus() {
+            const existing = document.querySelector(
+              "#giscus-container iframe.giscus-frame"
+            );
+            if (existing) return;
+            const container = document.getElementById("giscus-container");
+            if (!container) return;
+            container.innerHTML = "";
+            const s = document.createElement("script");
+            s.src = "https://giscus.app/client.js";
+            s.setAttribute("data-repo", GISCUS.repo);
+            s.setAttribute("data-repo-id", GISCUS.repoId);
+            s.setAttribute("data-category", GISCUS.category);
+            s.setAttribute("data-category-id", GISCUS.categoryId);
+            s.setAttribute("data-mapping", GISCUS.mapping || "pathname");
+            s.setAttribute("data-strict", "1");
+            s.setAttribute("data-reactions-enabled", "1");
+            s.setAttribute("data-emit-metadata", "0");
+            s.setAttribute("data-input-position", "top");
+            s.setAttribute("data-theme", theme);
+            s.setAttribute("data-lang", document.documentElement.lang || "en");
+            s.crossOrigin = "anonymous";
+            s.async = true;
+            container.appendChild(s);
+          }
+          loadGiscus();
+          document.addEventListener("astro:after-swap", loadGiscus);
+        })();
+      </script>
+      <div id="giscus-container" />
+    </section>
+  )
+}

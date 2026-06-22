@@ -1,0 +1,415 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Tag from "@/components/Tag.astro";
+import Datetime from "@/components/Datetime.astro";
+import EditPost from "@/components/EditPost.astro";
+import ShareLinks from "@/components/ShareLinks.astro";
+import Comments from "@/components/Comments.astro";
+import BackButton from "@/components/BackButton.astro";
+import BackToTopButton from "@/components/BackToTopButton.astro";
+import { getPath } from "@/utils/getPath";
+import { slugifyStr } from "@/utils/slugify";
+import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
+import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import {
+  getRelativeLocalePath,
+  getSlugWithoutLocale,
+  translateFor,
+} from "@/i18n/utils";
+import { SITE } from "@/config";
+
+export interface Props {
+  post: CollectionEntry<"blog">;
+  posts: CollectionEntry<"blog">[];
+}
+
+const t = translateFor(Astro.currentLocale);
+
+const { post, posts } = Astro.props;
+
+const {
+  title,
+  author,
+  description,
+  ogImage: initOgImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  timezone,
+  tags,
+  hideEditPost,
+} = post.data;
+
+const { Content } = await render(post);
+
+let ogImageUrl: string | undefined;
+
+// Determine OG image source
+if (typeof initOgImage === "string") {
+  ogImageUrl = initOgImage; // Remote OG image (absolute URL)
+} else if (initOgImage?.src) {
+  ogImageUrl = initOgImage.src; // Local asset
+}
+
+// Use dynamic OG image if enabled and no remote|local ogImage
+if (!ogImageUrl && SITE.dynamicOgImage) {
+  ogImageUrl = getRelativeLocalePath(
+    Astro.currentLocale,
+    `${getPath(post.id, post.filePath)}/index.png`
+  );
+}
+
+// Resolve OG image URL (or fallback to SITE.ogImage / default `og.png`)
+const ogImage = ogImageUrl
+  ? new URL(ogImageUrl, Astro.url.origin).href
+  : undefined;
+
+const layoutProps = {
+  title: `${title} | ${t("site.title")}`,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
+  canonicalURL,
+  ogImage,
+  scrollSmooth: true,
+};
+
+/* ========== Prev/Next Posts ========== */
+
+const allPosts = posts.map(({ data: { title }, id }) => ({
+  slug: id,
+  title,
+}));
+
+const currentPostIndex = allPosts.findIndex(a => a.slug === post.id);
+
+const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
+const nextPost =
+  currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
+---
+
+<Layout {...layoutProps}>
+  <Header />
+  <BackButton />
+  <main
+    id="main-content"
+    class:list={[
+      "mx-auto w-full max-w-app px-4 pb-12",
+      { "mt-8": !SITE.showBackButton },
+    ]}
+    data-pagefind-body
+    data-copy-string={t("copy")}
+    data-copied-string={t("copied")}
+    data-toc-string={t("tableOfContents")}
+  >
+    <h1
+      transition:name={slugifyStr(title)}
+      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+    >
+      {title}
+    </h1>
+    <div class="flex items-center gap-4">
+      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
+      <EditPost class="max-sm:hidden" {hideEditPost} {post} />
+    </div>
+    <article id="article" class="mx-auto prose mt-8 max-w-app">
+      <Content />
+    </article>
+
+    <hr class="my-8 border-dashed" />
+
+    <EditPost class="sm:hidden" {hideEditPost} {post} />
+
+    <ul class="mt-4 mb-8 sm:my-8">
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+    </ul>
+
+    <BackToTopButton />
+
+    <ShareLinks />
+
+    <Comments />
+
+    <hr class="my-6 border-dashed" />
+
+    <!-- Previous/Next Post Buttons -->
+    <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {
+        prevPost && (
+          <a
+            href={getRelativeLocalePath(
+              Astro.currentLocale,
+              `/posts/${getSlugWithoutLocale(prevPost.slug)}`
+            )}
+            class="flex w-full gap-1 hover:opacity-75"
+          >
+            <IconChevronLeft class="inline-block flex-none rtl:rotate-180" />
+            <div>
+              <span>{t("navigation.prevPost")}</span>
+              <div class="text-sm text-accent/85">{prevPost.title}</div>
+            </div>
+          </a>
+        )
+      }
+      {
+        nextPost && (
+          <a
+            href={getRelativeLocalePath(
+              Astro.currentLocale,
+              `/posts/${getSlugWithoutLocale(nextPost.slug)}`
+            )}
+            class="flex w-full justify-end gap-1 text-right hover:opacity-75 sm:col-start-2"
+          >
+            <div>
+              <span>{t("navigation.nextPost")}</span>
+              <div class="text-sm text-accent/85">{nextPost.title}</div>
+            </div>
+            <IconChevronRight class="inline-block flex-none rtl:rotate-180" />
+          </a>
+        )
+      }
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  article :global(pre) {
+    direction: ltr;
+    text-align: left;
+  }
+</style>
+
+<script is:inline data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ml-2 opacity-0 group-hover:opacity-100 focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const mainContent = document.querySelector("#main-content");
+    const copyButtonLabel = mainContent?.dataset?.copyString ?? "copy";
+
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.className =
+        "copy-code absolute right-3 -top-3 rounded bg-muted px-2 py-1 text-xs leading-4 text-foreground font-medium";
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = mainContent?.dataset?.copiedString ?? "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /** Click-to-zoom for article images (lightweight, no dependency). */
+  function attachImageZoom() {
+    const imgs = Array.from(
+      document.querySelectorAll("#article img")
+    );
+    let overlay = document.getElementById("img-zoom-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "img-zoom-overlay";
+      overlay.className =
+        "fixed inset-0 z-50 hidden cursor-zoom-out items-center justify-center bg-black/80 p-4";
+      const big = document.createElement("img");
+      big.id = "img-zoom-target";
+      big.className = "max-h-[92vh] max-w-[92vw] rounded shadow-2xl";
+      overlay.appendChild(big);
+      overlay.addEventListener("click", () => overlay.classList.add("hidden"));
+      document.body.appendChild(overlay);
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") overlay.classList.add("hidden");
+      });
+    }
+    const big = document.getElementById("img-zoom-target");
+    for (const img of imgs) {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", () => {
+        big.src = img.src;
+        big.alt = img.alt || "";
+        overlay.classList.remove("hidden");
+        overlay.classList.add("flex");
+      });
+    }
+  }
+  attachImageZoom();
+
+  /** Build a floating, scroll-synced Table of Contents on the right. */
+  function buildToc() {
+    const article = document.getElementById("article");
+    const existing = document.getElementById("toc-aside");
+    if (existing) existing.remove();
+    if (!article) return;
+    const headings = Array.from(article.querySelectorAll("h2, h3"));
+    if (headings.length < 3) return; // not worth a TOC for short posts
+
+    const aside = document.createElement("aside");
+    aside.id = "toc-aside";
+    aside.className =
+      "toc-aside fixed top-28 right-6 z-20 hidden w-56 max-h-[72vh] overflow-auto pr-2 text-[0.82rem] leading-relaxed min-[1180px]:block";
+    const tocTitle =
+      document.querySelector("#main-content")?.dataset?.tocString || "Contents";
+    aside.innerHTML =
+      '<div class="mb-3 text-xs font-semibold tracking-wide text-foreground/50 uppercase">' +
+      tocTitle +
+      "</div>";
+    const list = document.createElement("ul");
+    list.className = "toc-list space-y-0.5 border-l border-border";
+
+    headings.forEach((h, i) => {
+      if (!h.id) h.id = "h-" + i;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#" + h.id;
+      a.textContent = (h.textContent || "").replace(/#\s*$/, "").trim();
+      const indent = h.tagName === "H3" ? "pl-7" : "pl-3";
+      a.className =
+        "toc-link -ml-px block border-l-2 border-transparent py-1 " +
+        indent +
+        " text-foreground/55 hover:text-accent hover:border-foreground/30 transition-colors";
+      a.dataset.tocTarget = h.id;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+    aside.appendChild(list);
+    document.body.appendChild(aside);
+
+    // Scroll-spy: highlight the last heading scrolled past. Robust on load,
+    // on scroll, and when headings are far apart (always exactly one active).
+    const links = Array.from(aside.querySelectorAll(".toc-link"));
+    const byId = Object.fromEntries(links.map(l => [l.dataset.tocTarget, l]));
+    let activeId = null;
+    const setActive = id => {
+      if (id === activeId) return;
+      activeId = id;
+      links.forEach(l => l.classList.remove("toc-active"));
+      const active = byId[id];
+      if (active) {
+        active.classList.add("toc-active");
+        // keep the active item visible inside the scrollable TOC
+        active.scrollIntoView({ block: "nearest" });
+      }
+    };
+    const computeActive = () => {
+      const offset = 120; // px below the top counts as "current"
+      let current = headings[0];
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top <= offset) current = h;
+        else break;
+      }
+      if (current) setActive(current.id);
+    };
+    computeActive();
+    let ticking = false;
+    document.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          computeActive();
+          ticking = false;
+        });
+      },
+      { passive: true }
+    );
+  }
+  buildToc();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

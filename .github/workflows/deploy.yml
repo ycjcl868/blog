@@ -1,0 +1,30 @@
+name: Deploy to Github Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy.yml"
+      - "src/**"
+      - "public/**"
+      - "astro.config.ts"
+      - "tsconfig.json"
+      - "eslint.config.mjs"
+      - "remark-collapse.d.ts"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  code_quality:
+    uses: ./.github/workflows/code-standards-checks.yml
+
+  unit-tests:
+    uses: ./.github/workflows/tests.yml

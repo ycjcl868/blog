@@ -1,0 +1,182 @@
+---
+import Hr from "./Hr.astro";
+import IconX from "@/assets/icons/IconX.svg";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconArchive from "@/assets/icons/IconArchive.svg";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
+import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
+import LinkButton from "./LinkButton.astro";
+import { SITE } from "@/config";
+import { translateFor, getRelativeLocalePath } from "@/i18n/utils";
+import LanguagePicker from "./LanguagePicker.astro";
+
+const { pathname } = Astro.url;
+
+const currentLocale = Astro.currentLocale;
+
+const t = translateFor(currentLocale);
+
+// Remove trailing slash from current pathname if exists
+const currentPath =
+  pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+
+const isActive = (path: string) => {
+  const currentPathArray = currentPath.split("/").filter(p => p.trim());
+  const pathArray = path.split("/").filter(p => p.trim());
+
+  return currentPath === path || currentPathArray[0] === pathArray[0];
+};
+---
+
+<header>
+  <a
+    id="skip-to-content"
+    href="#main-content"
+    class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4"
+  >
+    {t("a11y.skipToContent")}
+  </a>
+  <div
+    id="nav-container"
+    class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"
+  >
+    <div
+      id="top-nav-wrap"
+      class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"
+    >
+      <a
+        href={getRelativeLocalePath(currentLocale, "/")}
+        class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
+      >
+        {t("site.title")}
+      </a>
+      <nav
+        id="nav-menu"
+        class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
+      >
+        <button
+          id="menu-btn"
+          class="focus-outline self-end p-2 sm:hidden"
+          aria-label={t("a11y.openMenu")}
+          aria-expanded="false"
+          aria-controls="menu-items"
+          data-open-text={t("a11y.openMenu")}
+          data-close-text={t("a11y.closeMenu")}
+        >
+          <IconX id="close-icon" class="hidden" />
+          <IconMenuDeep id="menu-icon" />
+        </button>
+        <ul
+          id="menu-items"
+          class:list={[
+            "mt-4 grid w-44 grid-cols-3 place-content-center gap-2",
+            "[&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium [&>li>a]:hover:text-accent sm:[&>li>a]:px-2 sm:[&>li>a]:py-1",
+            "hidden",
+            "sm:ms-0 sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0",
+          ]}
+        >
+          <li class="col-span-3">
+            <a
+              href={getRelativeLocalePath(Astro.currentLocale, "/posts/")}
+              class:list={{ "active-nav": isActive("/posts") }}
+            >
+              {t("posts")}
+            </a>
+          </li>
+          <li class="col-span-3">
+            <a
+              href={getRelativeLocalePath(Astro.currentLocale, "/about")}
+              class:list={{ "active-nav": isActive("/about") }}
+            >
+              {t("about")}
+            </a>
+          </li>
+          {
+            SITE.showArchives && (
+              <li class="col-span-3">
+                <LinkButton
+                  href="/archives"
+                  class:list={[
+                    "focus-outline flex justify-center p-3 sm:p-1",
+                    {
+                      "active-nav [&>svg]:stroke-accent": isActive("/archives"),
+                    },
+                  ]}
+                  ariaLabel={t("a11y.archives")}
+                  title={`   ${t("archives")}`}
+                >
+                  <IconArchive class="hidden sm:inline-block" />
+                  <span class="sm:sr-only">{t("archives")}</span>
+                </LinkButton>
+              </li>
+            )
+          }
+          <li class="col-span-1 flex items-center justify-center">
+            <LinkButton
+              href="/search"
+              class:list={[
+                "focus-outline flex p-3 sm:p-1",
+                { "[&>svg]:stroke-accent": isActive("/search") },
+              ]}
+              ariaLabel={t("a11y.search")}
+              title={` ${t("search")}`}
+            >
+              <IconSearch />
+              <span class="sr-only">{t("search")}</span>
+            </LinkButton>
+          </li>
+          <li class="col-span-1 flex items-center justify-center">
+            <LanguagePicker />
+          </li>
+          {
+            SITE.lightAndDarkMode && (
+              <li class="col-span-1 flex items-center justify-center">
+                <button
+                  id="theme-btn"
+                  class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent"
+                  title="Toggles light & dark"
+                  aria-label="auto"
+                  aria-live="polite"
+                >
+                  <IconMoon class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                  <IconSunHigh class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                </button>
+              </li>
+            )
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <Hr />
+</header>
+
+<script>
+  function toggleNav() {
+    const menuBtn = document.querySelector("#menu-btn") as HTMLButtonElement;
+    const menuItems = document.querySelector("#menu-items");
+    const menuIcon = document.querySelector("#menu-icon");
+    const closeIcon = document.querySelector("#close-icon");
+    const openText = menuBtn?.dataset.openText || "Open Menu";
+    const closeText = menuBtn?.dataset.closeText || "Close Menu";
+
+    if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
+
+    menuBtn.addEventListener("click", () => {
+      const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
+
+      menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
+      menuBtn.setAttribute("aria-label", openMenu ? openText : closeText);
+
+      menuItems.classList.toggle("hidden");
+      menuIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+    });
+  }
+
+  toggleNav();
+
+  // Runs on view transitions navigation
+  document.addEventListener("astro:after-swap", toggleNav);
+</script>

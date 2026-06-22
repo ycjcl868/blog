@@ -1,0 +1,146 @@
+@plugin '@tailwindcss/typography';
+
+@layer base {
+  .prose {
+    @apply prose-headings:!mb-3 prose-headings:!text-foreground prose-h3:italic prose-p:!text-foreground prose-a:!text-foreground prose-a:!decoration-dashed prose-a:underline-offset-8 hover:prose-a:text-accent prose-blockquote:!border-l-accent/50 prose-blockquote:opacity-80 prose-figcaption:!text-foreground prose-figcaption:opacity-70 prose-strong:!text-foreground prose-code:rounded prose-code:bg-muted/75 prose-code:p-1 prose-code:before:!content-none prose-code:after:!content-none prose-ol:!text-foreground prose-ul:overflow-x-clip prose-ul:!text-foreground prose-li:marker:!text-accent prose-table:text-foreground prose-th:border prose-th:border-border prose-td:border prose-td:border-border prose-img:mx-auto prose-img:!my-2 prose-img:border-2 prose-img:border-border prose-hr:!border-border;
+  }
+  .prose a {
+    @apply break-words hover:!text-accent;
+  }
+  .prose thead th:first-child,
+  tbody td:first-child,
+  tfoot td:first-child {
+    padding-inline-start: 0.5714286em !important;
+  }
+  .prose h2#table-of-contents {
+    @apply mb-2;
+  }
+  .prose details {
+    @apply inline-block cursor-pointer text-foreground select-none;
+  }
+  .prose summary {
+    @apply focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent focus-visible:outline-dashed;
+  }
+  .prose h2#table-of-contents + p {
+    @apply hidden;
+  }
+
+  /* ===== Code Blocks & Syntax Highlighting ===== */
+  pre:has(code) {
+    @apply border border-border;
+  }
+
+  .prose code,
+  .prose blockquote {
+    @apply break-words;
+  }
+
+  .prose table code {
+    /* add line breaks whenever necessary for codes under table */
+    @apply break-all sm:break-normal;
+  }
+
+  pre > code {
+    white-space: pre;
+  }
+
+  /* Apply Dark Theme (if multi-theme specified) */
+  html[data-theme="dark"] pre:has(code),
+  html[data-theme="dark"] pre:has(code) span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+/* ===== Yuque-style reading rhythm (Chinese-first) =====
+   Overrides on top of prose for a calmer, long-form-friendly feel. */
+@layer base {
+  .prose {
+    font-size: 16px;
+    line-height: 1.82;
+    max-width: none;
+  }
+  .prose p {
+    margin-block: 0.92em;
+  }
+  /* Headings: solid weight, no italic h3 (the default italic looks off in CJK) */
+  .prose :is(h1, h2, h3, h4) {
+    font-weight: 650;
+    letter-spacing: 0.01em;
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+    font-style: normal !important;
+  }
+  .prose h1 {
+    font-size: 1.7em;
+  }
+  .prose h2 {
+    font-size: 1.42em;
+  }
+  .prose h3 {
+    font-size: 1.2em;
+  }
+  .prose h4 {
+    font-size: 1.06em;
+  }
+  /* Lists */
+  .prose :is(ul, ol) {
+    margin-block: 0.7em;
+    padding-inline-start: 1.4em;
+  }
+  .prose li {
+    margin-block: 0.3em;
+  }
+  /* Links: subtle underline instead of dashed */
+  .prose a {
+    text-decoration: underline !important;
+    text-decoration-color: rgba(0, 108, 172, 0.35) !important;
+    text-underline-offset: 2px !important;
+    text-decoration-thickness: 1px !important;
+  }
+  /* Blockquote: rounded, soft fill (yuque) */
+  .prose blockquote {
+    margin: 0.9em 0;
+    padding: 0.75em 1em;
+    border-left: 4px solid var(--border);
+    background: rgba(0, 0, 0, 0.035);
+    border-radius: 8px;
+    opacity: 1 !important;
+    font-style: normal;
+  }
+  html[data-theme="dark"] .prose blockquote {
+    background: rgba(255, 255, 255, 0.045);
+  }
+  .prose blockquote p {
+    margin-block: 0.4em;
+  }
+  /* Inline code: softer pill */
+  .prose :not(pre) > code {
+    font-size: 0.92em;
+    padding: 0.12em 0.4em !important;
+    border-radius: 6px;
+  }
+  /* Code blocks: rounder, roomier */
+  .prose pre {
+    border-radius: 10px;
+    padding: 1em 1.1em;
+    line-height: 1.6;
+  }
+  /* Images: rounded, no harsh border */
+  .prose img {
+    border-radius: 10px;
+    border: none !important;
+    margin-block: 1.3em !important;
+  }
+}
+
+/* TOC active state — defined as real CSS because the TOC is built in JS,
+   so Tailwind utility classes on it would never be compiled. */
+.toc-link.toc-active {
+  color: var(--accent);
+  border-left-color: var(--accent) !important;
+  font-weight: 600;
+}

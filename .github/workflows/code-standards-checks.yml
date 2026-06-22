@@ -1,0 +1,48 @@
+name: Code Standards & Quality
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        type: string
+        default: "20"
+      run-build:
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    name: Check Code standards & Quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: 🛫 Checkout code
+        uses: actions/checkout@v4
+
+      - name: "📦 Install pnpm"
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.1
+
+      - name: 🔧 Setup Node.js ${{ inputs.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: "pnpm"
+
+      - name: 📦 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔎 Lint code
+        run: pnpm lint
+
+      - name: 📝 Checking code format
+        run: pnpm format:check
+
+      - name: 💪 Type Checking
+        run: pnpm  type-check
+
+      - name: 🚀 Build the project
+        if: ${{ inputs.run-build }}
+        run: pnpm run build

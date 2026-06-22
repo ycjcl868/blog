@@ -1,0 +1,43 @@
+---
+import { type CollectionEntry } from "astro:content";
+import PostDetails from "@/layouts/PostDetails.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/i18n/config";
+import { getPostsGroupedByLocale, getPostsByLocale } from "@/utils/posts";
+import { getPath } from "@/utils/getPath";
+
+export interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+export async function getStaticPaths() {
+  const postsByLocale = await getPostsGroupedByLocale({
+    draft: false,
+    allowedLocales: SUPPORTED_LOCALES,
+  });
+
+  const paths = SUPPORTED_LOCALES.flatMap(locale => {
+    const posts = postsByLocale[locale] || [];
+
+    const postResult = posts.map(post => ({
+      params: {
+        locale: locale === DEFAULT_LOCALE ? undefined : locale,
+        slug: getPath(post.id, post.filePath, false),
+      },
+      props: { post },
+    }));
+
+    return postResult;
+  });
+
+  return paths;
+}
+
+const { post } = Astro.props;
+const { locale = DEFAULT_LOCALE } = Astro.params;
+
+const posts = await getPostsByLocale(locale);
+const sortedPosts = getSortedPosts(posts);
+---
+
+<PostDetails post={post} posts={sortedPosts} />

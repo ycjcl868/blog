@@ -1,0 +1,49 @@
+---
+import { slugifyStr } from "@/utils/slugify";
+import type { CollectionEntry } from "astro:content";
+import { getPath } from "@/utils/getPath";
+import Datetime from "./Datetime.astro";
+import { getRelativeLocalePath } from "@/i18n/utils";
+
+export interface Props extends CollectionEntry<"blog"> {
+  variant?: "h2" | "h3";
+}
+
+const { variant = "h2", data, id, filePath } = Astro.props;
+
+const { title, description, pubDatetime, modDatetime, timezone, tags } = data;
+
+const headerProps = {
+  style: { viewTransitionName: slugifyStr(title) },
+  class: "text-lg font-medium decoration-dashed hover:underline",
+};
+
+const currentLocale = Astro.currentLocale;
+---
+
+<li class="my-6">
+  <a
+    href={getRelativeLocalePath(currentLocale, getPath(id, filePath))}
+    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+  >
+    {
+      variant === "h2" ? (
+        <h2 {...headerProps}>{title}</h2>
+      ) : (
+        <h3 {...headerProps}>{title}</h3>
+      )
+    }
+  </a>
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <Datetime {pubDatetime} {modDatetime} {timezone} />
+    {tags.map(tag => (
+      <a
+        href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}/`}
+        class="tag-chip inline-flex items-center rounded-full bg-muted/60 !text-foreground/75 !no-underline text-xs px-2.5 py-0.5 me-1 transition-colors hover:bg-accent/15 hover:!text-accent"
+      >
+        <span class="opacity-50">#</span>&nbsp;{tag}
+      </a>
+    ))}
+  </div>
+  <p>{description}</p>
+</li>

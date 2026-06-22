@@ -1,77 +1,54 @@
-# 📝 Notion Blog - A Modern Zero-Cost Blogging System with Real-time Updates
+# Charles' Blog
 
-[中文](./README-zh-CN.md) | English
+Personal technical blog — AI Infrastructure, Agents, LLM Inference, Sandbox, MCP.
 
-[![Cloudflare Pages](https://img.shields.io/badge/Deployed_on-Cloudflare_Pages-F38020?logo=cloudflare)](https://developers.cloudflare.com/pages/)
-[![Remix Framework](https://img.shields.io/badge/Built_with-Remix-1E1F21?logo=remix)](https://remix.run/)
+**Live:** [rustc.cloud](https://rustc.cloud)
 
-Built with Remix and Notion, deployed on Cloudflare Pages using Edge Functions for a cost-free, real-time updated blog site.
+## Stack
 
-![](https://user-images.githubusercontent.com/13595509/221388253-a719a869-c4b9-4387-a513-101caa35df27.png)
+- [Astro](https://astro.build) + [AstroPaper i18n](https://github.com/yousef8/astro-paper-i18n)
+- Content source: Obsidian (one-way sync)
+- Languages: English (default) + Chinese (`/zh/`)
+- Deploy: Cloudflare Pages
 
-## 🔥 Features
-
-- Create blogs directly from your Notion pages with real-time content updates
-- Smart caching ensures fast page loads while auto-updating content in the background
-- Built with modern tech stack using [Remix](https://remix.run/)
-- Zero-cost deployment on Cloudflare Pages
-- Clean and elegant design powered by [TailwindCSS](https://tailwindcss.com/)
-- Category tags and search functionality
-- RSS Feed support
-- Light/Dark theme toggle
-- [ ] Internationalization support with runtime translation using large language models
-
-https://github.com/user-attachments/assets/375b1a6a-c564-4717-838e-3285f0b90541
-
-## 🚀 Performance
-
-[PageSpeed Insights](https://pagespeed.web.dev/analysis/https-www-rustc-cloud/1zuls2fmg9?hl=zh-cn&form_factor=desktop)
-
-![](https://github.com/user-attachments/assets/b505fdf9-1cfa-410d-8f6f-98872263e75b)
-
-## 📦 Installation
-
-Clone the repository to your local machine:
-
-```
-git clone https://github.com/ycjcl868/blog
-```
-
-Install dependencies using pnpm:
-
-```
-pnpm i
-```
-
-## Generate Notion Database
-
-Duplicate this [Notion template](https://ycjcl868.notion.site/b7e25fb9b29a48269e92e36f65a3ffbb) and share the page to generate a public link.
-
-![](https://github.com/user-attachments/assets/cb894cb4-4e1b-4f1e-adb4-d35ce67e5df4)
-
-The PAGE_ID can be found in the URL format: `https://www.notion.so/{workspace_name}/{page_id}`(typically the last 32 characters)
-
-## 🔨 Local Development
-
-Create `.dev.vars` file with the following configuration:
+## Local Development
 
 ```bash
-NOTION_PAGE_ID=xxxx   # Notion page ID
-NOTION_ACCESS_TOKEN=secret_xxx # Create integration token at: https://developers.notion.com/docs/create-a-notion-integration
+npm install
+npm run dev          # http://localhost:4321
+npm run build        # production build -> dist/
 ```
 
-Start the development server:
+## Publishing Workflow
+
+Content lives in Obsidian `5. Outputs/`. Each article is a folder:
 
 ```
-npm run start
+5. Outputs/<Title>/
+  <Title>.md          # Chinese (frontmatter: status, channels, slug, tags)
+  <Title>.en.md       # English (optional)
+  attachments/        # Images
 ```
 
-Access the site at `localhost:3000`
+Publish:
 
-## 📝 Contribute
+```bash
+npm run publish      # sync + fix code fences + build + show git diff
+git commit && push   # Cloudflare auto-deploys
+```
 
-Feel free to submit an issue or pull request if you have any suggestions.
+## Key Scripts
 
-## Star History
+| Script | Purpose |
+|--------|---------|
+| `npm run obsidian-sync` | One-way sync: Obsidian → blog repo |
+| `npm run publish` | Full publish pipeline (sync + build + prompt push) |
+| `node scripts/translate.mjs` | Generate English translations via LLM |
+| `node scripts/infer-code-lang.mjs` | Auto-detect code fence languages for syntax highlighting |
 
-[![Star History Chart](https://api.star-history.com/svg?repos=ycjcl868/blog&type=Date)](https://star-history.com/#ycjcl868/blog&Date)
+## Config
+
+- `.env` — machine-specific paths (see `.env.example`)
+- `src/config.ts` — site metadata
+- `src/i18n/config.ts` — locale settings
+- `src/constants.ts` — social links
