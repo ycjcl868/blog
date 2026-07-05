@@ -4,7 +4,15 @@
   "trailingComma": "all",
   "tabWidth": 2,
   "semi": false,
+  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/styles/global.css",
   "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    },
     {
       "files": "*.canvas",
       "options": {

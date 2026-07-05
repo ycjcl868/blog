@@ -17,12 +17,5 @@ export const SITE = {
   timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 } as const
 
-// giscus comments — fill these from https://giscus.app after enabling
-// Discussions on your GitHub repo. Left empty => comments are hidden.
-export const GISCUS = {
-  repo: "", // e.g. "ycjcl868/blog"
-  repoId: "",
-  category: "Announcements",
-  categoryId: "",
-  mapping: "pathname",
-} as const
+// giscus comments config now lives in PUBLIC_GISCUS_* env vars
+// (see the env schema in astro.config.ts), set on the Cloudflare Pages project.

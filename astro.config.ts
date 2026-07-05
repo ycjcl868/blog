@@ -62,6 +62,18 @@ export default defineConfig({
         context: "client",
         optional: true,
       }),
+      // giscus comments — set these in the Cloudflare Pages project. Absent =>
+      // the comment section renders nothing.
+      PUBLIC_GISCUS_REPO: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
+      PUBLIC_GISCUS_REPO_ID: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
     },
   },
   experimental: {

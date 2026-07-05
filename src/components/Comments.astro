@@ -1,52 +1,44 @@
 ---
 /**
- * giscus comments (GitHub Discussions based).
+ * giscus comments (GitHub Discussions). repo + repoId come from PUBLIC_GISCUS_*
+ * env vars (set on the Cloudflare Pages project); category is fixed. Renders
+ * nothing until they're present, so the site works before comments are wired up.
  *
- * To enable: set up giscus at https://giscus.app for your repo, then fill the
- * GISCUS config in src/config.ts. While unconfigured, this renders nothing —
- * so the site works out of the box and comments light up once configured.
+ * Uses giscus's official <script src> embed — inline content scripts don't run
+ * reliably under Astro's View Transitions, but external scripts do. Theme sync
+ * therefore lives in public/toggle-theme.js (also external), which posts to the
+ * giscus iframe whenever the site's data-theme changes.
  */
-import { GISCUS } from "@/config";
+import { PUBLIC_GISCUS_REPO, PUBLIC_GISCUS_REPO_ID } from "astro:env/client"
+
+const repo = PUBLIC_GISCUS_REPO
+const repoId = PUBLIC_GISCUS_REPO_ID
+const configured = Boolean(repo && repoId)
+// giscus UI language follows the post's locale (server-rendered per language).
+const lang = Astro.currentLocale === "zh" ? "zh-CN" : "en"
 ---
 
 {
-  GISCUS && GISCUS.repo && (
+  configured && (
     <section class="mx-auto mt-8 w-full max-w-app px-4">
       <script
         is:inline
-        define:vars={{ GISCUS, theme: "preferred_color_scheme" }}
-      >
-        (function () {
-          function loadGiscus() {
-            const existing = document.querySelector(
-              "#giscus-container iframe.giscus-frame"
-            );
-            if (existing) return;
-            const container = document.getElementById("giscus-container");
-            if (!container) return;
-            container.innerHTML = "";
-            const s = document.createElement("script");
-            s.src = "https://giscus.app/client.js";
-            s.setAttribute("data-repo", GISCUS.repo);
-            s.setAttribute("data-repo-id", GISCUS.repoId);
-            s.setAttribute("data-category", GISCUS.category);
-            s.setAttribute("data-category-id", GISCUS.categoryId);
-            s.setAttribute("data-mapping", GISCUS.mapping || "pathname");
-            s.setAttribute("data-strict", "1");
-            s.setAttribute("data-reactions-enabled", "1");
-            s.setAttribute("data-emit-metadata", "0");
-            s.setAttribute("data-input-position", "top");
-            s.setAttribute("data-theme", theme);
-            s.setAttribute("data-lang", document.documentElement.lang || "en");
-            s.crossOrigin = "anonymous";
-            s.async = true;
-            container.appendChild(s);
-          }
-          loadGiscus();
-          document.addEventListener("astro:after-swap", loadGiscus);
-        })();
-      </script>
-      <div id="giscus-container" />
+        data-astro-rerun
+        src="https://giscus.app/client.js"
+        data-repo={repo}
+        data-repo-id={repoId}
+        data-category="Announcements"
+        data-category-id="DIC_kwDOCFm7w84DAiWm"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang={lang}
+        crossorigin="anonymous"
+        async
+      />
     </section>
   )
 }
