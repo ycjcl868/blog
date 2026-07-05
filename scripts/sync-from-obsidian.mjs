@@ -111,6 +111,7 @@ function toAstroFm(fm, slug) {
   lines.push("author: 信鑫");
   lines.push("pubDatetime: " + date + "T08:00:00Z");
   lines.push("draft: false");
+  lines.push("status: " + (unquote(fm.status) || "published"));
   if (tags.length) {
     lines.push("tags:");
     for (const t of tags) lines.push("  - " + t);

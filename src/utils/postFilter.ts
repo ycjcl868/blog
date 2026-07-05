@@ -1,10 +1,10 @@
 import type { CollectionEntry } from "astro:content"
-import { SITE } from "@/config"
 
+// A post is live only when its status is exactly "published" — the same signal
+// the Obsidian sync gates on. No scheduled publishing: visibility never depends
+// on pubDatetime, so a post shows on the next build regardless of its date.
 const postFilter = ({ data }: CollectionEntry<"blog">) => {
-  const isPublishTimePassed =
-    Date.now() > new Date(data.pubDatetime).getTime() - SITE.scheduledPostMargin
-  return !data.draft && (import.meta.env.DEV || isPublishTimePassed)
+  return data.status === "published"
 }
 
 export default postFilter
