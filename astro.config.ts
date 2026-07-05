@@ -1,11 +1,30 @@
 import { defineConfig, envField } from "astro/config"
 import tailwindcss from "@tailwindcss/vite"
 import sitemap from "@astrojs/sitemap"
+import expressiveCode from "astro-expressive-code"
 import remarkToc from "remark-toc"
 import remarkCollapse from "remark-collapse"
 import rehypeExternalLinks from "rehype-external-links"
 import { SITE } from "./src/config"
 import { DEFAULT_LOCALE, LOCALES_TO_LANG, SUPPORTED_LOCALES } from "./src/i18n/config"
+
+// Native lazy-loading + async decoding for markdown images. public/ images
+// bypass astro:assets, so <img>s from ![]() need these hints added by hand.
+type HastNode = {
+  tagName?: string
+  properties?: Record<string, string>
+  children?: HastNode[]
+}
+function rehypeLazyImages() {
+  const visit = (node: HastNode) => {
+    if (node.tagName === "img" && node.properties) {
+      node.properties.loading ??= "lazy"
+      node.properties.decoding ??= "async"
+    }
+    if (node.children) node.children.forEach(visit)
+  }
+  return (tree: HastNode) => visit(tree)
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,6 +35,41 @@ export default defineConfig({
   },
   integrations: [
     // llmsTxt(), // disabled: crashes on build:done hook; using manual llms.txt instead
+    // Rich code blocks (copy button, frames, markers). Follows the site's
+    // data-theme toggle instead of the OS media query.
+    expressiveCode({
+      themes: ["github-light", "night-owl"],
+      useDarkModeMediaQuery: false,
+      themeCssSelector: (theme) =>
+        theme.type === "dark" ? '[data-theme="dark"]' : ':root:not([data-theme="dark"])',
+      defaultProps: { wrap: true },
+      // Content fences use capitalized names (```Bash); map them to the lowercase
+      // ids Shiki expects so highlighting works without editing every post.
+      shiki: {
+        langAlias: {
+          Bash: "bash",
+          Shell: "shell",
+          Sh: "sh",
+          Zsh: "zsh",
+          Python: "python",
+          JavaScript: "javascript",
+          TypeScript: "typescript",
+          Go: "go",
+          Rust: "rust",
+          Java: "java",
+          JSON: "json",
+          YAML: "yaml",
+          HTML: "html",
+          CSS: "css",
+          SQL: "sql",
+          Dockerfile: "dockerfile",
+          Diff: "diff",
+          Markdown: "markdown",
+          TOML: "toml",
+          XML: "xml",
+        },
+      },
+    }),
     sitemap({
       filter: (page) => SITE.showArchives || !page.endsWith("/archives"),
       i18n: {
@@ -37,13 +91,10 @@ export default defineConfig({
       ],
       [remarkCollapse, { test: "Table of contents" }],
     ],
-    rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]],
-    shikiConfig: {
-      // For more themes, visit https://shiki.style/themes
-      // github-light has stronger contrast than min-light (which looked washed out)
-      themes: { light: "github-light", dark: "night-owl" },
-      wrap: true,
-    },
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
+      rehypeLazyImages,
+    ],
   },
   vite: {
     plugins: [tailwindcss()],

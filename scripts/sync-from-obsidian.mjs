@@ -170,6 +170,15 @@ export function rewriteImages(body, slug) {
   return out;
 }
 
+// Lowercase code-fence languages (```Bash -> ```bash) so Shiki / Expressive Code
+// highlight them; Obsidian content frequently capitalizes fence languages.
+export function lowercaseFences(body) {
+  return body.replace(
+    /^(\s*`{3,})([A-Za-z][\w#+-]*)/gm,
+    (_m, fence, lang) => fence + lang.toLowerCase()
+  );
+}
+
 function isPublishedToBlog(fm) {
   const status = unquote(fm.status || "");
   const channels = Array.isArray(fm.channels)
@@ -191,17 +200,16 @@ function syncPage(dir, fm, body, enName) {
   if (DRY) return { slug, isPage: true, hasEn: !!enName, skipped: false };
   fs.mkdirSync(ABOUT, { recursive: true });
   const title = unquote(fm.title || slug);
-  const mk = (f, isEn) =>
-    `---\ntitle: ${quote(unquote(f.title || title))}\n---\n`;
+  const mk = f => `---\ntitle: ${quote(unquote(f.title || title))}\n---\n`;
   fs.writeFileSync(
     path.join(ABOUT, `${slug}.zh.md`),
-    mk(fm, false) + "\n" + body.trimStart()
+    mk(fm) + "\n" + body.trimStart()
   );
   if (enName) {
     const en = parseFm(fs.readFileSync(path.join(dir, enName), "utf-8"));
     fs.writeFileSync(
       path.join(ABOUT, `${slug}.en.md`),
-      mk(en.fm, true) + "\n" + en.body.trimStart()
+      mk(en.fm) + "\n" + en.body.trimStart()
     );
   }
   return { slug, isPage: true, hasEn: !!enName, skipped: false };
@@ -284,7 +292,9 @@ function syncFolder(dir) {
     fs.mkdirSync(ZH, { recursive: true });
     fs.writeFileSync(
       path.join(ZH, slug + ".md"),
-      toAstroFm(fm, slug) + "\n\n" + rewriteImages(body, slug).trimStart()
+      toAstroFm(fm, slug) +
+        "\n\n" +
+        rewriteImages(lowercaseFences(body), slug).trimStart()
     );
   }
 
@@ -297,7 +307,7 @@ function syncFolder(dir) {
         path.join(EN, slug + ".md"),
         toAstroFm(enParsed.fm, slug) +
           "\n\n" +
-          rewriteImages(enParsed.body, slug).trimStart()
+          rewriteImages(lowercaseFences(enParsed.body), slug).trimStart()
       );
     }
     hasEn = true;
