@@ -49,18 +49,6 @@ function loadEnv() {
 loadEnv();
 
 const VAULT_OUTPUTS = process.env.OBSIDIAN_OUTPUTS_DIR;
-if (!VAULT_OUTPUTS) {
-  console.error(
-    "✗ OBSIDIAN_OUTPUTS_DIR is not set.\n" +
-      "  Copy .env.example to .env and set OBSIDIAN_OUTPUTS_DIR to your\n" +
-      "  Obsidian outputs folder (the one holding one folder per article)."
-  );
-  process.exit(1);
-}
-if (!fs.existsSync(VAULT_OUTPUTS)) {
-  console.error(`✗ OBSIDIAN_OUTPUTS_DIR does not exist: ${VAULT_OUTPUTS}`);
-  process.exit(1);
-}
 
 const CONTENT = process.env.CONTENT_DIR
   ? path.resolve(process.env.CONTENT_DIR)
@@ -134,21 +122,48 @@ function toAstroFm(fm, slug) {
   return lines.join("\n");
 }
 
-function rewriteImages(body, slug) {
-  // 1. Standard markdown images: ![alt](attachments/<file>) -> ![alt](/img/<slug>/<file>)
+const REMOTE_SRC = /^(https?:)?\/\//i;
+
+/** Basenames of every local image an article body references, across the three
+ *  syntaxes it can use: markdown ![](path), Obsidian ![[wikilink]], and raw
+ *  <img src>. Remote/data URLs are ignored. Drives image copying so that
+ *  unreferenced vault attachments never leak into the site. */
+export function referencedImageNames(body) {
+  const names = new Set();
+  const add = ref => {
+    if (!ref || REMOTE_SRC.test(ref) || /^data:/i.test(ref)) return;
+    names.add(ref.replace(/^.*[/\\]/, ""));
+  };
+  for (const m of body.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g)) add(m[1]);
+  for (const m of body.matchAll(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)) add(m[1]);
+  for (const m of body.matchAll(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi))
+    add(m[1]);
+  return names;
+}
+
+export function rewriteImages(body, slug) {
+  // Standard markdown: ![alt](attachments/<file>) -> ![alt](/img/<slug>/<file>)
   let out = body.replace(
     /(!\[[^\]]*\]\()attachments\/([^)]+)(\))/g,
     (_m, pre, file, post) => `${pre}/img/${slug}/${file}${post}`
   );
-  // 2. Obsidian wikilink images: ![[file.png]] or ![[file.png|alt]] or ![[attachments/file.png]]
-  //    Convert to standard markdown ![alt](/img/<slug>/<file>).
-  //    Obsidian wikilinks reference by filename only (no path prefix) even when
-  //    the file lives in attachments/. Strip any path prefix and point to /img/<slug>/.
+  // Obsidian wikilink: ![[file.png|alt]] — referenced by filename only, even
+  // when the file lives under attachments/ or a per-note subfolder.
   out = out.replace(
     /!\[\[([^\]|]+\.(png|jpe?g|gif|webp|svg|mp4|mov))(?:\|([^\]]*))?\]\]/gi,
     (_m, file, _ext, alt) => {
       const basename = file.replace(/^.*[/\\]/, "");
       return `![${alt || ""}](/img/${slug}/${basename})`;
+    }
+  );
+  // Raw <img src="local">: repoint at /img/<slug>/<basename>, preserving other
+  // attributes. Remote, data:, and already-rooted sources are left alone.
+  out = out.replace(
+    /(<img\b[^>]*\bsrc\s*=\s*["'])([^"']+)(["'])/gi,
+    (m, pre, src, post) => {
+      if (REMOTE_SRC.test(src) || /^data:/i.test(src) || src.startsWith("/img/"))
+        return m;
+      return `${pre}/img/${slug}/${src.replace(/^.*[/\\]/, "")}${post}`;
     }
   );
   return out;
@@ -211,14 +226,25 @@ function syncFolder(dir) {
 
   const slug = unquote(fm.slug || mainName.replace(/\.md$/, ""));
 
-  // Copy images. Flatten any nested attachment subfolders (Obsidian may store
-  // pasted images under a per-note subdir). Skip non-regular files such as
-  // not-yet-downloaded iCloud placeholders (which appear as sockets and break
-  // copyFileSync with ENOTSUP).
+  // Parse the English variant up front so both image collection and writing see it.
+  const enParsed = enName
+    ? parseFm(fs.readFileSync(path.join(dir, enName), "utf-8"))
+    : null;
+
+  // Copy only images the body actually references (zh or en). Flatten nested
+  // attachment subfolders by basename — Obsidian resolves embeds by filename
+  // regardless of the per-note subdir it stores pastes in, so the basename is
+  // exactly what the rewritten markdown points at. Skip non-regular files such
+  // as not-yet-downloaded iCloud placeholders (sockets that break copyFileSync
+  // with ENOTSUP).
+  const refNames = new Set([
+    ...referencedImageNames(body),
+    ...(enParsed ? referencedImageNames(enParsed.body) : []),
+  ]);
   const attDir = path.join(dir, "attachments");
   const destImg = path.join(PUBLIC_IMG, slug);
   let imgCount = 0;
-  const copyTree = (srcDir, prefix = "") => {
+  const copyTree = srcDir => {
     for (const name of fs.readdirSync(srcDir)) {
       const src = path.join(srcDir, name);
       let st;
@@ -228,14 +254,14 @@ function syncFolder(dir) {
         continue; // unreadable (e.g. cloud placeholder)
       }
       if (st.isDirectory()) {
-        copyTree(src, prefix + name + "__");
+        copyTree(src); // flatten; keep basenames so refs resolve
         continue;
       }
       if (!st.isFile()) continue; // sockets / fifos / devices
-      const destName = prefix + name;
+      if (!refNames.has(name)) continue; // body never references it
       if (!DRY) {
         try {
-          fs.copyFileSync(src, path.join(destImg, destName));
+          fs.copyFileSync(src, path.join(destImg, name));
         } catch (e) {
           console.warn(`  ⚠ skip image ${name}: ${e.code || e.message}`);
           continue;
@@ -263,8 +289,7 @@ function syncFolder(dir) {
 
   // Write English (matched by *.en.md suffix)
   let hasEn = false;
-  if (enName) {
-    const enParsed = parseFm(fs.readFileSync(path.join(dir, enName), "utf-8"));
+  if (enParsed) {
     if (!DRY) {
       fs.mkdirSync(EN, { recursive: true });
       fs.writeFileSync(
@@ -281,8 +306,15 @@ function syncFolder(dir) {
 }
 
 function main() {
+  if (!VAULT_OUTPUTS) {
+    console.error(
+      "✗ OBSIDIAN_OUTPUTS_DIR is not set. Copy .env.example to .env and set it\n" +
+        "  to your Obsidian outputs folder (one folder per article)."
+    );
+    process.exit(1);
+  }
   if (!fs.existsSync(VAULT_OUTPUTS)) {
-    console.error(`No vault outputs dir: ${VAULT_OUTPUTS}`);
+    console.error(`✗ OBSIDIAN_OUTPUTS_DIR does not exist: ${VAULT_OUTPUTS}`);
     process.exit(1);
   }
   const dirs = fs
@@ -318,4 +350,7 @@ function main() {
   if (skipped) console.log(`Skipped ${skipped} (not published).`);
 }
 
-main();
+const isMain =
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isMain) main();
