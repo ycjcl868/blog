@@ -35,7 +35,7 @@
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.5",
-    "astro-expressive-code": "^0.44.0",
+    "astro-expressive-code": "^0.44.1",
     "lodash.kebabcase": "^4.1.1",
     "luxon": "^3.7.2",
     "rehype-external-links": "^3.0.0",
